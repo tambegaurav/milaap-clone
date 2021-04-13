@@ -1,12 +1,12 @@
 import { Heading } from "@chakra-ui/layout";
 import React from "react";
 
-const HomePage = () => {
+const SignupPage = () => {
   return (
     <div>
-      <Heading>Home Page</Heading>
+      <Heading>Sign Up Page</Heading>
     </div>
   );
 };
 
-export default HomePage;
+export default SignupPage;
