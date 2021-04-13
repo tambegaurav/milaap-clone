@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
 
@@ -16,18 +16,20 @@ export function Navbar() {
       background-color: #f0efef;
     }
   `;
+  const [show, setShow] = useState(false);
 
   return (
     <div
       style={{
         width: "100%",
         height: "11vh",
-        boxShadow: "1px 1px 10px #ffc2d4",
+        boxShadow: "1px 1px 5px #fcb2c8",
         display: "flex",
         position: "sticky",
         top: 0,
         zIndex: "100",
         backgroundColor: "#fff",
+        justifyContent: "space-around",
       }}
     >
       <Link
@@ -50,29 +52,9 @@ export function Navbar() {
       <Link>
         <Switch size="lg" />
       </Link>
-      <Link>
-        {/* <div style={{backgroundColor:"#9c3353",
-        borderRadius:"20px",
-        width:"80px",
-        height:"25px",
-        position:"relative"
-        }}>
-            <div style={{position:"absolute",
-            width:"35px",
-            height:"35px",
-            backgroundColor:"lightgray",
-            borderRadius:"20px",top:"-5px",
-            boxShadow:"-moz-initial"
-            }}></div>
-            <div style={{
-                position:"absolute",
-                left:"40px"
-                
-            }}>INR</div>
-        </div> */}
-      </Link>
 
       <Link
+        onClick={() => setShow(!show)}
         style={{
           paddingTop: "15px",
         }}
@@ -82,6 +64,28 @@ export function Navbar() {
           alt=""
         />
       </Link>
+
+      {show && (
+        <div
+          style={{
+            position: "absolute",
+            top: "60px",
+            right: "20px",
+            border: "1px solid #a2a2ff",
+            background: "white",
+            display: "flex",
+            padding: "5px",
+            borderRadius: "5px",
+            boxShadow: "2px 2px #d0d1f0",
+            transition: "1px",
+          }}
+        >
+          <button style={{ borderRight: "1px solid gray", padding: "10px" }}>
+            Login
+          </button>
+          <button style={{ padding: "10px" }}>Register</button>
+        </div>
+      )}
     </div>
   );
 }
