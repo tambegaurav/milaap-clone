@@ -1,12 +1,10 @@
 import "./App.css";
-import { Heading } from "@chakra-ui/layout";
-import { Footer } from "./Shared-components/Footer/Footer";
+import Routes from "./Routes";
 
 function App() {
   return (
     <div className="App">
-      <Heading>Milaap Clone</Heading>
-      <Footer />
+      <Routes />
     </div>
   );
 }
