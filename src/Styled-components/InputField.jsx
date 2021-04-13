@@ -14,9 +14,9 @@ const InputField = ({ label, onChange, style, type = "text", value }) => {
         type={type}
         onChange={onChange}
         label={label}
-        value={value}
+        value={value} 
         style={style}
-      />
+      /> 
     </div>
   );
 };

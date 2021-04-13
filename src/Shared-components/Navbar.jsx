@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { Switch } from "@chakra-ui/react"
 
@@ -14,9 +14,9 @@ export function Navbar(){
 
      &:hover{
          background-color:#f0efef;
-     }; 
-         
+     };      
     `
+    const [show,setShow]=useState(false)
 
     return(
         <div style={{
@@ -34,7 +34,7 @@ export function Navbar(){
          <Link href="">Pricing</Link>
          <Link href="">Contact us</Link>
         <Link ><Switch size="lg" /></Link>
-        <Link>
+        
         {/* <div style={{backgroundColor:"#9c3353",
         borderRadius:"20px",
         width:"80px",
@@ -55,12 +55,31 @@ export function Navbar(){
             }}>INR</div>
         </div> */}
         
-        </Link>
+       
 
-         <Link style={{
+         <Link onClick={()=>setShow(!show)} style={{
              paddingTop:"15px"
          }}><img  src="https://assets.milaap.org/assets/header/user-icon-dfb080c6054d6a209639e60bd2bc033a2b79a8528da7131a2f118b92dd5589ae.png" alt=""/></Link>
 
+
+      {
+          show  && <div style={{
+            position:"absolute",
+            top:"60px",
+            left:"600px",
+            border:"1px solid #7878c5",
+            background:"white",
+            display:"flex",
+            padding:"5px",
+            borderRadius:"5px",
+            boxShadow:"2px 2px #d0d1f0",
+            transition:"1px"
+
+        }}>
+            <button style={{borderRight:"1px solid gray",padding:"10px"}}>Login</button>
+            <button style={{padding:"10px"}}>Register</button>
+        </div>
+      }
             
         </div>
     )
