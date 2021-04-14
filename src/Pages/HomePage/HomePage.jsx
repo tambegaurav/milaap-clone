@@ -1,4 +1,3 @@
-import { Heading } from "@chakra-ui/layout";
 import React from "react";
 import { CategoryFilter } from "../../Shared-components/CategoryFilter/CategoryFilter";
 import Footer from "../../Shared-components/Footer/Footer";
@@ -14,7 +13,7 @@ const HomePage = () => {
         <HomeBanner />
       </LayoutContainer>
       <LayoutContainer>
-        <CategoryFilter/>
+        <CategoryFilter />
       </LayoutContainer>
       <Footer />
     </>
