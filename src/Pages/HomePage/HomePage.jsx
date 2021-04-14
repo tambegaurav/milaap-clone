@@ -4,22 +4,14 @@ import { CategoryFilter } from "../../Shared-components/CategoryFilter/CategoryF
 import Footer from "../../Shared-components/Footer/Footer";
 import { Navbar } from "../../Shared-components/Navbar";
 import LayoutContainer from "../../Styled-components/LayoutContainer";
+import { HomeBanner } from "./HomeBanner";
 
 const HomePage = () => {
   return (
     <>
       <Navbar />
       <LayoutContainer>
-        <Heading>1 Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading> <Heading>Home Page</Heading>{" "}
-        <Heading>Home Page</Heading>
+        <HomeBanner />
       </LayoutContainer>
       <LayoutContainer>
         <CategoryFilter/>

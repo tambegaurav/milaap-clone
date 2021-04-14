@@ -22,7 +22,7 @@ export function Navbar() {
     <div
       style={{
         width: "100%",
-        height: "11vh",
+        height: "9vh",
         boxShadow: "1px 1px 5px #fcb2c8",
         display: "flex",
         position: "sticky",
