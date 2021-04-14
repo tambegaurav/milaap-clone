@@ -7,6 +7,7 @@ import LayoutContainer from "../../Styled-components/LayoutContainer";
 import { HomeBanner } from "./HomeBanner";
 import Carousel from 'react-elastic-carousel';
 import data from "../../DB/review.json"
+import { MilaapFAQ } from "./MilaapFAQ";
 
 
 
@@ -21,7 +22,9 @@ const HomePage = () => {
       <LayoutContainer>
         <CategoryFilter />
       </LayoutContainer>
-
+      <LayoutContainer>
+        <MilaapFAQ />
+      </LayoutContainer>
       <LayoutContainer>
         <Carousel>
         <CarouselCard img={data.one.img}

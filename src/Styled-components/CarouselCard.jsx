@@ -9,7 +9,7 @@ border-radius:5px;
 margin:auto;
 padding:3% 5%;
 margin-top:20px;
-margin-bottom:20px
+margin-bottom:20px;
 `
 const LeftDiv=styled.div`
     position:absolute;
