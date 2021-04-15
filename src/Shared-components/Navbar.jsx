@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
+import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
 
 export function Navbar() {
   const Link = styled.a`
@@ -18,6 +19,7 @@ export function Navbar() {
   `;
   const [show, setShow] = useState(false);
 
+  const { currencyToggle, handleCurrencyToggel } = useContext( CurrencyContext )
   return (
     <div
       style={{
@@ -50,7 +52,7 @@ export function Navbar() {
       <Link href="">Pricing</Link>
       <Link href="">Contact us</Link>
       <Link>
-        <Switch size="lg" />
+        <Switch size="lg" isChecked={currencyToggle} onChange={handleCurrencyToggel} />
       </Link>
 
       <Link
