@@ -22,6 +22,9 @@ const Routes = () => {
         <Route path="/donate">
           <Donate />
         </Route>
+         donate_page
+        <Route>
+         
         <Route path="/fundraisers/:id">
           <FundraiserDonate />
         </Route>
