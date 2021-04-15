@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getCards } from "../../Redux/categoryApi/actions";
+import { CategoryCard } from "../../Styled-components/CategoryCard";
 import { DonationCardCompo } from "../DonationCard/DonationCardCompo";
 import { DonationCardDetails } from "../DonationCard/DonationCardDetails";
 
@@ -29,7 +30,6 @@ export function CategoryFilter() {
 
   return (
     <div>
-      <h1>category</h1>
       <div
         style={{
           display: "flex",
@@ -38,15 +38,29 @@ export function CategoryFilter() {
           gap: "10px",
         }}
       >
-        <button onClick={() => handleButton("all")}>All</button>
-        <button onClick={() => handleButton("animals")}>Animal</button>
-        <button onClick={() => handleButton("memorial")}>Memorial</button>
-        <select onChange={(e) => setFilters(e.target.value)}>
+        <CategoryCard text="All" onClick={()=>handleButton("all")} 
+        img="https://www.shareicon.net/data/512x512/2015/08/22/89164_all_512x512.png"/>
+        
+        <CategoryCard text="Medical" onClick={()=>handleButton("medical")} 
+        img="https://image.flaticon.com/icons/png/512/3/3862.png"/>
+          
+          <CategoryCard text="Animal" onClick={()=>handleButton("animals")} 
+        img="https://www.freeiconspng.com/uploads/animal-paw-vector-icon-animals-icons-icons-download-0.png"/>
+         
+         <CategoryCard text="Memorial" onClick={()=>handleButton("memorial")} 
+        img="https://static.thenounproject.com/png/1382987-200.png"/>
+
+        <CategoryCard text="Education" onClick={()=>handleButton("education")}  
+        img="https://upload.wikimedia.org/wikipedia/commons/e/e8/Education%2C_Studying%2C_University%2C_Alumni_-_icon.png"/>
+
+        
+        
+        {/* <select onChange={(e) => setFilters(e.target.value)}>
           <option value="medical">Medical</option>
           <option value="emergencies">Emergencies</option>
           <option value="sports">Sports</option>
           <option value="memorial">Memorial</option>
-        </select>
+        </select> */}
       </div>
 
       <DonationCardCompo>
