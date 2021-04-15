@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { Donate } from "./Pages/DonatePage/Donate";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import SignupPage from "./Pages/SignupPage";
@@ -16,6 +17,12 @@ const Routes = () => {
         </Route>
         <Route exact path={"/users/sign-in"}>
           <LoginPage />
+        </Route>
+        <Route path="/donate">
+          <Donate/>
+        </Route>
+        <Route>
+          <h1>Page not found!!</h1>
         </Route>
       </Switch>
     </div>

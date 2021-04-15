@@ -15,6 +15,9 @@ export function Navbar() {
     &:hover {
       background-color: #f0efef;
     }
+    &:active {
+      background:brown
+    }
   `;
   const [show, setShow] = useState(false);
 
@@ -44,8 +47,8 @@ export function Navbar() {
           alt=""
         />
       </Link>
-      <Link href="#">Home</Link>
-      <Link href="">Donate</Link>
+      <Link href="/">Home</Link>
+      <Link href="/donate">Donate</Link>
       <Link href="">Lend</Link>
       <Link href="">Pricing</Link>
       <Link href="">Contact us</Link>
