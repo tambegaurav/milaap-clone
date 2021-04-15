@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Navbar } from '../../Shared-components/Navbar'
 import styled from "styled-components";
 import Footer from '../../Shared-components/Footer/Footer';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import StyledButton from '../../Styled-components/Button';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { fetchFundraiserData } from '../../Redux/specificFundraiser/actions';
 
 const DonateMainDiv = styled.div`
     width: 40vw;
@@ -474,144 +476,149 @@ const SupportFundraiser = styled.div`
 `
 
 export const FundraiserDonate = () => {
+    const { id } = useParams();
+
+    const dispatch = useDispatch();
+    const { fundraiserData, raisedAmount } = useSelector( state => state.fundraiser, shallowEqual )
+
+    useEffect(() => {
+        dispatch( fetchFundraiserData({id}) )
+    }, [dispatch, id])
+    
     return (
         <div>
-            <Navbar />
-            <DonateMainDiv>
-                <BeneficiaryDiv>
-                    <div>
-                        <h3>Milaap will not charge any fee on your donation to this campaign.</h3>
-                    </div>
-                    <BeneficiaryTitle>
-                        <h1>{"Help My Cousin Anuraag Khaund Recover From Leukemia"}</h1> {/** This takes title */}
-                    </BeneficiaryTitle>
-                    <BeneficiaryImage style={{backgroundImage: `url(${`${"https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_452,w_603/v1618149448/production/images/campaign/268504/IMG_0764_c1d2v3_1618149456.jpg"}`})`}}></BeneficiaryImage> {/** This takes image */}
-                    <FundraisedStats>        
-                        <CircularProgress value={40} color="#37d123" size="74px">
-                            <CircularProgressLabel fontSize="15px" fontWeight="500">{40}%</CircularProgressLabel>
-                        </CircularProgress>
-                        <div>
-                            <h3>Raised</h3>
-                            <h1> <span>Rs.{"1,742,746"}{/** This takes amount raised till now */}</span> <span> of Rs.{"4,000,000"}{/** This takes target amount */}</span> </h1>
-                        </div>
-                        <div>
-                            <Link>
-                                {"954"} supporters { /** This takes length of supporters aaray */ }
-                            </Link>
-                        </div>
-                    </FundraisedStats>
-                    <ShareInfo>
-                        <div>
-                            <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/whatsapp-de7eea5e99374fa76f0ef336de81e6009c552c0e0fd4310da10d76ff52ea8693.svg"})`}}></div>
-                            <div>Share</div>
-                        </div>
-                        <div>
-                            <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/facebook-e95d42ee18fd2198d8052f9b73e846cf2811d7c566c64bc6957422917e271f7b.svg"})`}}></div>
-                            <div>Share</div>
-                        </div>
-                    </ShareInfo>
-                    <BeneficiaryName>
-                        <div>
-                            <div>{"ND"}</div>{/** This will take first char of name */}
+            {
+                fundraiserData && 
+                <div>
+                    <Navbar />
+                    <DonateMainDiv>
+                        <BeneficiaryDiv>
                             <div>
-                                <h4>Created by</h4>
-                                <h1>{"Nilanjana Das"}</h1> { /** This takes createdBy */ }
+                                <h3>Milaap will not charge any fee on your donation to this campaign.</h3>
                             </div>
-                        </div>
-                        <div>
-                            <div>{"AK"}</div>{/** This will take first char of name */}
-                            <div>
-                                <h4>This fundraiser will benefit</h4>
-                                <h1>{"Anurag Khaund"}</h1> { /** This takes createdFor */ }
-                            </div>
-                        </div>
-                    </BeneficiaryName>
-                    <BeneficiaryStory>
-                        <h1>Story</h1>
-                        <p>
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Repellat vel, exercitationem iusto magnam reiciendis, veniam voluptate, aspernatur culpa beatae et illum quasi illo neque eligendi maxime vero labore molestias aliquid!
-                            In assumenda facilis laboriosam quae mollitia ea. Sapiente, minima mollitia? Mollitia, ducimus? Architecto provident quos possimus adipisci odit aliquid incidunt cum, quam blanditiis sunt saepe, corrupti enim tenetur sapiente molestias.
-                            Cum ut itaque cumque totam repellat? Delectus ducimus distinctio sint repudiandae possimus repellendus ipsa molestias totam eius esse optio sunt necessitatibus aut voluptatem modi vel, labore earum eveniet id. Eaque.
-                            Vitae accusamus reiciendis, quia, corporis obcaecati id expedita doloribus eveniet, explicabo modi atque deleniti vero optio perferendis veniam a ratione sapiente asperiores ex perspiciatis illum. Quasi nobis quo tempora quia.
-                            Fugit, nostrum reiciendis ducimus iusto laborum itaque quod repellat eum ut maiores ex doloribus molestias quia corrupti. Maiores assumenda laudantium nulla officia eligendi odit animi, veritatis sunt repudiandae iusto nesciunt.
-                            Nihil officia amet consequuntur reiciendis placeat, illo sequi perspiciatis voluptatum dolore voluptate ad quam sint unde, recusandae doloremque mollitia itaque numquam cupiditate dignissimos consequatur? Doloribus est iusto corrupti ab non.
-                            Doloribus id reprehenderit, omnis non error iure nisi ipsa dolore quia assumenda odit natus necessitatibus laudantium asperiores? Explicabo veniam vel magnam vero in, unde labore, error porro delectus soluta voluptatem?
-                            Sed repellendus sunt maiores corporis est, quaerat nulla, iusto sint quia id exercitationem, voluptatibus tempore qui minima. Adipisci recusandae dolorem doloremque quisquam minus dolores eligendi iure optio provident unde? Magni?
-                            Dolorem perspiciatis repellat dolore minus libero eos facere nisi, perferendis quas officiis ad temporibus ipsam magnam repudiandae voluptas cumque et voluptates aliquid saepe! Maiores, non modi aut quasi atque fugiat?
-                            Iusto perferendis ratione exercitationem accusantium dolores unde debitis qui quia ut molestias, dolorum aliquam quas ab aspernatur officiis, temporibus suscipit voluptatum corrupti rerum ullam eveniet? Ad, quaerat quas. Iste, pariatur.
-                        </p> {/** This will take discription */}
-                    </BeneficiaryStory>
-                    <SupportFundraiser>
-                        <div>
-                            <h2>Create a support fundraiser page and raise donations from your friends to</h2>
-                            <h2>help {"Anurag Khaund"}{/** This takes createdFor */}</h2>
-                        </div>
-                        <div>
-                            <StyledButton text="Create a support fundraiser" />
-                        </div>
-                    </SupportFundraiser>
-                </BeneficiaryDiv>
-                <PaymentDiv>
-                    <div>
-                        <div>
-                            <div>
-                                <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/donate-icon-7cabb309d2c7a586a914c0a23abe52032aa0ce01115fb54e07c6148ab2cf8c6a.svg"})`}}></div>
-                                <div>Donate</div>
-                            </div>
-                            <div>
-                                <Link>
-                                    {"954"} supporters
-                                </Link>
-                            </div>
-                        </div>
-                        <div>
-                            <CircularProgress value={40} color="#37d123" size="73px">
-                                <CircularProgressLabel fontSize="15px" fontWeight="500">{40}%</CircularProgressLabel>
-                            </CircularProgress>
-                            <div>
-                                <h3>Raised</h3>
-                                <h1> <span>Rs.{"1,742,746"}</span> <span> of Rs.{"4,000,000"}</span> </h1>
-                            </div>
-                        </div>
-                        <div>
-                            <StyledButton text="Donate now" />    
-                        </div>  
-                        <div>
-                            <h2>Card, Netbanking, Cheque pickups</h2>
-                        </div>
-                        <div>
-                            <div></div>
-                            <div>
-                                <span>Or</span>
-                                <span>Donate using</span>
-                            </div>
-                            <div></div>
-                        </div>
-                        <div>
+                            <BeneficiaryTitle>
+                                <h1>{fundraiserData.title}</h1> {/** This takes title */}
+                            </BeneficiaryTitle>
+                            <BeneficiaryImage style={{backgroundImage: `url(${fundraiserData.image})`}}></BeneficiaryImage> {/** This takes image */}
+                            <FundraisedStats>        
+                                <CircularProgress value={ (raisedAmount/fundraiserData.target)*100 } color="#37d123" size="74px">
+                                    <CircularProgressLabel fontSize="15px" fontWeight="500">{ (raisedAmount/fundraiserData.target)*100 }%</CircularProgressLabel>
+                                </CircularProgress>
+                                <div>
+                                    <h3>Raised</h3>
+                                    <h1> <span>Rs.{raisedAmount}{/** This takes amount raised till now */}</span> <span> of Rs.{fundraiserData.target}{/** This takes target amount */}</span> </h1>
+                                </div>
+                                <div>
+                                    <Link>
+                                        {fundraiserData.supporters.length} supporters { /** This takes length of supporters aaray */ }
+                                    </Link>
+                                </div>
+                            </FundraisedStats>
+                            <ShareInfo>
+                                <div>
+                                    <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/whatsapp-de7eea5e99374fa76f0ef336de81e6009c552c0e0fd4310da10d76ff52ea8693.svg"})`}}></div>
+                                    <div>Share</div>
+                                </div>
+                                <div>
+                                    <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/facebook-e95d42ee18fd2198d8052f9b73e846cf2811d7c566c64bc6957422917e271f7b.svg"})`}}></div>
+                                    <div>Share</div>
+                                </div>
+                            </ShareInfo>
+                            <BeneficiaryName>
+                                <div>
+                                    <div>{"ND"}</div>{/** This will take first char of name */}
+                                    <div>
+                                        <h4>Created by</h4>
+                                        <h1>{fundraiserData.createdBy}</h1> { /** This takes createdBy */ }
+                                    </div>
+                                </div>
+                                <div>
+                                    <div>{"AK"}</div>{/** This will take first char of name */}
+                                    <div>
+                                        <h4>This fundraiser will benefit</h4>
+                                        <h1>{fundraiserData.createdFor}</h1> { /** This takes createdFor */ }
+                                    </div>
+                                </div>
+                            </BeneficiaryName>
+                            <BeneficiaryStory>
+                                <h1>Story</h1>
+                                <p>
+                                    {fundraiserData.description}
+                                </p> {/** This will take discription */}
+                            </BeneficiaryStory>
+                            <SupportFundraiser>
+                                <div>
+                                    <h2>Create a support fundraiser page and raise donations from your friends to</h2>
+                                    <h2>help {fundraiserData.createdFor}{/** This takes createdFor */}</h2>
+                                </div>
+                                <div>
+                                    <StyledButton text="Create a support fundraiser" />
+                                </div>
+                            </SupportFundraiser>
+                        </BeneficiaryDiv>
+                        <PaymentDiv>
                             <div>
                                 <div>
-                                    <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/qr_code-4663c94becb62937467a2d00e761e207e3a7af3490f0b73577fa0a1392fbda0f.jpg"})`}}></div>
+                                    <div>
+                                        <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/donate-icon-7cabb309d2c7a586a914c0a23abe52032aa0ce01115fb54e07c6148ab2cf8c6a.svg"})`}}></div>
+                                        <div>Donate</div>
+                                    </div>
+                                    <div>
+                                        <Link>
+                                            {fundraiserData.supporters.length} supporters
+                                        </Link>
+                                    </div>
+                                </div>
+                                <div>
+                                    <CircularProgress value={ (raisedAmount/fundraiserData.target)*100 } color="#37d123" size="73px">
+                                        <CircularProgressLabel fontSize="15px" fontWeight="500">{ (raisedAmount/fundraiserData.target)*100 }%</CircularProgressLabel>
+                                    </CircularProgress>
+                                    <div>
+                                        <h3>Raised</h3>
+                                        <h1> <span>Rs.{raisedAmount}</span> <span> of Rs.{fundraiserData.target}</span> </h1>
+                                    </div>
+                                </div>
+                                <div>
+                                    <StyledButton text="Donate now" />    
+                                </div>  
+                                <div>
+                                    <h2>Card, Netbanking, Cheque pickups</h2>
+                                </div>
+                                <div>
+                                    <div></div>
+                                    <div>
+                                        <span>Or</span>
+                                        <span>Donate using</span>
+                                    </div>
+                                    <div></div>
+                                </div>
+                                <div>
+                                    <div>
+                                        <div>
+                                            <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/qr_code-4663c94becb62937467a2d00e761e207e3a7af3490f0b73577fa0a1392fbda0f.jpg"})`}}></div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <StyledButton text="Generate QR" />
+                                    </div>
                                 </div>
                             </div>
                             <div>
-                                <StyledButton text="Generate QR" />
+                                <div>
+                                    <h3>Scan & donate with any app</h3>
+                                </div>
+                                <div>
+                                    <div style={{backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/bhim-3-69845.png"})`}}></div>
+                                    <div style={{backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-256/google-pay-2038779-1721670.png"})`}}></div>
+                                    <div style={{backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/paytm-226448.png"})`}}></div>
+                                    <div style={{backgroundImage: `url(${"https://www.searchpng.com/wp-content/uploads/2018/11/phone-pe.png"})`}}></div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div>
-                        <div>
-                            <h3>Scan & donate with any app</h3>
-                        </div>
-                        <div>
-                            <div style={{backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/bhim-3-69845.png"})`}}></div>
-                            <div style={{backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-256/google-pay-2038779-1721670.png"})`}}></div>
-                            <div style={{backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/paytm-226448.png"})`}}></div>
-                            <div style={{backgroundImage: `url(${"https://www.searchpng.com/wp-content/uploads/2018/11/phone-pe.png"})`}}></div>
-                        </div>
-                    </div>
-                </PaymentDiv>
-            </DonateMainDiv>
-            <Footer />
+                        </PaymentDiv>
+                    </DonateMainDiv>        
+                    <Footer />
+                </div>
+            }
         </div>
     )
 }

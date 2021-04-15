@@ -8,6 +8,7 @@ const init = {
   isLoading: false,
   isError: false,
   fundraiserData: undefined,
+  raisedAmount: 0,
 };
 
 export const funraiserReducer = (state = init, { type, payload }) => {
@@ -26,6 +27,7 @@ export const funraiserReducer = (state = init, { type, payload }) => {
         isLoading: false,
         isError: false,
         fundraiserData: payload,
+        raisedAmount: payload.supporters.map( item => item.amount ).reduce( (ac, el) => ac+el, 0 )
       };
     }
 
