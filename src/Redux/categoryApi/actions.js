@@ -25,13 +25,13 @@ export const categoryFailure = () => {
 };
 
 export const getCards = (params) => (dispatch) => {
-  var last = params === "" ? "" : `?category=${params}`;
+  var last = params === "" ? "" : `&category=${params}`;
   if (params === "all") {
     last = "";
   }
   dispatch(categoryRequest());
   axios
-    .get("https://boron-milaap-clone.herokuapp.com/fundraisers" + last)
+    .get(`https://boron-milaap-clone.herokuapp.com/fundraisers?_sort=target&_order=_desc` + last)
     .then((res) => dispatch(categorySuccess(res.data)))
     .catch((err) => dispatch(categoryFailure()));
 };

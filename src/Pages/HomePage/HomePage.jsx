@@ -12,7 +12,6 @@ import { Heading } from "@chakra-ui/layout";
 import ScrollToTopButton from "../../Shared-components/ScrollToTopButton/ScrollToTopButton";
 
 const HomePage = () => {
-  console.log(data.one);
   return (
     <>
       <Navbar />
