@@ -24,6 +24,7 @@ const Routes = () => {
         </Route>
         <Route>
           <h1>Page not found!!</h1>
+          </Route>
         <Route path="/fundraisers/:id">
           <FundraiserDonate />
         </Route>
