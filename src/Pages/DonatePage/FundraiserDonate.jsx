@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar } from '../../Shared-components/Navbar'
 import styled from "styled-components";
 import Footer from '../../Shared-components/Footer/Footer';
@@ -438,16 +438,63 @@ const BeneficiaryStory = styled.div`
     width: 100%;
     text-align: left;
 
-    h1 {
-        font-size: 20px;
-        font-weight: 500;
-        color: #212121;
-        padding-bottom: 8px;
-        border-bottom: 1px solid #d6d5d5;
+    > div {
+        display: flex;
+
+        > div {
+            /* flex: 1; */
+        }
+        > div:nth-child(1) button {
+            
+            width: 285px;
+            padding: 25px 20px;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.4px;
+            background: #fff;
+            border: 1px solid #9c3353;
+            border-right: none;
+            color: #912c4a;
+            border-top-left-radius: 25px;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 0;
+            border-top-right-radius: 0;
+            box-shadow: none;
+
+            :hover {
+                background: #912c4a;
+                color: #fff; 
+            }
+
+        }
+
+        > div:nth-child(2) button {
+            
+            width: 285px;
+            padding: 25px 20px;
+            font-size: 18px;
+            font-weight: 400;
+            letter-spacing: 0.4px;
+            background: #fff;
+            border: 1px solid #9c3353;
+            border-left: none;
+            color: #912c4a;
+            border-top-left-radius: 0;
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 25px;
+            border-top-right-radius: 25px;
+            box-shadow: none;
+
+            :hover {
+                background: #912c4a;
+                color: #fff; 
+            }
+        }
     }
 
     p {
-        margin-top: 8px;
+        margin-top: 15px;
+        padding-top: 8px;
     }
 `
 
@@ -472,10 +519,21 @@ const SupportFundraiser = styled.div`
         padding: 23px 22px 26px;
         border-radius: 50px;
         background: #9c3353;
+
+        :hover {
+            background: #9c3353;
+            color: #fff;
+        }
     }
 `
 
 export const FundraiserDonate = () => {
+    const [storyUpdate, setStoryUpdate] = useState(false);
+    
+    const handleSwitchStoryUpdate = () => {
+        setStoryUpdate( !storyUpdate )
+    }
+
     const { id } = useParams();
 
     const dispatch = useDispatch();
@@ -541,10 +599,23 @@ export const FundraiserDonate = () => {
                                 </div>
                             </BeneficiaryName>
                             <BeneficiaryStory>
-                                <h1>Story</h1>
-                                <p>
-                                    {fundraiserData.description}
-                                </p> {/** This will take discription */}
+                                <div>
+                                    <div>
+                                        <StyledButton text="Story" onClick={handleSwitchStoryUpdate} style={ storyUpdate ? {} : {background: "#912c4a", color: "#fff"}} />
+                                    </div>
+                                    <div>
+                                        <StyledButton text={`Updates(${fundraiserData.updates.length})`} onClick={handleSwitchStoryUpdate} style={ storyUpdate ? {background: "#912c4a", color: "#fff"} : {}} />
+                                    </div>
+                                </div>
+                                {
+                                    storyUpdate ? 
+                                    <p>
+                                        {fundraiserData.description}
+                                    </p> 
+                                    : 
+                                    <p>{fundraiserData.updates[0].description}</p>
+                                }
+                                {/** This will take discription */}
                             </BeneficiaryStory>
                             <SupportFundraiser>
                                 <div>
