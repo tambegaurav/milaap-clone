@@ -9,6 +9,7 @@ import Carousel from "react-elastic-carousel";
 import data from "../../DB/review.json";
 import { MilaapFAQ } from "./MilaapFAQ";
 import { Heading } from "@chakra-ui/layout";
+import ScrollToTopButton from "../../Shared-components/ScrollToTopButton/ScrollToTopButton";
 
 const HomePage = () => {
   console.log(data.one);
@@ -16,6 +17,7 @@ const HomePage = () => {
     <>
       <Navbar />
       <LayoutContainer>
+        <ScrollToTopButton showBelow={250} />
         <HomeBanner />
       </LayoutContainer>
       <LayoutContainer>
