@@ -501,8 +501,8 @@ export const FundraiserDonate = () => {
                             </BeneficiaryTitle>
                             <BeneficiaryImage style={{backgroundImage: `url(${fundraiserData.image})`}}></BeneficiaryImage> {/** This takes image */}
                             <FundraisedStats>        
-                                <CircularProgress value={ (raisedAmount/fundraiserData.target)*100 } color="#37d123" size="74px">
-                                    <CircularProgressLabel fontSize="15px" fontWeight="500">{ (raisedAmount/fundraiserData.target)*100 }%</CircularProgressLabel>
+                                <CircularProgress value={ ((raisedAmount/fundraiserData.target)*100).toFixed(1) } color="#37d123" size="74px">
+                                    <CircularProgressLabel fontSize="15px" fontWeight="500">{ ((raisedAmount/fundraiserData.target)*100).toFixed(1) }%</CircularProgressLabel>
                                 </CircularProgress>
                                 <div>
                                     <h3>Raised</h3>
@@ -570,8 +570,8 @@ export const FundraiserDonate = () => {
                                     </div>
                                 </div>
                                 <div>
-                                    <CircularProgress value={ (raisedAmount/fundraiserData.target)*100 } color="#37d123" size="73px">
-                                        <CircularProgressLabel fontSize="15px" fontWeight="500">{ (raisedAmount/fundraiserData.target)*100 }%</CircularProgressLabel>
+                                    <CircularProgress value={ ((raisedAmount/fundraiserData.target)*100).toFixed(1) } color="#37d123" size="73px">
+                                        <CircularProgressLabel fontSize="15px" fontWeight="500">{ ((raisedAmount/fundraiserData.target)*100).toFixed(1) }%</CircularProgressLabel>
                                     </CircularProgress>
                                     <div>
                                         <h3>Raised</h3>
