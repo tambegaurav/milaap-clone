@@ -22,10 +22,23 @@ import {
   } from "@chakra-ui/react"
 
 
+  
+
+
+
+
+
+
+
 export function Donate(){
    const [filters,setFilters]=useState("")
    const [value,setValue]=useState("all")
-  //  const [desc,setDesc]=useState(true)
+   const [sort,setSort]=useState("asc")
+   const [order,setOrder]=useState("asc")
+  
+
+ 
+    
    
 
    const { isOpen, onOpen, onClose } = useDisclosure()
@@ -36,11 +49,17 @@ export function Donate(){
     useEffect(()=>{
        dispatch(getCards(filters))
     },[filters]) 
-  //  if(desc){
-  //    cards.sort((a,b)=>{
-  //      return b.target-a.target;
-  //    })
-  //  }
+    if(order==="desc"){
+      cards.sort((a,b)=>{
+        return b.target-a.target;
+      })
+    }
+
+    if(order==="asc"){
+      cards.sort((a,b)=>{
+        return a.target-b.target;
+      })
+    }
 
     return(
         <div>
@@ -68,18 +87,15 @@ export function Donate(){
         <Radio value="animals">Animals</Radio>
         <Radio value="memorial">Memorials</Radio>
       </Stack>
-    </RadioGroup>
+    </RadioGroup><br/> <br/>
 
-    {/* <RadioGroup onChange={()=>setDesc(!desc)} value={desc}>
-      <Stack direction="column">
-         <Radio value="true">Ascending</Radio>
-        <Radio value="false">Descending</Radio> 
-      </Stack>
-    </RadioGroup> */}
-    
-      
-     
-
+          <div>Sort</div><hr/>
+          {/* <input type="radio" name="sort" value="sort" onChange={()=>setSort("none")} checked/>
+          <label>None</label><br/> */}
+           <input type="radio" name="sort" value={sort} onChange={()=>setSort("asc")} />
+           <label>Low to high</label><br/>
+           <input type="radio" name="sort" value={sort} onChange={()=>setSort("desc")}/>
+           <label>High to low</label>
         
             </DrawerBody>
 
@@ -88,7 +104,8 @@ export function Donate(){
                 Cancel
               </Button>
               <Button onClick={()=>{setFilters(value)
-              
+              setOrder(sort)
+              onClose()
               }} colorScheme="blue">Submit</Button>
               
             </DrawerFooter>
