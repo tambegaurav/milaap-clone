@@ -20,12 +20,13 @@ const Routes = () => {
           <LoginPage />
         </Route>
         <Route path="/donate">
-          <Donate/>
+          <Donate />
+        </Route>
+        <Route path="/fundraisers/:id">
+          <FundraiserDonate />
         </Route>
         <Route>
           <h1>Page not found!!</h1>
-        <Route path="/fundraisers/:id">
-          <FundraiserDonate />
         </Route>
       </Switch>
     </div>
