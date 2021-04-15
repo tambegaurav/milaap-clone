@@ -25,13 +25,7 @@ export function CategoryFilter() {
     setFilters(str);
   };
   // eslint-disable-next-line array-callback-return
-  cards.map((item) => {
-    console.log(
-      item.supporters.reduce((acc, a) => {
-        return acc + a.amount;
-      }, 0)
-    );
-  });
+  
 
   return (
     <div>

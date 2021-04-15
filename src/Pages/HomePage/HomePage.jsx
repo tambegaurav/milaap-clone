@@ -11,7 +11,6 @@ import { MilaapFAQ } from "./MilaapFAQ";
 import { Heading } from "@chakra-ui/layout";
 
 const HomePage = () => {
-  console.log(data.one);
   return (
     <>
       <Navbar />
