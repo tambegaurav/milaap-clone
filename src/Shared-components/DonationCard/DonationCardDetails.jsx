@@ -1,6 +1,7 @@
 import React from "react";
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 
 const CardDetailsMainDiv = styled.div`
   width: 30%;
@@ -8,6 +9,7 @@ const CardDetailsMainDiv = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 5px #9c3353;
   padding-bottom: 5px;
+  cursor: pointer;
 
   > div:nth-child(1) > div {
     width: 100%;
@@ -94,12 +96,13 @@ export const DonationCardDetails = ({
   imageUrl,
   amount,
   creater,
-
+  id,
   percentage,
 }) => {
+  const history = useHistory();
   console.log(imageUrl);
   return (
-    <CardDetailsMainDiv>
+    <CardDetailsMainDiv onClick={() => history.push(`/fundraisers/${id}`)}>
       <div>
         <div style={{ backgroundImage: `url(${imageUrl})` }}></div>
       </div>
