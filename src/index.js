@@ -7,15 +7,18 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store } from "./Redux/store";
+import { CurrencyContextProvider } from "./Context/CurrencyContextProvider/CurrencyContextProvider";
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <BrowserRouter>
-        <ChakraProvider>
-          <App />
-        </ChakraProvider>
-      </BrowserRouter>
+      <CurrencyContextProvider>
+        <BrowserRouter>
+          <ChakraProvider>
+            <App />
+          </ChakraProvider>
+        </BrowserRouter>
+      </CurrencyContextProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById("root")
