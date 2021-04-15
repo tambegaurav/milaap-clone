@@ -8,6 +8,7 @@ import StyledButton from '../../Styled-components/Button';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { fetchFundraiserData } from '../../Redux/specificFundraiser/actions';
 import { CurrencyContext } from '../../Context/CurrencyContextProvider/CurrencyContextProvider';
+import { Modal, ModalOverlay, ModalContent, ModalHeader, ModalFooter, ModalBody, ModalCloseButton, useDisclosure, RadioGroup, Radio, Button, Stack } from "@chakra-ui/react"
 
 const DonateMainDiv = styled.div`
     width: 40vw;
@@ -528,10 +529,77 @@ const SupportFundraiser = styled.div`
     }
 `
 
+const SupporterModal = styled.div`
+    display: flex;
+    padding: 10px 10px;
+
+    > div:nth-child(1) {
+        width: 50px;
+        height: 50px;
+        font-weight: 500;
+        border-radius: 50px;
+        padding: 13px 20px;
+        background: #cc668535;
+        color: #9c3353;   
+    }
+
+    > div:nth-child(2) {
+        flex: 1;
+        margin-left: 10px;
+        margin-top: 5px;
+        text-align: left;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #cc668560;
+
+        h4 {
+            margin-left: 0;
+            font-size: 13.5px;
+            color: #5d5d5d;
+            letter-spacing: 0.1px;
+        }
+
+        h1 {
+            font-weight: 500;
+            font-size: 15px;
+        }
+    }
+
+    > div:nth-child(1) {
+        margin-right: 12px;
+    }
+
+    > div:nth-child(2) {
+        margin-left: 12px;
+    }
+
+`
+
+const ModalDonateButton = styled.button`
+    width: 100%;
+    
+    button {
+        width: 300px;
+        font-size: 18px;
+        font-weight: 400;
+        margin: 5px 0;
+        letter-spacing: 0.4px;
+        padding: 23px 22px 26px;
+        border-radius: 50px;
+        background: #9c3353;
+        
+        :hover {
+            background: #9c3353;
+            color: #fff;
+        }
+    }
+`
+
 export const FundraiserDonate = () => {
     const [storyUpdate, setStoryUpdate] = useState(false);
     const { currencyToggle, handleCurrencyToggel } = useContext( CurrencyContext );
-    
+        
+    const btnRef = React.useRef()
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const handleSwitchStoryUpdate = () => {
         setStoryUpdate( !storyUpdate )
     }
@@ -572,9 +640,51 @@ export const FundraiserDonate = () => {
                                     </h1>
                                 </div>
                                 <div>
-                                    <Link>
+                                    <Link onClick={onOpen} ref={btnRef} as={"div"}>
                                         {fundraiserData.supporters.length} supporters { /** This takes length of supporters aaray */ }
                                     </Link>
+                                    <Modal
+                                        onClose={onClose}
+                                        finalFocusRef={btnRef}
+                                        isOpen={isOpen}
+                                        scrollBehavior="inside"
+                                    >
+                                        <ModalOverlay />
+                                        <ModalContent>
+                                            <ModalHeader style={{borderBottom: "1px solid #c4c4c4", margin: "10px 0"}}>
+                                                <div>
+                                                {fundraiserData.supporters.length} supporters
+                                                </div>
+                                            </ModalHeader>
+                                            <ModalCloseButton />
+                                            <ModalBody>
+                                                {
+                                                    fundraiserData.supporters.map( item => {
+                                                        return (
+                                                            <div key={item.id}>
+                                                                <SupporterModal>
+                                                                    <div>
+                                                                        <div>{item.name[0]}</div>
+                                                                    </div>
+                                                                    <div>
+                                                                        <h4>{item.name}</h4>
+                                                                        <h1>{currencyToggle ? <span>&#8377;</span> : "$" }{ currencyToggle ? item.amount : Math.round(item.amount/74) }</h1>
+                                                                    </div>
+                                                                </SupporterModal>
+                                                            </div>
+                                                        )
+                                                    } )
+                                                }
+                                            </ModalBody>
+                                            <ModalFooter style={{borderTop: "1px solid #c4c4c4"}}>
+                                                <ModalDonateButton>
+                                                    <Link to="" onClick={onClose}>
+                                                        <StyledButton text="Donate now" />
+                                                    </Link>
+                                                </ModalDonateButton>
+                                            </ModalFooter>
+                                        </ModalContent>
+                                    </Modal>
                                 </div>
                             </FundraisedStats>
                             <ShareInfo>
@@ -640,7 +750,7 @@ export const FundraiserDonate = () => {
                                         <div>Donate</div>
                                     </div>
                                     <div>
-                                        <Link>
+                                        <Link onClick={onOpen} ref={btnRef} as={"div"}>
                                             {fundraiserData.supporters.length} supporters
                                         </Link>
                                     </div>
