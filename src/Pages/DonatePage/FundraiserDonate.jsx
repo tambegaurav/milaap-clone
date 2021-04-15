@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Navbar } from '../../Shared-components/Navbar'
 import styled from "styled-components";
 import Footer from '../../Shared-components/Footer/Footer';
@@ -7,6 +7,7 @@ import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import StyledButton from '../../Styled-components/Button';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { fetchFundraiserData } from '../../Redux/specificFundraiser/actions';
+import { CurrencyContext } from '../../Context/CurrencyContextProvider/CurrencyContextProvider';
 
 const DonateMainDiv = styled.div`
     width: 40vw;
@@ -529,6 +530,7 @@ const SupportFundraiser = styled.div`
 
 export const FundraiserDonate = () => {
     const [storyUpdate, setStoryUpdate] = useState(false);
+    const { currencyToggle, handleCurrencyToggel } = useContext( CurrencyContext );
     
     const handleSwitchStoryUpdate = () => {
         setStoryUpdate( !storyUpdate )
@@ -564,7 +566,10 @@ export const FundraiserDonate = () => {
                                 </CircularProgress>
                                 <div>
                                     <h3>Raised</h3>
-                                    <h1> <span>Rs.{raisedAmount}{/** This takes amount raised till now */}</span> <span> of Rs.{fundraiserData.target}{/** This takes target amount */}</span> </h1>
+                                    <h1> 
+                                        <span>{currencyToggle ? "Rs" : "USD"}.{ currencyToggle ? raisedAmount : Math.round(raisedAmount/74) }</span>{/** This takes amount raised till now */} 
+                                        <span> of {currencyToggle ? "Rs" : "USD"}.{ currencyToggle ? fundraiserData.target : Math.round(fundraiserData.target/74) }</span>{/** This takes target amount */} 
+                                    </h1>
                                 </div>
                                 <div>
                                     <Link>
@@ -646,7 +651,10 @@ export const FundraiserDonate = () => {
                                     </CircularProgress>
                                     <div>
                                         <h3>Raised</h3>
-                                        <h1> <span>Rs.{raisedAmount}</span> <span> of Rs.{fundraiserData.target}</span> </h1>
+                                        <h1> 
+                                            <span>{currencyToggle ? "Rs" : "USD"}.{ currencyToggle ? raisedAmount : Math.round(raisedAmount/74) }</span> 
+                                            <span> of {currencyToggle ? "Rs" : "USD"}.{ currencyToggle ? fundraiserData.target : Math.round(fundraiserData.target/74) }</span> 
+                                        </h1>
                                     </div>
                                 </div>
                                 <div>

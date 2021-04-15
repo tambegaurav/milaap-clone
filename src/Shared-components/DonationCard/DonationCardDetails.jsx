@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import { CurrencyContext } from "../../Context/CurrencyContextProvider/CurrencyContextProvider";
 
 const CardDetailsMainDiv = styled.div`
   width: 30%;
@@ -99,6 +100,9 @@ export const DonationCardDetails = ({
   id,
   percentage,
 }) => {
+
+  const { currencyToggle } = useContext( CurrencyContext )
+
   const history = useHistory();
   console.log(imageUrl);
   return (
@@ -115,7 +119,7 @@ export const DonationCardDetails = ({
         </CircularProgress>
         <div>
           <div>Raised</div>
-          <div>&#8377;{amount}</div>
+          <div> { currencyToggle ? <span>&#8377;</span> : <span>$</span> } { currencyToggle ? amount : Math.round(amount/74) }</div>
         </div>
         <div></div>
         <div>
