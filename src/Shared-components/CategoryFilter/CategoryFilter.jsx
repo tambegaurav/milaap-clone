@@ -52,6 +52,7 @@ export function CategoryFilter() {
       <DonationCardCompo>
         {cards.map((item) => (
           <DonationCardDetails
+            id={item.id}
             label={item.title}
             imageUrl={item.image}
             amount={item.target}

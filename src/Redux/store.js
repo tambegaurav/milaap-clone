@@ -1,10 +1,12 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import { authReducer } from "./auth/authReducer";
-import {categoryReducer} from "./categoryApi/categoryReducer"
+import { categoryReducer } from "./categoryApi/categoryReducer";
+import { funraiserReducer } from "./specificFundraiser/fundraiserReducer";
 
 const rootReducer = combineReducers({
   auth: authReducer,
-  cards:categoryReducer  
+  cards: categoryReducer,
+  fundraiser: funraiserReducer,
 });
 
 const customThunk = (store) => (next) => (action) => {
@@ -12,7 +14,7 @@ const customThunk = (store) => (next) => (action) => {
     return action(store.dispatch, store.getState);
   }
   return next(action);
-}; 
+};
 
 export const store = createStore(
   rootReducer,
