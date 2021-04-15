@@ -5,6 +5,7 @@ import StyledButton from "../../Styled-components/Button";
 import LayoutContainer from "../../Styled-components/LayoutContainer";
 import { useDispatch } from "react-redux";
 import { signup } from "../../Redux/auth/actions";
+import { Heading } from "@chakra-ui/layout";
 
 const Container = styled.div`
   width: 70%;
@@ -46,8 +47,7 @@ const LogoBox = styled.div`
   place-items: center;
 `;
 
-const SignupPage = () => {
-  const [fullname, setFullname] = useState("");
+const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -88,17 +88,11 @@ const SignupPage = () => {
               marginTop: "50px",
             }}
           >
-            <p style={{ textAlign: "center" }}>
-              Sign up & manage fundraisers, donations & more
-            </p>
-            <InputField
-              value={fullname}
-              label="Full name"
-              onChange={(e) => setFullname(e.target.value)}
-            />
+            <Heading>Login</Heading>
+
             <InputField
               value={email}
-              label="Email"
+              label="Mobile / Email"
               type="email"
               onChange={(e) => setEmail(e.target.value)}
             />
@@ -111,7 +105,7 @@ const SignupPage = () => {
             <StyledButton
               onClick={handleRegister}
               isLoading={false}
-              text="Sign up"
+              text="Login"
               style={{ width: "400px" }}
             />
           </div>
@@ -126,8 +120,8 @@ const SignupPage = () => {
             }}
           >
             {" "}
-            <p>Already signed up with Milaap? </p>{" "}
-            <StyledButton text="Login" style={{ width: "100px" }} />
+            <p>New to Milaap? Sign up now, it’s quick & free </p>{" "}
+            <StyledButton text="Sign up" style={{ width: "100px" }} />
           </div>
         </FormContainer>
       </Container>
@@ -135,4 +129,4 @@ const SignupPage = () => {
   );
 };
 
-export default SignupPage;
+export default LoginPage;
