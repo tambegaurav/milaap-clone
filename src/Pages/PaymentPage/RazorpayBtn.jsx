@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router";
 import { makePayment } from "../../Redux/payment/actions";
 import StyledButton from "../../Styled-components/Button";
 
@@ -26,13 +27,18 @@ const PayByRazorPay = ({ amount, disableData }) => {
     },
   };
 
-  const { fundraiserData } = useSelector(state => state.fundraiser, shallowEqual)
+  const { fundraiserData } = useSelector(
+    (state) => state.fundraiser,
+    shallowEqual
+  );
+
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const openPayModal = async () => {
     var rzp1 = await new window.Razorpay(options);
     rzp1.open();
-    console.log("amount",options.amount);
+    console.log("amount", options.amount);
     const payload = {
       id: fundraiserData.id,
       supporters: fundraiserData.supporters,
@@ -40,14 +46,13 @@ const PayByRazorPay = ({ amount, disableData }) => {
         id: fundraiserData.supporters.length + 1,
         name: disableData.name,
         emailid: disableData.emailid,
-        amount: Number(disableData.amount)
-      }
-    }
+        amount: Number(disableData.amount),
+      },
+    };
     console.log(disableData);
     console.log(payload);
-    console.log("fund",fundraiserData);
-
-    dispatch( makePayment(payload) )
+    console.log("fund", fundraiserData);
+    dispatch(makePayment(payload));
   };
   useEffect(() => {
     const script = document.createElement("script");
@@ -59,7 +64,11 @@ const PayByRazorPay = ({ amount, disableData }) => {
   return (
     <>
       <StyledButton
-        disabled= { disableData.name === "" || disableData.amount === "" || disableData.emailid === "" }
+        disabled={
+          disableData.name === "" ||
+          disableData.amount === "" ||
+          disableData.emailid === ""
+        }
         style={{ backgroundColor: "#9c3353", borderRadius: "50px" }}
         onClick={openPayModal}
         text="Pay with Razorpay"
