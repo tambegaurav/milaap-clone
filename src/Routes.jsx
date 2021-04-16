@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
 import { CreateFundraiser } from "./Pages/CreateFundraiser/CreateFundraiser";
+import { DashBoard } from "./Pages/DashBoard/DashBoard";
 import { Donate } from "./Pages/DonatePage/Donate";
 import { FundraiserDonate } from "./Pages/DonatePage/FundraiserDonate";
 import HomePage from "./Pages/HomePage";
@@ -32,6 +33,9 @@ const Routes = () => {
         </Route>
         <Route path="/createfundraiser">
           <CreateFundraiser />
+        </Route>
+        <Route path="/dashboard">
+          <DashBoard />
         </Route>
         <Route>
           <h1>Page not found!!</h1>

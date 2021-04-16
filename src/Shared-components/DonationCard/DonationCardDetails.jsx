@@ -93,7 +93,6 @@ export const DonationCardDetails = ({
 
 
   const history = useHistory();
-  console.log(imageUrl);
   return (
     <CardDetailsMainDiv onClick={() => history.push(`/fundraisers/${id}`)}>
       <div>
