@@ -111,15 +111,17 @@ const PaymentMilaapLogo = styled.div`
 const initState = {
   name: "",
   amount: null,
-  emailid: ""
+  emailid: "",
+  anonymus: true
 }
 
 const PaymentPage = () => {
   const [formDetails, setFormDetails] = useState(initState)
 
   const handleChange = e => {
-    const { name, value } = e.target
-    setFormDetails({ ...formDetails, [name]: value })
+    const { name, value, checked, type } = e.target
+    const val = type === "checkbox" ? checked : value;
+    setFormDetails({ ...formDetails, [name]: val })
   }
 
   return (
@@ -174,13 +176,13 @@ const PaymentPage = () => {
               </div>
             </div>
             <div>
-              <Checkbox size="md" colorScheme="green" defaultIsChecked>
+              <Checkbox size="md" colorScheme="green" defaultIsChecked checked={formDetails.anonymus} type="checkbox" name="anonymus" onChange={handleChange}>
                 Keep me <strong>Anonymous</strong>
               </Checkbox>
             </div>
           </Form>
           <div>
-              <PayByRazorPay amount={formDetails.amount} disableData={formDetails} />
+              <PayByRazorPay amount={formDetails.amount} disableData={formDetails.anonymus ? { ...formDetails, name: "Anonymus" } : formDetails} />
           </div> 
         </div>   
         <PaymentMilaapLogo>
