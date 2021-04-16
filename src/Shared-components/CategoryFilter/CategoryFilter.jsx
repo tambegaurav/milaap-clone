@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getCards } from "../../Redux/categoryApi/actions";
 import { CategoryCard } from "../../Styled-components/CategoryCard";
+import Loader from "../../Styled-components/Loader";
 import { DonationCardCompo } from "../DonationCard/DonationCardCompo";
 import { DonationCardDetails } from "../DonationCard/DonationCardDetails";
 
@@ -26,7 +27,6 @@ export function CategoryFilter() {
     setFilters(str);
   };
   // eslint-disable-next-line array-callback-return
-  
 
   return (
     <div>
@@ -38,23 +38,36 @@ export function CategoryFilter() {
           gap: "10px",
         }}
       >
-        <CategoryCard text="All" onClick={()=>handleButton("all")} 
-        img="https://www.shareicon.net/data/512x512/2015/08/22/89164_all_512x512.png"/>
-        
-        <CategoryCard text="Medical" onClick={()=>handleButton("medical")} 
-        img="https://image.flaticon.com/icons/png/512/3/3862.png"/>
-          
-          <CategoryCard text="Animal" onClick={()=>handleButton("animals")} 
-        img="https://www.freeiconspng.com/uploads/animal-paw-vector-icon-animals-icons-icons-download-0.png"/>
-         
-         <CategoryCard text="Memorial" onClick={()=>handleButton("memorial")} 
-        img="https://static.thenounproject.com/png/1382987-200.png"/>
+        <CategoryCard
+          text="All"
+          onClick={() => handleButton("all")}
+          img="https://www.shareicon.net/data/512x512/2015/08/22/89164_all_512x512.png"
+        />
 
-        <CategoryCard text="Education" onClick={()=>handleButton("education")}  
-        img="https://upload.wikimedia.org/wikipedia/commons/e/e8/Education%2C_Studying%2C_University%2C_Alumni_-_icon.png"/>
+        <CategoryCard
+          text="Medical"
+          onClick={() => handleButton("medical")}
+          img="https://image.flaticon.com/icons/png/512/3/3862.png"
+        />
 
-        
-        
+        <CategoryCard
+          text="Animal"
+          onClick={() => handleButton("animals")}
+          img="https://www.freeiconspng.com/uploads/animal-paw-vector-icon-animals-icons-icons-download-0.png"
+        />
+
+        <CategoryCard
+          text="Memorial"
+          onClick={() => handleButton("memorial")}
+          img="https://static.thenounproject.com/png/1382987-200.png"
+        />
+
+        <CategoryCard
+          text="Education"
+          onClick={() => handleButton("education")}
+          img="https://upload.wikimedia.org/wikipedia/commons/e/e8/Education%2C_Studying%2C_University%2C_Alumni_-_icon.png"
+        />
+
         {/* <select onChange={(e) => setFilters(e.target.value)}>
           <option value="medical">Medical</option>
           <option value="emergencies">Emergencies</option>
@@ -64,22 +77,26 @@ export function CategoryFilter() {
       </div>
 
       <DonationCardCompo>
-        {cards.map((item) => (
-          <DonationCardDetails
-            id={item.id}
-            label={item.title}
-            imageUrl={item.image}
-            amount={item.target}
-            creater={item.createdBy}
-            percentage={(
-              (item.supporters.reduce((ac, v) => {
-                return ac + v.amount;
-              }, 0) /
-                item.target) *
-              100
-            ).toFixed(1)}
-          ></DonationCardDetails>
-        ))}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          cards.map((item) => (
+            <DonationCardDetails
+              id={item.id}
+              label={item.title}
+              imageUrl={item.image}
+              amount={item.target}
+              creater={item.createdBy}
+              percentage={(
+                (item.supporters.reduce((ac, v) => {
+                  return ac + v.amount;
+                }, 0) /
+                  item.target) *
+                100
+              ).toFixed(1)}
+            ></DonationCardDetails>
+          ))
+        )}
       </DonationCardCompo>
     </div>
   );

@@ -8,6 +8,7 @@ import { Navbar } from "../../Shared-components/Navbar";
 import LayoutContainer from "../../Styled-components/LayoutContainer";
 import { RefineSearchBtn } from "./RefineSearchBtn";
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
+import ScrollToTopButton from "../../Shared-components/ScrollToTopButton/ScrollToTopButton";
 
 import {
   Drawer,
@@ -20,6 +21,7 @@ import {
   useDisclosure,
   Button,
 } from "@chakra-ui/react";
+import Loader from "../../Styled-components/Loader";
 
 export function Donate() {
   const [filters, setFilters] = useState("");
@@ -54,6 +56,7 @@ export function Donate() {
     <div>
       <Navbar />
       <LayoutContainer>
+        <ScrollToTopButton showBelow={250} />
         <RefineSearchBtn ref={btnRef} onClick={onOpen} text="Refine Search" />
 
         <Drawer
@@ -121,22 +124,26 @@ export function Donate() {
 
       <LayoutContainer>
         <DonationCardCompo>
-          {cards.map((item) => (
-            <DonationCardDetails
-              id={item.id}
-              label={item.title}
-              imageUrl={item.image}
-              amount={item.target}
-              creater={item.createdBy}
-              percentage={(
-                (item.supporters.reduce((ac, v) => {
-                  return ac + v.amount;
-                }, 0) /
-                  item.target) *
-                100
-              ).toFixed(1)}
-            ></DonationCardDetails>
-          ))}
+          {isLoading ? (
+            <Loader />
+          ) : (
+            cards.map((item) => (
+              <DonationCardDetails
+                id={item.id}
+                label={item.title}
+                imageUrl={item.image}
+                amount={item.target}
+                creater={item.createdBy}
+                percentage={(
+                  (item.supporters.reduce((ac, v) => {
+                    return ac + v.amount;
+                  }, 0) /
+                    item.target) *
+                  100
+                ).toFixed(1)}
+              ></DonationCardDetails>
+            ))
+          )}
         </DonationCardCompo>
       </LayoutContainer>
 
