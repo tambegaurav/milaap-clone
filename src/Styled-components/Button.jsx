@@ -17,10 +17,10 @@ const StyledBtn = styled(Button)`
   }
 `;
 
-const StyledButton = ({ text, onClick, isLoading, style }) => {
+const StyledButton = ({ text, onClick, isLoading, style, disabled }) => {
   return (
     <div>
-      <StyledBtn isLoading={isLoading} onClick={onClick} style={style}>
+      <StyledBtn disabled={disabled} isLoading={isLoading} onClick={onClick} style={style}>
         {text}
       </StyledBtn>
     </div>

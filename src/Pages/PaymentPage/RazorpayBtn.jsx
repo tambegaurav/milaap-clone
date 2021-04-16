@@ -14,9 +14,9 @@ const PayByRazorPay = ({ amount }) => {
       console.log(response);
     },
     prefill: {
-      name: "Gaurav",
-      contact: "9999999999",
-      email: "demo@demo.com",
+      name: "",
+      contact: "",
+      email: "",
     },
     theme: {
       color: "grey",
