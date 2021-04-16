@@ -34,7 +34,7 @@ const Routes = () => {
         <Route path="/createfundraiser">
           <CreateFundraiser />
         </Route>
-        <Route path="/dashboard">
+        <Route exact path="/dashboard">
           <DashBoard />
         </Route>
         <Route>

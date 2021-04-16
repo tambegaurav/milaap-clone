@@ -99,7 +99,6 @@ export function Navbar() {
         >
           {!isAuth && (
             <>
-              {" "}
               <button
                 onClick={() => history.push("/users/sign-in")}
                 style={{
@@ -115,12 +114,11 @@ export function Navbar() {
                 style={{ padding: "10px", outline: "none" }}
               >
                 Register
-              </button>{" "}
+              </button>
             </>
           )}
           {isAuth && (
             <>
-              {" "}
               <button
                 onClick={() => history.push("/dashboard")}
                 style={{
@@ -131,9 +129,9 @@ export function Navbar() {
               >
                 Dashboard
               </button>
-              <button onClick="" style={{ padding: "10px", outline: "none" }}>
+              <button onClick={() => history.push("/users/sign-out")} style={{ padding: "10px", outline: "none" }}>
                 Signout
-              </button>{" "}
+              </button>
             </>
           )}
         </div>

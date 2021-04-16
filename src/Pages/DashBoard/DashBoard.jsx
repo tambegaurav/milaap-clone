@@ -5,6 +5,7 @@ import { Navbar } from '../../Shared-components/Navbar';
 
 export const DashBoard = () => {
     const { activeUser, isAuth } = useSelector( state => state.auth );
+    
     if( isAuth ) {
         return <Redirect to="/users/sign-in" />
     }
