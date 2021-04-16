@@ -4,11 +4,12 @@ import React, { useState } from "react";
 import PayByRazorPay from "./RazorpayBtn";
 import styled from "styled-components";
 import { Checkbox } from "@chakra-ui/react";
+import { useSelector } from "react-redux";
 
 const PaymentMainDiv = styled.div`
-  background: linear-gradient(90deg,#a33555,#5f2747);
+  background: linear-gradient(90deg, #a33555, #5f2747);
   height: 100vh;
-`
+`;
 
 const PaymentContent = styled.div`
   background: white;
@@ -25,7 +26,7 @@ const PaymentContent = styled.div`
     margin: 10px;
   }
 
-  @media all and ( max-width: 500px ) {
+  @media all and (max-width: 500px) {
     margin: 20px;
     height: 45vh;
 
@@ -38,8 +39,7 @@ const PaymentContent = styled.div`
       display: none;
     }
   }
-
-`
+`;
 
 const Form = styled.form`
   display: flex;
@@ -58,7 +58,6 @@ const Form = styled.form`
     color: #525252;
   }
 
-
   input {
     color: #212121;
     font-weight: 500;
@@ -72,8 +71,7 @@ const Form = styled.form`
       letter-spacing: 0px;
     }
   }
-  
-`
+`;
 
 const PaymentMilaapLogo = styled.div`
   border-left: 1px solid #c4c4c4;
@@ -81,7 +79,7 @@ const PaymentMilaapLogo = styled.div`
   > div:nth-child(1) {
     width: 130px;
     height: 120px;
-    margin: 22% 0 0 35% ;
+    margin: 22% 0 0 35%;
     border-radius: 50%;
     padding: 20px;
     background: #9c3353;
@@ -106,25 +104,29 @@ const PaymentMilaapLogo = styled.div`
       color: #525252;
     }
   }
-`
+`;
 
 const initState = {
   name: "",
   amount: null,
-  emailid: ""
-}
+  emailid: "",
+  anonymus: true,
+};
 
 const PaymentPage = () => {
-  const [formDetails, setFormDetails] = useState(initState)
+  const [formDetails, setFormDetails] = useState(initState);
 
-  const handleChange = e => {
-    const { name, value } = e.target
-    setFormDetails({ ...formDetails, [name]: value })
-  }
+  const handleChange = (e) => {
+    const { name, value, checked, type } = e.target;
+    const val = type === "checkbox" ? checked : value;
+    setFormDetails({ ...formDetails, [name]: val });
+  };
 
   return (
     <PaymentMainDiv>
-      <Heading color="#fff" paddingTop="50px" lineHeight="0">LET'S SAVE A LIFE TOGETHER!</Heading>
+      <Heading color="#fff" paddingTop="50px" lineHeight="0">
+        LET'S SAVE A LIFE TOGETHER!
+      </Heading>
       <PaymentContent>
         <div>
           <Form>
@@ -139,7 +141,7 @@ const PaymentPage = () => {
                   placeholder="Amount that you wish"
                   value={formDetails.amount}
                   onChange={handleChange}
-                  style={{width: "100%"}}
+                  style={{ width: "100%" }}
                 />
               </div>
             </div>
@@ -148,13 +150,13 @@ const PaymentPage = () => {
                 <label>Name</label>
               </div>
               <div>
-                <Input 
+                <Input
                   name="name"
                   type="text"
                   placeholder="Let the world know who you are"
                   value={formDetails.name}
                   onChange={handleChange}
-                  style={{width: "100%"}}
+                  style={{ width: "100%" }}
                 />
               </div>
             </div>
@@ -163,39 +165,54 @@ const PaymentPage = () => {
                 <label>Email</label>
               </div>
               <div>
-                <Input 
+                <Input
                   name="emailid"
                   type="email"
                   placeholder="Let me have your email"
                   value={formDetails.emailid}
                   onChange={handleChange}
-                  style={{width: "100%"}}
+                  style={{ width: "100%" }}
                 />
               </div>
             </div>
             <div>
-              <Checkbox size="md" colorScheme="green" defaultIsChecked>
+              <Checkbox
+                size="md"
+                colorScheme="green"
+                defaultIsChecked
+                checked={formDetails.anonymus}
+                type="checkbox"
+                name="anonymus"
+                onChange={handleChange}
+              >
                 Keep me <strong>Anonymous</strong>
               </Checkbox>
             </div>
           </Form>
           <div>
-              <PayByRazorPay amount={formDetails.amount} disableData={formDetails} />
-          </div> 
-        </div>   
+            <PayByRazorPay
+              amount={formDetails.amount}
+              disableData={
+                formDetails.anonymus
+                  ? { ...formDetails, name: "Anonymus" }
+                  : formDetails
+              }
+            />
+          </div>
+        </div>
         <PaymentMilaapLogo>
           <div>
-            <div style={{backgroundImage: `url(${"https://assets.milaap.org/assets/milaap-trasparent-logo-25f6253e0156e2f82e2c3daf85575d169864e35ffffd21033ac59da0b4dd88e0.png"})`}}></div>
+            <div
+              style={{
+                backgroundImage: `url(${"https://assets.milaap.org/assets/milaap-trasparent-logo-25f6253e0156e2f82e2c3daf85575d169864e35ffffd21033ac59da0b4dd88e0.png"})`,
+              }}
+            ></div>
           </div>
           <div>
-            <h1>  
-              Welcome to Milaap Payment
-            </h1>
-            <h3>
-              Let's show world, Humanity is still alive.
-            </h3>
+            <h1>Welcome to Milaap Payment</h1>
+            <h3>Let's show world, Humanity is still alive.</h3>
           </div>
-        </PaymentMilaapLogo>  
+        </PaymentMilaapLogo>
       </PaymentContent>
     </PaymentMainDiv>
   );

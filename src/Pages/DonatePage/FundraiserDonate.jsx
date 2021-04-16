@@ -797,10 +797,10 @@ export const FundraiserDonate = () => {
                     />
                   </div>
                 </div>
-                {storyUpdate ? (
+                {!storyUpdate ? (
                   <p>{fundraiserData.description}</p>
                 ) : (
-                  <p>{fundraiserData.updates[0].description}</p>
+                  <p>{fundraiserData.updates.length>0 && fundraiserData.updates[0].description}</p>
                 )}
                 {/** This will take discription */}
               </BeneficiaryStory>
