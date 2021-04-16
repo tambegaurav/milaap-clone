@@ -1,3 +1,4 @@
+import { loadData } from "../../localStorage";
 import {
   SIGNUP_FAILURE,
   SIGNUP_REQUEST,
@@ -7,11 +8,14 @@ import {
   SIGNIN_REQUEST,
 } from "./actionTypes";
 
+const userFromLS = loadData("user") || undefined;
+const isAuthFromLS = loadData("isAuth") || false;
+
 const init = {
   isLoading: false,
   isError: false,
-  isAuth: false,
-  activeUser: undefined,
+  isAuth: isAuthFromLS,
+  activeUser: userFromLS,
   message: "",
 };
 
