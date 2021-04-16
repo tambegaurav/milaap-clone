@@ -9,6 +9,7 @@ import LayoutContainer from "../../Styled-components/LayoutContainer";
 import { RefineSearchBtn } from "./RefineSearchBtn";
 import { Radio, RadioGroup, Stack } from "@chakra-ui/react";
 import ScrollToTopButton from "../../Shared-components/ScrollToTopButton/ScrollToTopButton";
+import StyledButton from "../../Styled-components/Button";
 
 import {
   Drawer,
@@ -19,7 +20,6 @@ import {
   DrawerContent,
   DrawerCloseButton,
   useDisclosure,
-  Button,
 } from "@chakra-ui/react";
 import Loader from "../../Styled-components/Loader";
 
@@ -68,21 +68,25 @@ export function Donate() {
           <DrawerOverlay>
             <DrawerContent>
               <DrawerCloseButton />
-              <DrawerHeader>Filter and Sort</DrawerHeader>
+              <DrawerHeader>Refine your Search</DrawerHeader>
 
               <DrawerBody>
-                <div>Filter</div>
+                <div>Filter by Category</div>
                 <hr />
+                <br />
                 <RadioGroup onChange={setValue} value={value}>
                   <Stack direction="column">
                     <Radio value="all">All</Radio>
                     <Radio value="animals">Animals</Radio>
                     <Radio value="memorial">Memorials</Radio>
+                    <Radio value="education">Education</Radio>
+                    <Radio value="medical">Medical</Radio>
                   </Stack>
                 </RadioGroup>
                 <br /> <br />
                 <div>Sort</div>
                 <hr />
+                <br />
                 {/* <input type="radio" name="sort" value="sort" onChange={()=>setSort("none")} checked/>
           <label>None</label><br/> */}
                 <input
@@ -93,6 +97,7 @@ export function Donate() {
                 />
                 <label>Low to high</label>
                 <br />
+                <br />
                 <input
                   type="radio"
                   name="sort"
@@ -102,20 +107,32 @@ export function Donate() {
                 <label>High to low</label>
               </DrawerBody>
 
-              <DrawerFooter>
-                <Button variant="outline" mr={3} onClick={onClose}>
-                  Cancel
-                </Button>
-                <Button
+              <DrawerFooter
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-around",
+                }}
+              >
+                <StyledButton
+                  text="Cancel"
+                  style={{
+                    color: "#9c3353",
+                  }}
+                  onClick={onClose}
+                />
+
+                <StyledButton
                   onClick={() => {
                     setFilters(value);
                     setOrder(sort);
                     onClose();
                   }}
-                  colorScheme="blue"
-                >
-                  Submit
-                </Button>
+                  style={{
+                    backgroundColor: "#9c3353",
+                  }}
+                  text="Submit"
+                />
               </DrawerFooter>
             </DrawerContent>
           </DrawerOverlay>
