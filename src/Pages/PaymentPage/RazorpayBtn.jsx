@@ -1,7 +1,9 @@
 import React, { useEffect } from "react";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { makePayment } from "../../Redux/payment/actions";
 import StyledButton from "../../Styled-components/Button";
 
-const PayByRazorPay = ({ amount }) => {
+const PayByRazorPay = ({ amount, disableData }) => {
   const amt = Number(amount) * 100;
   const options = {
     key: process.env.REACT_APP_RAZORPAY_KEY,
@@ -14,9 +16,9 @@ const PayByRazorPay = ({ amount }) => {
       console.log(response);
     },
     prefill: {
-      name: "Gaurav",
-      contact: "9999999999",
-      email: "demo@demo.com",
+      name: "",
+      contact: "",
+      email: "",
     },
     theme: {
       color: "grey",
@@ -24,10 +26,28 @@ const PayByRazorPay = ({ amount }) => {
     },
   };
 
+  const { fundraiserData } = useSelector(state => state.fundraiser, shallowEqual)
+  const dispatch = useDispatch();
+
   const openPayModal = async () => {
     var rzp1 = await new window.Razorpay(options);
     rzp1.open();
-    console.log(options.amount);
+    console.log("amount",options.amount);
+    const payload = {
+      id: fundraiserData.id,
+      supporters: fundraiserData.supporters,
+      data: {
+        id: fundraiserData.supporters.length + 1,
+        name: disableData.name,
+        emailid: disableData.emailid,
+        amount: Number(disableData.amount)
+      }
+    }
+    console.log(disableData);
+    console.log(payload);
+    console.log("fund",fundraiserData);
+
+    dispatch( makePayment(payload) )
   };
   useEffect(() => {
     const script = document.createElement("script");
@@ -39,7 +59,8 @@ const PayByRazorPay = ({ amount }) => {
   return (
     <>
       <StyledButton
-        style={{ backgroundColor: "#9c3353" }}
+        disabled= { disableData.name === "" || disableData.amount === "" || disableData.emailid === "" }
+        style={{ backgroundColor: "#9c3353", borderRadius: "50px" }}
         onClick={openPayModal}
         text="Pay with Razorpay"
       />

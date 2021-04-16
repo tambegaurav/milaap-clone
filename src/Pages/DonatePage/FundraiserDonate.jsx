@@ -721,7 +721,7 @@ export const FundraiserDonate = () => {
                       </ModalBody>
                       <ModalFooter style={{ borderTop: "1px solid #c4c4c4" }}>
                         <ModalDonateButton>
-                          <Link to="" onClick={onClose}>
+                          <Link to="/payment" onClick={onClose}>
                             <StyledButton
                               onClick={() => history.push("/payment")}
                               text="Donate now"
