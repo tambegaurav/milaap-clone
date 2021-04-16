@@ -1,6 +1,6 @@
 import { Input } from "@chakra-ui/input";
 import { Select } from "@chakra-ui/select";
-import React, { useRef, useState } from "react"
+import React, {  useState } from "react"
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { addCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";

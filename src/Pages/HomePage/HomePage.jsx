@@ -10,6 +10,7 @@ import data from "../../DB/review.json";
 import { MilaapFAQ } from "./MilaapFAQ";
 import { Heading } from "@chakra-ui/layout";
 import ScrollToTopButton from "../../Shared-components/ScrollToTopButton/ScrollToTopButton";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
   return (
@@ -21,6 +22,7 @@ const HomePage = () => {
       </LayoutContainer>
       <LayoutContainer>
         <CategoryFilter />
+        <Link style={{color:"brown",textDecoration:"underline"}} to="/donate">See more fundraisers</Link>
       </LayoutContainer>
       <LayoutContainer>
         <MilaapFAQ />
