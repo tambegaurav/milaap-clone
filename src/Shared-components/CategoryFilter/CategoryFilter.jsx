@@ -80,7 +80,8 @@ export function CategoryFilter() {
         {isLoading ? (
           <Loader />
         ) : (
-          cards.map((item) => (
+          cards.map((item,i) => (
+            i<6 &&
             <DonationCardDetails
               id={item.id}
               label={item.title}
