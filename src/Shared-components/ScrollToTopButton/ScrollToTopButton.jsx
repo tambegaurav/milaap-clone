@@ -5,9 +5,17 @@ import styled from "styled-components";
 const ScrollBtn = styled.div`
   position: fixed;
   right: 20px;
-  top: 600px;
+  top: 700px;
   z-index: 100;
 `;
+
+const ScrollIcon = styled.div`
+  width: 2em;
+  height: 2em;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+`
 
 const ScrollToTopButton = ({ showBelow }) => {
   const [show, setShow] = useState(showBelow ? false : true);
@@ -33,7 +41,10 @@ const ScrollToTopButton = ({ showBelow }) => {
 
   return (
     <ScrollBtn>
-      {show && <IconButton onClick={handleClick}>Top</IconButton>}
+      {show && 
+        <IconButton onClick={handleClick}>
+          <ScrollIcon style={{backgroundImage: `url(${"https://static.thenounproject.com/png/138547-200.png"})`}}></ScrollIcon>  
+        </IconButton>}
     </ScrollBtn>
   );
 };

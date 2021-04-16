@@ -77,7 +77,7 @@ export function CategoryFilter() {
               }, 0) /
                 item.target) *
               100
-            ).toFixed(1)}
+            )}
           ></DonationCardDetails>
         ))}
       </DonationCardCompo>

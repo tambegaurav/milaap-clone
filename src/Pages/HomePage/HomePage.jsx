@@ -16,7 +16,7 @@ const HomePage = () => {
     <>
       <Navbar />
       <LayoutContainer>
-        <ScrollToTopButton showBelow={250} />
+        <ScrollToTopButton showBelow={2000} />
         <HomeBanner />
       </LayoutContainer>
       <LayoutContainer>

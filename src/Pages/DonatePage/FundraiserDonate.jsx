@@ -425,6 +425,7 @@ const BeneficiaryName = styled.div`
       margin-left: 10px;
       margin-top: 5px;
       text-align: left;
+      overflow: hidden;
 
       h4 {
         font-size: 12px;
@@ -753,7 +754,7 @@ export const FundraiserDonate = () => {
               </ShareInfo>
               <BeneficiaryName>
                 <div>
-                  <div>{"ND"}</div>
+                  <div>{fundraiserData.createdBy[0]}</div>
                   {/** This will take first char of name */}
                   <div>
                     <h4>Created by</h4>
@@ -762,7 +763,7 @@ export const FundraiserDonate = () => {
                   </div>
                 </div>
                 <div>
-                  <div>{"AK"}</div>
+                  <div>{fundraiserData.createdFor[0]}</div>
                   {/** This will take first char of name */}
                   <div>
                     <h4>This fundraiser will benefit</h4>

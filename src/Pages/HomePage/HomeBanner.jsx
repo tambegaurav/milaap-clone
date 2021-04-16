@@ -302,7 +302,7 @@ export const HomeBanner = () => {
     return (
         <BannerSection>
             <UrgentNeed>
-                <Link>
+                <Link to="/fundraisers/3">
                     <div>
                         <div>Vedika Wont't Make It To Her 1st Birthday Without Your Help!</div>    
                         <div><strong>{">"}</strong></div>
@@ -318,7 +318,9 @@ export const HomeBanner = () => {
                     <h2>Raise funds online for medical emergencies and social causes</h2>
                 </div>
                 <div>
-                    <StyledButton text="Start a fundraiser - it's FREE" />
+                    <Link to="/createfundraiser">
+                        <StyledButton text="Start a fundraiser - it's FREE" />
+                    </Link>
                 </div>
                 <div>
                     <div>

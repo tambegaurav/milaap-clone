@@ -72,26 +72,6 @@ const TitleDiv = styled.div`
   padding: 10px;
 `;
 
-// const DescriptionDiv = styled.div`
-//   padding: 15px 0 15px 14px;
-//   display: flex;
-
-//   > div:nth-child(1) {
-//     border: 1.5px solid #691a47;
-//     border-top-left-radius: 10px;
-//     border-bottom-left-radius: 10px;
-//     background: #691a47;
-//   }
-//   > div:nth-child(2) {
-//     background: #f7f7f7;
-//     text-align: left;
-//     margin: 0 5% 0 0;
-//     font-size: 14px;
-//     line-height: 18px;
-//     padding: 5px 8px;
-//   }
-// `;
-
 export const DonationCardDetails = ({
   label,
   imageUrl,
@@ -102,6 +82,15 @@ export const DonationCardDetails = ({
 }) => {
 
   const { currencyToggle } = useContext( CurrencyContext )
+  let str = "";
+  for( let i=0; i<15; i++ ) {
+    if( creater[i] === undefined ) {
+      break
+    } else {
+      str += creater[i]
+    }
+  }
+
 
   const history = useHistory();
   console.log(imageUrl);
@@ -114,8 +103,8 @@ export const DonationCardDetails = ({
         <h1>{label}</h1>
       </TitleDiv>
       <div>
-        <CircularProgress value={percentage} color="green.400">
-          <CircularProgressLabel>{percentage}%</CircularProgressLabel>
+        <CircularProgress value={Math.round(percentage)} color="green.400">
+          <CircularProgressLabel>{Math.round(percentage)}%</CircularProgressLabel>
         </CircularProgress>
         <div>
           <div>Raised</div>
@@ -124,7 +113,11 @@ export const DonationCardDetails = ({
         <div></div>
         <div>
           <div>Created by</div>
-          <div>{creater}</div>
+          <div>
+            {
+              str
+            } ...
+          </div>
         </div>
       </div>
     </CardDetailsMainDiv>
