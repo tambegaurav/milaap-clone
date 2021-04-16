@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import StyledButton from "../../Styled-components/Button";
 
-const PayByRazorPay = ({ amount }) => {
+const PayByRazorPay = ({ amount, disableData }) => {
   const amt = Number(amount) * 100;
   const options = {
     key: process.env.REACT_APP_RAZORPAY_KEY,
@@ -39,7 +39,8 @@ const PayByRazorPay = ({ amount }) => {
   return (
     <>
       <StyledButton
-        style={{ backgroundColor: "#9c3353" }}
+        disabled= { disableData.name === "" || disableData.amount === "" || disableData.emailid === "" }
+        style={{ backgroundColor: "#9c3353", borderRadius: "50px" }}
         onClick={openPayModal}
         text="Pay with Razorpay"
       />
