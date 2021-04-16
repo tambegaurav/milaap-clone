@@ -1,5 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router-dom";
+import { CreateFundraiser } from "./Pages/CreateFundraiser/CreateFundraiser";
 import { Donate } from "./Pages/DonatePage/Donate";
 import { FundraiserDonate } from "./Pages/DonatePage/FundraiserDonate";
 import HomePage from "./Pages/HomePage";
@@ -28,6 +29,9 @@ const Routes = () => {
         </Route>
         <Route path="/payment">
           <PaymentPage />
+        </Route>
+        <Route path="/createfundraiser">
+          <CreateFundraiser />
         </Route>
         <Route>
           <h1>Page not found!!</h1>
