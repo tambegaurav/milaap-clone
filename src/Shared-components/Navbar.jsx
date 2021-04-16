@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
 import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export function Navbar() {
   const Link = styled.a`
@@ -25,6 +26,7 @@ export function Navbar() {
   const history = useHistory();
 
   const { currencyToggle, handleCurrencyToggel } = useContext(CurrencyContext);
+  const { isAuth, activeUser } = useSelector((state) => state.auth);
   return (
     <div
       style={{
@@ -70,10 +72,14 @@ export function Navbar() {
           paddingTop: "15px",
         }}
       >
-        <img
-          src="https://assets.milaap.org/assets/header/user-icon-dfb080c6054d6a209639e60bd2bc033a2b79a8528da7131a2f118b92dd5589ae.png"
-          alt=""
-        />
+        {isAuth ? (
+          <p>{activeUser.fullname}</p>
+        ) : (
+          <img
+            src="https://assets.milaap.org/assets/header/user-icon-dfb080c6054d6a209639e60bd2bc033a2b79a8528da7131a2f118b92dd5589ae.png"
+            alt=""
+          />
+        )}
       </Link>
 
       {show && (
@@ -91,22 +97,45 @@ export function Navbar() {
             transition: "1px",
           }}
         >
-          <button
-            onClick={() => history.push("/users/sign-in")}
-            style={{
-              borderRight: "1px solid gray",
-              padding: "10px",
-              outline: "none",
-            }}
-          >
-            Login
-          </button>
-          <button
-            onClick={() => history.push("/users/sign-up")}
-            style={{ padding: "10px", outline: "none" }}
-          >
-            Register
-          </button>
+          {!isAuth && (
+            <>
+              {" "}
+              <button
+                onClick={() => history.push("/users/sign-in")}
+                style={{
+                  borderRight: "1px solid gray",
+                  padding: "10px",
+                  outline: "none",
+                }}
+              >
+                Login
+              </button>
+              <button
+                onClick={() => history.push("/users/sign-up")}
+                style={{ padding: "10px", outline: "none" }}
+              >
+                Register
+              </button>{" "}
+            </>
+          )}
+          {isAuth && (
+            <>
+              {" "}
+              <button
+                onClick={() => history.push("/dashboard")}
+                style={{
+                  borderRight: "1px solid gray",
+                  padding: "10px",
+                  outline: "none",
+                }}
+              >
+                Dashboard
+              </button>
+              <button onClick="" style={{ padding: "10px", outline: "none" }}>
+                Signout
+              </button>{" "}
+            </>
+          )}
         </div>
       )}
     </div>

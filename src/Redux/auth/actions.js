@@ -8,6 +8,7 @@ import {
 } from "./actionTypes";
 // import { auth } from "../../firebase";
 import axios from "axios";
+import { setData } from "../../localStorage";
 
 export const signupRequest = () => {
   return {
@@ -82,6 +83,8 @@ export const signin = (params) => (dispatch) => {
         (el) => el.email === params.email && el.password === params.password
       );
       if (user) {
+        setData("user", user);
+        setData("isAuth", true);
         dispatch(signinSuccess(user));
       } else {
         dispatch(signinFailure());
