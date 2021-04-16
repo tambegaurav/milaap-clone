@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
 import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
+import { useHistory } from "react-router-dom";
 
 export function Navbar() {
   const Link = styled.a`
@@ -17,12 +18,13 @@ export function Navbar() {
       background-color: #f0efef;
     }
     &:active {
-      background:brown
+      background: brown;
     }
   `;
   const [show, setShow] = useState(false);
+  const history = useHistory();
 
-  const { currencyToggle, handleCurrencyToggel } = useContext( CurrencyContext )
+  const { currencyToggle, handleCurrencyToggel } = useContext(CurrencyContext);
   return (
     <div
       style={{
@@ -55,7 +57,11 @@ export function Navbar() {
       <Link href="">Pricing</Link>
       <Link href="">Contact us</Link>
       <Link>
-        <Switch size="lg" isChecked={currencyToggle} onChange={handleCurrencyToggel} />
+        <Switch
+          size="lg"
+          isChecked={currencyToggle}
+          onChange={handleCurrencyToggel}
+        />
       </Link>
 
       <Link
@@ -85,10 +91,22 @@ export function Navbar() {
             transition: "1px",
           }}
         >
-          <button style={{ borderRight: "1px solid gray", padding: "10px" }}>
+          <button
+            onClick={() => history.push("/users/sign-in")}
+            style={{
+              borderRight: "1px solid gray",
+              padding: "10px",
+              outline: "none",
+            }}
+          >
             Login
           </button>
-          <button style={{ padding: "10px" }}>Register</button>
+          <button
+            onClick={() => history.push("/users/sign-up")}
+            style={{ padding: "10px", outline: "none" }}
+          >
+            Register
+          </button>
         </div>
       )}
     </div>

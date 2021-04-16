@@ -1,4 +1,11 @@
-import { SIGNUP_FAILURE, SIGNUP_REQUEST, SIGNUP_SUCCESS } from "./actionTypes";
+import {
+  SIGNUP_FAILURE,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
+  SIGNIN_SUCCESS,
+  SIGNIN_FAILURE,
+  SIGNIN_REQUEST,
+} from "./actionTypes";
 
 const init = {
   isLoading: false,
@@ -33,6 +40,35 @@ export const authReducer = (state = init, { type, payload }) => {
         isLoading: false,
         isError: true,
         message: "Something went wrong",
+      };
+    }
+
+    case SIGNIN_REQUEST: {
+      return {
+        ...state,
+        isLoading: true,
+        isError: false,
+      };
+    }
+
+    case SIGNIN_SUCCESS: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        activeUser: payload,
+        isAuth: true,
+      };
+    }
+
+    case SIGNIN_FAILURE: {
+      return {
+        ...state,
+        isLoading: false,
+        isError: true,
+        activeUser: undefined,
+        isAuth: false,
+        message: "Something went wrong Please try again!",
       };
     }
 

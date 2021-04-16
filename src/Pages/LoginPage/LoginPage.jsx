@@ -3,9 +3,10 @@ import InputField from "../../Styled-components/InputField";
 import styled from "styled-components";
 import StyledButton from "../../Styled-components/Button";
 import LayoutContainer from "../../Styled-components/LayoutContainer";
-import { useDispatch } from "react-redux";
-import { signup } from "../../Redux/auth/actions";
+import { useDispatch, useSelector } from "react-redux";
+import { signin } from "../../Redux/auth/actions";
 import { Heading } from "@chakra-ui/layout";
+import { Redirect, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   width: 70%;
@@ -51,10 +52,17 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const history = useHistory();
+
+  const { isAuth } = useSelector((state) => state.auth);
 
   const handleRegister = () => {
-    dispatch(signup({ email, password }));
+    dispatch(signin({ email, password }));
   };
+
+  if (isAuth) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <LayoutContainer
@@ -106,7 +114,7 @@ const LoginPage = () => {
               onClick={handleRegister}
               isLoading={false}
               text="Login"
-              style={{ width: "400px" }}
+              style={{ width: "400px", backgroundColor: "#9c3353" }}
             />
           </div>
 
@@ -121,7 +129,11 @@ const LoginPage = () => {
           >
             {" "}
             <p>New to Milaap? Sign up now, it’s quick & free </p>{" "}
-            <StyledButton text="Sign up" style={{ width: "100px" }} />
+            <StyledButton
+              text="Sign up"
+              style={{ width: "100px", backgroundColor: "#9c3353" }}
+              onClick={() => history.replace("/users/sign-up")}
+            />
           </div>
         </FormContainer>
       </Container>

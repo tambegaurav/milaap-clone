@@ -3,8 +3,9 @@ import InputField from "../../Styled-components/InputField";
 import styled from "styled-components";
 import StyledButton from "../../Styled-components/Button";
 import LayoutContainer from "../../Styled-components/LayoutContainer";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../Redux/auth/actions";
+import { Redirect, useHistory } from "react-router-dom";
 
 const Container = styled.div`
   width: 70%;
@@ -51,10 +52,17 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const { isAuth } = useSelector((state) => state.auth);
+
+  const history = useHistory();
 
   const handleRegister = () => {
-    dispatch(signup({ email, password }));
+    dispatch(signup({ fullname, email, password }));
   };
+
+  if (isAuth) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <LayoutContainer
@@ -112,7 +120,7 @@ const SignupPage = () => {
               onClick={handleRegister}
               isLoading={false}
               text="Sign up"
-              style={{ width: "400px" }}
+              style={{ width: "400px", backgroundColor: "#9c3353" }}
             />
           </div>
 
@@ -127,7 +135,11 @@ const SignupPage = () => {
           >
             {" "}
             <p>Already signed up with Milaap? </p>{" "}
-            <StyledButton text="Login" style={{ width: "100px" }} />
+            <StyledButton
+              onClick={() => history.replace("/users/sign-in")}
+              text="Login"
+              style={{ width: "100px", backgroundColor: "#9c3353" }}
+            />
           </div>
         </FormContainer>
       </Container>
