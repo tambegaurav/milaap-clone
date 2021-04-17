@@ -57,7 +57,7 @@ export function Navbar() {
       <Link href="/">Home</Link>
       <Link href="/donate">Donate</Link>
       <Link href="">Lend</Link>
-      <Link href="">Pricing</Link>
+      <Link href="/pricing">Pricing</Link>
       <Link href="">Contact us</Link>
       <Link>
         <Switch
