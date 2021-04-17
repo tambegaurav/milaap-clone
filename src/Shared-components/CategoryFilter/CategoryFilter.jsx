@@ -1,3 +1,5 @@
+import { Button } from "@chakra-ui/button";
+import { Input } from "@chakra-ui/input";
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -8,8 +10,8 @@ import { DonationCardCompo } from "../DonationCard/DonationCardCompo";
 import { DonationCardDetails } from "../DonationCard/DonationCardDetails";
 
 export function CategoryFilter() {
-  const [filters, setFilters] = useState("");
-
+  const [filters, setFilters] = useState("all");
+const [search,setSearch]=useState("")
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const { cards, isLoading, isError } = useSelector(
@@ -18,7 +20,7 @@ export function CategoryFilter() {
   );
 
   useEffect(() => {
-    dispatch(getCards(filters));
+    dispatch(getCards(filters,""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
@@ -29,9 +31,17 @@ export function CategoryFilter() {
     setFilters(str);
   };
   // eslint-disable-next-line array-callback-return
-
+const handleSearch=()=>{
+  dispatch(getCards("",search))
+}
   return (
     <div>
+     <Input style={{width:"40%",margin:"20px",marginRight:"10px",borderRadius:"20px",border:"1px solid brown" }} placeholder="Search fundraisers" onChange={(e)=>setSearch(e.target.value)} value={search}/>
+     <Button style={{
+       background:"brown",
+       color:"white"
+     }} onClick={handleSearch}>Search</Button>
+  
       <div
         style={{
           display: "flex",

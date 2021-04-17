@@ -49,12 +49,10 @@ export const updateCampaign = (params) => (dispatch) => {
   dispatch(updateCampaignReq());
   axios({
     method: "put",
-    url:
-      "https://boron-milaap-clone.herokuapp.com/fundraisers/" +
-      params.campaignId,
+    url: "https://boron-milaap-clone.herokuapp.com/fundraisers/" + params.id,
     data: {
-      ...params.data,
-      target: Number(params.data.target),
+      ...params,
+      target: Number(params.target),
       image: params.image,
     },
   })

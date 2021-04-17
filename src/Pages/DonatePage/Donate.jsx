@@ -25,7 +25,7 @@ import Loader from "../../Styled-components/Loader";
 import { useHistory } from "react-router-dom";
 
 export function Donate() {
-  const [filters, setFilters] = useState("");
+  const [filters, setFilters] = useState("all");
   const [value, setValue] = useState("all");
   const [sort, setSort] = useState("asc");
   const [order, setOrder] = useState("asc");
@@ -40,7 +40,7 @@ export function Donate() {
   );
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(getCards(filters));
+    dispatch(getCards(filters,""));
   }, [filters]);
   if (order === "desc") {
     cards.sort((a, b) => {
