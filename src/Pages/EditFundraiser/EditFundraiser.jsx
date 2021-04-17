@@ -1,29 +1,31 @@
 import { Input } from "@chakra-ui/input";
 import { Select } from "@chakra-ui/select";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { addCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
-import { Link, Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
+import { fetchFundraiserData } from "../../Redux/specificFundraiser/actions";
 
 const DonateMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
   height: auto;
-  padding-top: 10px;
+  display:flex;
+  
 
   > div {
     width: 40%;
-    margin: auto;
+    margin-left:5% ;
     text-align: left;
     color: brown;
     font-weight: 600;
     font-size: 20px;
     background: #fff;
     padding: 40px;
-    border-radius: 20px;  
-    
+    border-radius: 20px;
+
     > div {
       margin-top: 1%;
 
@@ -155,7 +157,7 @@ const DonateMainDiv = styled.div`
   }
 `;
 
-export function CreateFundraiser() {
+export function EditFundraiser() {
   const initial = {
     createdBy: "",
     createdFor: "",
@@ -183,7 +185,7 @@ export function CreateFundraiser() {
     updates,
   } = data;
   const [img, setImg] = useState(null);
-
+  const id=useParams()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -196,6 +198,18 @@ export function CreateFundraiser() {
     shallowEqual
   );
   const dispatch = useDispatch();
+  const {fundraiserData}=useSelector(state=>state.fundraiser,shallowEqual)
+
+useEffect(()=>{   
+ dispatch(fetchFundraiserData(id))
+ setData({
+     ...data,
+     ...fundraiserData
+ })
+},[data])
+
+
+
 
   const handleSubmit = () => {
     upload(img).then((res) => {
@@ -322,11 +336,35 @@ export function CreateFundraiser() {
               <br />
             </label>
           </div>
-          <Link to="/">  
-            <StyledButton onClick={handleSubmit} text="Start a campaign" />
-          </Link>
+          <StyledButton onClick={handleSubmit} text="Update campaign" />
+        </div>
+        <div>
+            Updates
+            <hr/>
+            <div>
+            <label>
+              Put new update:
+              <Input
+                size="xm"
+                isInvalid
+                errorBorderColor="red.700"
+                variant="flushed"
+                type="text"
+                // name=""
+                // value={}
+                onChange={handleChange}
+              />
+            </label>
+          </div>
+
+            <div style={{
+                overflow:"scroll"
+            }}>
+             
+            </div>
         </div>
       </DonateMainDiv>
+     
     </>
   );
 }

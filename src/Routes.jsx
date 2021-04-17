@@ -4,6 +4,7 @@ import { CreateFundraiser } from "./Pages/CreateFundraiser/CreateFundraiser";
 import { DashBoard } from "./Pages/DashBoard/DashBoard";
 import { Donate } from "./Pages/DonatePage/Donate";
 import { FundraiserDonate } from "./Pages/DonatePage/FundraiserDonate";
+import { EditFundraiser } from "./Pages/EditFundraiser/EditFundraiser";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import PaymentPage from "./Pages/PaymentPage";
@@ -36,6 +37,9 @@ const Routes = () => {
         </Route>
         <Route exact path="/dashboard">
           <DashBoard />
+        </Route>
+        <Route path="/editfundraiser/:id">
+          <EditFundraiser/>
         </Route>
         <Route>
           <h1>Page not found!!</h1>
