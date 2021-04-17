@@ -4,6 +4,9 @@ import {
   ADD_CAMPAIGN_FAILURE,
   ADD_CAMPAIGN_REQ,
   ADD_CAMPAIGN_SUCCESS,
+  UPDATE_CAMPAIGN_FAILURE,
+  UPDATE_CAMPAIGN_REQ,
+  UPDATE_CAMPAIGN_SUCCESS,
 } from "./actionTypes";
 
 export const addCampaignReq = () => {
@@ -22,6 +25,47 @@ export const addCampaignFailure = () => {
   return {
     type: ADD_CAMPAIGN_FAILURE,
   };
+};
+
+export const updateCampaignReq = () => {
+  return {
+    type: UPDATE_CAMPAIGN_REQ,
+  };
+};
+
+export const updateCampaignSuccess = () => {
+  return {
+    type: UPDATE_CAMPAIGN_SUCCESS,
+  };
+};
+
+export const updateCampaignFailure = () => {
+  return {
+    type: UPDATE_CAMPAIGN_FAILURE,
+  };
+};
+
+export const updateCampaign = (params) => (dispatch) => {
+  dispatch(updateCampaignReq());
+  axios({
+    method: "put",
+    url:
+      "https://boron-milaap-clone.herokuapp.com/fundraisers/" +
+      params.campaignId,
+    data: {
+      ...params.data,
+      target: Number(params.data.target),
+      image: params.image,
+    },
+  })
+    .then((res) => {
+      console.log(res);
+      dispatch(updateCampaignSuccess());
+    })
+    .catch((err) => {
+      console.log(err);
+      dispatch(updateCampaignFailure());
+    });
 };
 
 export const addCampaign = (params) => (dispatch) => {
