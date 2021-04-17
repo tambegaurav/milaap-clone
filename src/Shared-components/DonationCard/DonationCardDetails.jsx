@@ -11,6 +11,12 @@ const CardDetailsMainDiv = styled.div`
   box-shadow: 0px 0px 5px #9c3353;
   padding-bottom: 5px;
   cursor: pointer;
+  transition: 0.2s all ease-in-out;
+
+  :hover {
+    box-shadow: 2px 2px 10px #9c3353;
+    transform: scale(1.01);
+  }
 
   > div:nth-child(1) > div {
     width: 100%;
@@ -80,17 +86,15 @@ export const DonationCardDetails = ({
   id,
   percentage,
 }) => {
-
-  const { currencyToggle } = useContext( CurrencyContext )
+  const { currencyToggle } = useContext(CurrencyContext);
   let str = "";
   for( let i=0; i<7; i++ ) {
     if( creater[i] === undefined ) {
       break
     } else {
-      str += creater[i]
+      str += creater[i];
     }
   }
-
 
   const history = useHistory();
   // console.log(imageUrl);
@@ -104,20 +108,22 @@ export const DonationCardDetails = ({
       </TitleDiv>
       <div>
         <CircularProgress value={Math.round(percentage)} color="green.400">
-          <CircularProgressLabel>{Math.round(percentage)}%</CircularProgressLabel>
+          <CircularProgressLabel>
+            {Math.round(percentage)}%
+          </CircularProgressLabel>
         </CircularProgress>
         <div>
           <div>Raised</div>
-          <div> { currencyToggle ? <span>&#8377;</span> : <span>$</span> } { currencyToggle ? amount : Math.round(amount/74) }</div>
+          <div>
+            {" "}
+            {currencyToggle ? <span>&#8377;</span> : <span>$</span>}{" "}
+            {currencyToggle ? amount : Math.round(amount / 74)}
+          </div>
         </div>
         <div></div>
         <div>
           <div>Created by</div>
-          <div>
-            {
-              str
-            } ...
-          </div>
+          <div>{str} ...</div>
         </div>
       </div>
     </CardDetailsMainDiv>

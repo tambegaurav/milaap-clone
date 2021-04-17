@@ -52,7 +52,7 @@ const SignupPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth, isLoading } = useSelector((state) => state.auth);
 
   const history = useHistory();
 
@@ -118,7 +118,7 @@ const SignupPage = () => {
             />
             <StyledButton
               onClick={handleRegister}
-              isLoading={false}
+              isLoading={isLoading}
               text="Sign up"
               style={{ width: "400px", backgroundColor: "#9c3353" }}
             />

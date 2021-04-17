@@ -6,6 +6,7 @@ import {
   SIGNIN_SUCCESS,
   SIGNIN_FAILURE,
   SIGNIN_REQUEST,
+  SIGNOUT,
 } from "./actionTypes";
 
 const userFromLS = loadData("user") || undefined;
@@ -73,6 +74,14 @@ export const authReducer = (state = init, { type, payload }) => {
         activeUser: undefined,
         isAuth: false,
         message: "Something went wrong Please try again!",
+      };
+    }
+
+    case SIGNOUT: {
+      return {
+        ...state,
+        activeUser: undefined,
+        isAuth: false,
       };
     }
 

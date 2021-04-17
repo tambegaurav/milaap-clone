@@ -5,6 +5,7 @@ import {
   SIGNIN_FAILURE,
   SIGNIN_SUCCESS,
   SIGNIN_REQUEST,
+  SIGNOUT,
 } from "./actionTypes";
 // import { auth } from "../../firebase";
 import axios from "axios";
@@ -45,6 +46,14 @@ export const signup = (params) => (dispatch) => {
       dispatch(signupFailure(err));
       console.log(err);
     });
+};
+
+//logout
+
+export const signout = () => {
+  return {
+    type: SIGNOUT,
+  };
 };
 
 //login

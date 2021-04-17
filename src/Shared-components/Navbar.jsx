@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
 import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../Redux/auth/actions";
 
 export function Navbar() {
   const Link = styled.a`
@@ -19,12 +20,12 @@ export function Navbar() {
       background-color: #f0efef;
     }
     &:active {
-      background: brown;
+      background: #e2e1e1;
     }
   `;
   const [show, setShow] = useState(false);
   const history = useHistory();
-
+  const dispatch = useDispatch();
   const { currencyToggle, handleCurrencyToggel } = useContext(CurrencyContext);
   const { isAuth, activeUser } = useSelector((state) => state.auth);
   return (
@@ -99,7 +100,6 @@ export function Navbar() {
         >
           {!isAuth && (
             <>
-              {" "}
               <button
                 onClick={() => history.push("/users/sign-in")}
                 style={{
@@ -115,12 +115,11 @@ export function Navbar() {
                 style={{ padding: "10px", outline: "none" }}
               >
                 Register
-              </button>{" "}
+              </button>
             </>
           )}
           {isAuth && (
             <>
-              {" "}
               <button
                 onClick={() => history.push("/dashboard")}
                 style={{
@@ -131,9 +130,15 @@ export function Navbar() {
               >
                 Dashboard
               </button>
-              <button onClick="" style={{ padding: "10px", outline: "none" }}>
+              <button
+                onClick={() => {
+                  dispatch(signout());
+                  history.replace("/");
+                }}
+                style={{ padding: "10px", outline: "none" }}
+              >
                 Signout
-              </button>{" "}
+              </button>
             </>
           )}
         </div>

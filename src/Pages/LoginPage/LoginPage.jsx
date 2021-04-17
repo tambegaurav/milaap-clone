@@ -54,7 +54,7 @@ const LoginPage = () => {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth, isLoading } = useSelector((state) => state.auth);
 
   const handleRegister = () => {
     dispatch(signin({ email, password }));
@@ -112,7 +112,7 @@ const LoginPage = () => {
             />
             <StyledButton
               onClick={handleRegister}
-              isLoading={false}
+              isLoading={isLoading}
               text="Login"
               style={{ width: "400px", backgroundColor: "#9c3353" }}
             />

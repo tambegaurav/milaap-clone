@@ -17,10 +17,6 @@ import {
   ModalBody,
   ModalCloseButton,
   useDisclosure,
-  RadioGroup,
-  Radio,
-  Button,
-  Stack,
 } from "@chakra-ui/react";
 import Loader from "../../Styled-components/Loader";
 
@@ -601,7 +597,7 @@ const ModalDonateButton = styled.button`
 
 export const FundraiserDonate = () => {
   const [storyUpdate, setStoryUpdate] = useState(false);
-  const { currencyToggle, handleCurrencyToggel } = useContext(CurrencyContext);
+  const { currencyToggle } = useContext(CurrencyContext);
   const history = useHistory();
   const btnRef = React.useRef();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -806,7 +802,10 @@ export const FundraiserDonate = () => {
                 {!storyUpdate ? (
                   <p>{fundraiserData.description}</p>
                 ) : (
-                  <p>{fundraiserData.updates.length>0 && fundraiserData.updates[0].description}</p>
+                  <p>
+                    {fundraiserData.updates.length > 0 &&
+                      fundraiserData.updates[0].description}
+                  </p>
                 )}
                 {/** This will take discription */}
               </BeneficiaryStory>
