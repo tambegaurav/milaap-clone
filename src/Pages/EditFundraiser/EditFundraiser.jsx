@@ -175,7 +175,6 @@ export function EditFundraiser() {
   };
 
   const { isAuth, activeUser } = useSelector((state) => state.auth);
-
   const [data, setData] = useState(initial);
   const {
     createdBy,
@@ -213,18 +212,23 @@ export function EditFundraiser() {
       ...data,
       ...fundraiserData,
     });
-  }, [data]);
+  }, [dispatch, id]);
 
   const handleSubmit = () => {
     upload(img).then((res) => {
       console.log(res.data.link);
       dispatch(
         updateCampaign({
-          ...data,
           target: Number(target),
           image: res.data.link,
-          activeUser,
-          campaignId: id,
+          id: data.id,
+          createdBy,
+          createdFor,
+          title,
+          description,
+          category,
+          supporters,
+          updates,
         })
       );
     });
