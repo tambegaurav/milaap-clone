@@ -202,11 +202,12 @@ export function EditFundraiser() {
 
 useEffect(()=>{   
  dispatch(fetchFundraiserData(id))
+ fundraiserData &&
  setData({
-     ...data,
+      ...data,
      ...fundraiserData
  })
-},[data])
+},[])
 
 
 
