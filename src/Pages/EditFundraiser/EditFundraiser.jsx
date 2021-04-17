@@ -6,7 +6,8 @@ import { addCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
+import { fetchFundraiserData } from "../../Redux/specificFundraiser/actions";
 
 const DonateMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
@@ -184,7 +185,7 @@ export function EditFundraiser() {
     updates,
   } = data;
   const [img, setImg] = useState(null);
-
+  const id=useParams()
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -197,11 +198,16 @@ export function EditFundraiser() {
     shallowEqual
   );
   const dispatch = useDispatch();
-  
+  const {fundraiserData}=useSelector(state=>state.fundraiser,shallowEqual)
 
-useEffect(()=>{
- 
-},[])
+useEffect(()=>{   
+ dispatch(fetchFundraiserData(id))
+ setData({
+     ...data,
+     ...fundraiserData
+ })
+},[data])
+
 
 
 
