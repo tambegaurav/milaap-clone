@@ -6,6 +6,7 @@ import { addCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 
 const DonateMainDiv = styled.div`
     background: linear-gradient(90deg,#a33555,#5f2747);
@@ -170,10 +171,14 @@ const initial={
 
 }
 
-
+const {isAuth,activeUser}=useSelector(state=>state.auth)
  const [data,setData]=useState(initial)
 const {createdBy,createdFor,title,description,category,target,image,supporters,updates}=data;
 const [img,setImg] = useState(null);
+
+
+console.log(activeUser)
+
 
 const handleChange=(e)=>{
    const {name,value}=e.target;
@@ -187,15 +192,16 @@ const dispatch=useDispatch()
 
 const handleSubmit=()=>{
 upload(img).then(res => {
-    console.log(res.data.link)
+   // console.log(res.data.link)
     dispatch(addCampaign({...data,target:Number(target), image: res.data.link}))
-
 })
+  
        
 }
 
     return(
         <>
+        {!isAuth && <Redirect to="/users/sign-in"/>}
         <Navbar/>
         <DonateMainDiv>
             
