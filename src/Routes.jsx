@@ -42,9 +42,11 @@ const Routes = () => {
         <Route path="/editfundraiser/:id">
           <EditFundraiser/>
         </Route>
-        <Route>
-          {/* <h1>Page not found!!</h1> */}
+        <Route path="/pricing">
           <Pricing />
+        </Route>
+        <Route>
+          <h1>Page not found!!</h1>
         </Route>
       </Switch>
     </div>
