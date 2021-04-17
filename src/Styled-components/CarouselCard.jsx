@@ -13,6 +13,11 @@ const MainDiv = styled.div`
   height: 200px;
   padding-left: 100px;
   margin-right: 17%;
+  transition: all 0.5s ease-in-out;
+
+  &:hover {
+    transform: scale(1.03);
+  }
 `;
 const LeftDiv = styled.div`
   position: absolute;
@@ -36,7 +41,10 @@ export function CarouselCard({ img, name, review }) {
           width="100px"
           src={img}
           alt=""
-          style={{ border: "1px solid #9c3353", borderRadius: "50px" }}
+          style={{
+            border: "1px solid #9c3353",
+            borderRadius: "50px",
+          }}
         />
         {name}
       </LeftDiv>

@@ -22,7 +22,18 @@ const HomePage = () => {
       </LayoutContainer>
       <LayoutContainer>
         <CategoryFilter />
-        <Link style={{color:"#9c3353",textDecoration:"underline"}} to="/donate">See more fundraisers</Link>
+        <br />
+        <Link
+          style={{
+            color: "#9c3353",
+            textDecoration: "underline",
+            fontWeight: "500",
+            fontSize: "20px",
+          }}
+          to="/donate"
+        >
+          See more fundraisers
+        </Link>
       </LayoutContainer>
       <LayoutContainer>
         <MilaapFAQ />

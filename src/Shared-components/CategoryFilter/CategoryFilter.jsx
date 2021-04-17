@@ -11,7 +11,7 @@ import { DonationCardDetails } from "../DonationCard/DonationCardDetails";
 
 export function CategoryFilter() {
   const [filters, setFilters] = useState("all");
-const [search,setSearch]=useState("")
+  const [search, setSearch] = useState("");
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const { cards, isLoading, isError } = useSelector(
@@ -20,7 +20,7 @@ const [search,setSearch]=useState("")
   );
 
   useEffect(() => {
-    dispatch(getCards(filters,""));
+    dispatch(getCards(filters, ""));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
 
@@ -31,23 +31,42 @@ const [search,setSearch]=useState("")
     setFilters(str);
   };
   // eslint-disable-next-line array-callback-return
-const handleSearch=()=>{
-  dispatch(getCards("",search))
-}
+  const handleSearch = () => {
+    dispatch(getCards("", search));
+  };
   return (
     <div>
-     <Input style={{width:"40%",margin:"20px",marginRight:"10px",borderRadius:"20px",border:"1px solid brown" }} placeholder="Search fundraisers" onChange={(e)=>setSearch(e.target.value)} value={search}/>
-     <Button style={{
-       background:"brown",
-       color:"white"
-     }} onClick={handleSearch}>Search</Button>
-  
+      <Input
+        style={{
+          width: "40%",
+          margin: "20px",
+          marginRight: "10px",
+          borderRadius: "20px",
+          border: "1px solid #9c3353",
+        }}
+        placeholder="Search fundraisers"
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+      />
+      <Button
+        style={{
+          background: "#9c3353",
+          color: "white",
+          borderRadius: "50px",
+        }}
+        onClick={handleSearch}
+      >
+        Search
+      </Button>
+
       <div
         style={{
           display: "flex",
           flexDirection: "row",
           justifyContent: "center",
           gap: "10px",
+          marginTop: "20px",
+          marginBottom: "35px",
         }}
       >
         <CategoryCard
@@ -92,24 +111,26 @@ const handleSearch=()=>{
         {isLoading ? (
           <Loader />
         ) : (
-          cards.map((item,i) => (
-            i<6 &&
-            <DonationCardDetails
-              onClick={() => history.push(`/fundraisers/${item.id}`)}
-              id={item.id}
-              label={item.title}
-              imageUrl={item.image}
-              amount={item.target}
-              creater={item.createdBy}
-              percentage={(
-                (item.supporters.reduce((ac, v) => {
-                  return ac + v.amount;
-                }, 0) /
-                  item.target) *
-                100
-              )}
-            ></DonationCardDetails>
-          ))
+          cards.map(
+            (item, i) =>
+              i < 6 && (
+                <DonationCardDetails
+                  onClick={() => history.push(`/fundraisers/${item.id}`)}
+                  id={item.id}
+                  label={item.title}
+                  imageUrl={item.image}
+                  amount={item.target}
+                  creater={item.createdBy}
+                  percentage={
+                    (item.supporters.reduce((ac, v) => {
+                      return ac + v.amount;
+                    }, 0) /
+                      item.target) *
+                    100
+                  }
+                ></DonationCardDetails>
+              )
+          )
         )}
       </DonationCardCompo>
     </div>

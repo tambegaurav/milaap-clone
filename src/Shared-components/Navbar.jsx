@@ -69,7 +69,12 @@ export function Navbar() {
         Donate
       </Link>
       <Link to="/">Lend</Link>
-      <Link to="/">Pricing</Link>
+      <Link
+        activeStyle={{ backgroundColor: "#912c4a", color: "#fff" }}
+        to="/pricing"
+      >
+        Pricing
+      </Link>
       <Link to="/">Contact us</Link>
 
       <Link
