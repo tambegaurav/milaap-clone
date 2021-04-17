@@ -84,6 +84,7 @@ export const DonationCardDetails = ({
   amount,
   creater,
   id,
+  onClick,
   percentage,
 }) => {
   const { currencyToggle } = useContext(CurrencyContext);
@@ -99,7 +100,7 @@ export const DonationCardDetails = ({
   const history = useHistory();
   // console.log(imageUrl);
   return (
-    <CardDetailsMainDiv onClick={() => history.push(`/fundraisers/${id}`)}>
+    <CardDetailsMainDiv onClick={onClick}>
       <div>
         <div style={{ backgroundImage: `url(${imageUrl})` }}></div>
       </div>

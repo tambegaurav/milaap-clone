@@ -27,10 +27,11 @@ export const fetchFundraiserFailure = (err) => {
 
 export const fetchFundraiserData = (params) => (dispatch) => {
   dispatch(fetchFundraiserRequest());
+ 
   return axios
     .get("https://boron-milaap-clone.herokuapp.com/fundraisers/" + params.id)
     .then((res) => {
-      console.log(res);
+     
       dispatch(fetchFundraiserSuccess(res.data));
     })
     .catch((err) => {

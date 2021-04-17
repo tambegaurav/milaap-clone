@@ -1,29 +1,35 @@
 import { Input } from "@chakra-ui/input";
 import { Select } from "@chakra-ui/select";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { addCampaign, upload } from "../../Redux/campaignApi/actions";
+import {
+  addCampaign,
+  updateCampaign,
+  upload,
+} from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
-import { Link, Redirect } from "react-router-dom";
+import { Link, Redirect, useParams } from "react-router-dom";
+import { fetchFundraiserData } from "../../Redux/specificFundraiser/actions";
+import { Textarea } from "@chakra-ui/textarea";
 
 const DonateMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
   height: auto;
-  padding-top: 10px;
+  display: flex;
 
   > div {
     width: 40%;
-    margin: auto;
+    margin-left: 5%;
     text-align: left;
     color: brown;
     font-weight: 600;
     font-size: 20px;
     background: #fff;
     padding: 40px;
-    border-radius: 20px;  
-    
+    border-radius: 20px;
+
     > div {
       margin-top: 1%;
 
@@ -155,7 +161,7 @@ const DonateMainDiv = styled.div`
   }
 `;
 
-export function CreateFundraiser() {
+export function EditFundraiser() {
   const initial = {
     createdBy: "",
     createdFor: "",
@@ -183,7 +189,7 @@ export function CreateFundraiser() {
     updates,
   } = data;
   const [img, setImg] = useState(null);
-
+  const id = useParams();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -196,16 +202,29 @@ export function CreateFundraiser() {
     shallowEqual
   );
   const dispatch = useDispatch();
+  const { fundraiserData } = useSelector(
+    (state) => state.fundraiser,
+    shallowEqual
+  );
+
+  useEffect(() => {
+    dispatch(fetchFundraiserData(id));
+    setData({
+      ...data,
+      ...fundraiserData,
+    });
+  }, [data]);
 
   const handleSubmit = () => {
     upload(img).then((res) => {
       console.log(res.data.link);
       dispatch(
-        addCampaign({
+        updateCampaign({
           ...data,
           target: Number(target),
           image: res.data.link,
           activeUser,
+          campaignId: id,
         })
       );
     });
@@ -293,6 +312,16 @@ export function CreateFundraiser() {
           </div>
           <div>
             <label>
+              Uploaded imageUrl:{" "}
+              <span
+                style={{ cursor: "pointer", textDecoration: "underline" }}
+                onClick={() => window.open(image, "_blank")}
+              >
+                {image}
+              </span>
+            </label>
+            <br />
+            <label>
               Upload image:
               <Input
                 type="file"
@@ -322,9 +351,67 @@ export function CreateFundraiser() {
               <br />
             </label>
           </div>
-          <Link to="/">  
-            <StyledButton onClick={handleSubmit} text="Start a campaign" />
-          </Link>
+          <StyledButton
+            onClick={handleSubmit}
+            isLoading={isLoading}
+            text="Update campaign"
+          />
+        </div>
+        <div>
+          Updates
+          <hr />
+          <div>
+            <label>
+              Put new update:
+              <Textarea
+                size="xm"
+                variant="flushed"
+                type="text"
+                placeholder="Write new update here"
+                style={{ backgroundColor: "red", paddingLeft: "10px" }}
+              />
+              <StyledButton
+                style={{ width: "100%", margin: "auto" }}
+                text="Post"
+                onClick=""
+              />
+            </label>
+          </div>
+          <div>
+            {updates?.map((el) => {
+              return (
+                <div
+                  style={{
+                    overflowY: "scroll",
+                    height: "150px",
+                  }}
+                >
+                  Heyyyy Lorem ipsum dolor sit amet, consectetur adipisicing
+                  elit. Est libero alias illo animi ab. Corrupti esse
+                  reprehenderit rerum quaerat rem nemo tenetur ad id
+                  voluptatibus sunt fuga, at maxime laudantium! Heyyyy Lorem
+                  ipsum dolor sit amet, consectetur adipisicing elit. Est libero
+                  alias illo animi ab. Corrupti esse reprehenderit rerum quaerat
+                  rem nemo tenetur ad id voluptatibus sunt fuga, at maxime
+                  laudantium! Heyyyy Lorem ipsum dolor sit amet, consectetur
+                  adipisicing elit. Est libero alias illo animi ab. Corrupti
+                  esse reprehenderit rerum quaerat rem nemo tenetur ad id
+                  voluptatibus sunt fuga, at maxime laudantium! Heyyyy Lorem
+                  ipsum dolor sit amet, consectetur adipisicing elit. Est libero
+                  alias illo animi ab. Corrupti esse reprehenderit rerum quaerat
+                  rem nemo tenetur ad id voluptatibus sunt fuga, at maxime
+                  laudantium! Heyyyy Lorem ipsum dolor sit amet, consectetur
+                  adipisicing elit. Est libero alias illo animi ab. Corrupti
+                  esse reprehenderit rerum quaerat rem nemo tenetur ad id
+                  voluptatibus sunt fuga, at maxime laudantium! Heyyyy Lorem
+                  ipsum dolor sit amet, consectetur adipisicing elit. Est libero
+                  alias illo animi ab. Corrupti esse reprehenderit rerum quaerat
+                  rem nemo tenetur ad id voluptatibus sunt fuga, at maxime
+                  laudantium!
+                </div>
+              );
+            })}
+          </div>
         </div>
       </DonateMainDiv>
     </>
