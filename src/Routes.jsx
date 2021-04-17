@@ -8,6 +8,7 @@ import { EditFundraiser } from "./Pages/EditFundraiser/EditFundraiser";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import PaymentPage from "./Pages/PaymentPage";
+import { Pricing } from "./Pages/Pricing/Pricing";
 import SignupPage from "./Pages/SignupPage";
 
 const Routes = () => {
@@ -40,6 +41,9 @@ const Routes = () => {
         </Route>
         <Route path="/editfundraiser/:id">
           <EditFundraiser/>
+        </Route>
+        <Route path="/pricing">
+          <Pricing />
         </Route>
         <Route>
           <h1>Page not found!!</h1>

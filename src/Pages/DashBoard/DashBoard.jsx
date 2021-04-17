@@ -102,7 +102,7 @@ export const DashBoard = () => {
                 activeUser.campaigns.length > 0 && 
                 <RaiseCampaign>
                     <Link to="/createfundraiser">
-                        <StyledButton text="Raise Campagin" />
+                        <StyledButton text="Raise Campaign" />
                     </Link>
                 </RaiseCampaign>
             }
@@ -117,11 +117,11 @@ export const DashBoard = () => {
                     <NoCampaigns>
                         <div>
                             <div>
-                                <h2>No campagins raised by you till now</h2>
+                                <h2>No campaigns raised by you till now</h2>
                             </div>
                             <div>
                                 <Link to="/createfundraiser">    
-                                    <StyledButton text="Raise Campagin" />
+                                    <StyledButton text="Raise Campaign" />
                                 </Link>
                             </div>
                         </div>
