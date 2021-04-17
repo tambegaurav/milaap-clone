@@ -4,6 +4,7 @@ import { campaignReducer } from "./campaignApi/campaignReducer";
 import { categoryReducer } from "./categoryApi/categoryReducer";
 import { paymentReducer } from "./payment/paymentReducer";
 import { funraiserReducer } from "./specificFundraiser/fundraiserReducer";
+import { userCampaginReducer } from "./userCampagins/userCampaginReducer";
 
 
 const rootReducer = combineReducers({
@@ -11,7 +12,8 @@ const rootReducer = combineReducers({
   cards: categoryReducer,
   fundraiser: funraiserReducer,
   campaign:campaignReducer,
-  payment: paymentReducer
+  payment: paymentReducer,
+  userCampaginData: userCampaginReducer
 });
 
 const customThunk = (store) => (next) => (action) => {

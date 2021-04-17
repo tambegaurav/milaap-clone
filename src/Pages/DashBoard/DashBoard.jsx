@@ -1,12 +1,14 @@
-import React from 'react'
-import { Link, Redirect } from 'react-router-dom';
-import { useSelector } from "react-redux";
+import React, { useEffect } from 'react'
+import { Link, Redirect, useHistory } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
 import { Navbar } from '../../Shared-components/Navbar';
 import styled from "styled-components";
 import { DonationCardCompo } from '../../Shared-components/DonationCard/DonationCardCompo';
 import { DonationCardDetails } from '../../Shared-components/DonationCard/DonationCardDetails';
 import ScrollToTopButton from '../../Shared-components/ScrollToTopButton/ScrollToTopButton';
 import StyledButton from '../../Styled-components/Button';
+import { filterFundraisers } from '../../Redux/userCampagins/action';
+import Loader from '../../Styled-components/Loader';
 
 const DashBoardMainDiv = styled.div`
     /* background: red; */
@@ -76,12 +78,22 @@ const Campaigns = styled.div`
 
 export const DashBoard = () => {
     const { activeUser, isAuth } = useSelector( state => state.auth );
+    const { userCampagin, isLoading, isError } = useSelector( state => state.userCampaginData );
+    console.log("from dash",userCampagin);
+    console.log("from actve", activeUser);
+
+    const history = useHistory();
+
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        dispatch( filterFundraisers( activeUser ) )
+    }, [activeUser])
     
     if( !isAuth ) {
         return <Redirect to="/users/sign-in" />
     }
 
-    console.log(activeUser);
     return (
         <div>
             <Navbar />
@@ -118,52 +130,32 @@ export const DashBoard = () => {
                     <Campaigns>
                         <div>
                             <DonationCardCompo>
-                                <DonationCardDetails 
-                                    label="Vedika Won't Make It To Her 1st Birthday Without Your Help!"
-                                    imageUrl= "https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_198,w_264/v1615285571/production/images/campaign/260723/WhatsApp_Image_2021-03-09_at_1.51.04_PM_hyotzn_1615285576.jpg"
-                                    amount= "40,550,730"
-                                    creater= "sourabh"
-                                    description= "Receive tax benefits by donating to this cause"
-                                    percentage= "40"
-                                />
-                                <DonationCardDetails 
-                                    label="Help My Cousin Anuraag Khaund Recover From Leukemia"
-                                    imageUrl= "https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_198,w_264/v1618148823/production/images/campaign/268504/New_Project_1_uv7obl_1618148828.jpg"
-                                    amount= "1,418,693"
-                                    creater= "Nilanjana Das"
-                                    percentage= "95"
-                                />
-                                <DonationCardDetails 
-                                    label="10-Year-Old Anant Needs Your Support to Save His Father's Life!"
-                                    imageUrl= "https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_198,w_264/v1618207758/production/images/campaign/273714/FB_IMG_1618201582247_yrzfl7_1618208259.jpg"
-                                    amount= "40,550,730"
-                                    creater= "Shweta Bharti"
-                                    description= "For every &#8377;100 you donate, Milaap will contribute &#8377;5 on your behalf."
-                                    percentage= "48"
-                                />
-                                <DonationCardDetails 
-                                    label="Vedika Won't Make It To Her 1st Birthday Without Your Help!"
-                                    imageUrl= "https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_198,w_264/v1615285571/production/images/campaign/260723/WhatsApp_Image_2021-03-09_at_1.51.04_PM_hyotzn_1615285576.jpg"
-                                    amount= "40,550,730"
-                                    creater= "sourabh"
-                                    description= "Receive tax benefits by donating to this cause"
-                                    percentage= "40"
-                                />
-                                <DonationCardDetails 
-                                    label="Help My Cousin Anuraag Khaund Recover From Leukemia"
-                                    imageUrl= "https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_198,w_264/v1618148823/production/images/campaign/268504/New_Project_1_uv7obl_1618148828.jpg"
-                                    amount= "1,418,693"
-                                    creater= "Nilanjana Das"
-                                    percentage= "95"
-                                />
-                                <DonationCardDetails 
-                                    label="10-Year-Old Anant Needs Your Support to Save His Father's Life!"
-                                    imageUrl= "https://cimages.milaap.org/milaap/image/upload/c_fill,g_faces,h_198,w_264/v1618207758/production/images/campaign/273714/FB_IMG_1618201582247_yrzfl7_1618208259.jpg"
-                                    amount= "40,550,730"
-                                    creater= "Shweta Bharti"
-                                    description= "For every &#8377;100 you donate, Milaap will contribute &#8377;5 on your behalf."
-                                    percentage= "48"
-                                />
+                                {isLoading ? (
+                                    <Loader />
+                                ) :
+                                    (userCampagin.map( item => {
+                                        return (
+                                            <>
+                                                <DonationCardDetails 
+                                                    id={item.id}
+                                                    label={item.title}
+                                                    imageUrl={item.image}
+                                                    amount={item.target}
+                                                    creater={item.createdBy}
+                                                    percentage={(
+                                                      (item.supporters.reduce((ac, v) => {
+                                                        return ac + v.amount;
+                                                      }, 0) /
+                                                        item.target) *
+                                                      100
+                                                    )}
+                                                    onClick={() => history.push("/editfundraiser/" + item.id)}
+                                                    key={item.id}
+                                                />
+                                            </>
+                                        )
+                                    })
+                                )}
                             </DonationCardCompo>
                         </div>
                     </Campaigns>
