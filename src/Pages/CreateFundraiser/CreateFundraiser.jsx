@@ -68,7 +68,7 @@ upload(img).then(res => {
                 
             }}>
                 <label>
-                    Campaign Creator name:
+                    Campaign creator name:
                     <Input  isInvalid
                     errorBorderColor="red.700"
                     size="xm" variant="flushed"
@@ -99,14 +99,14 @@ upload(img).then(res => {
                     errorBorderColor="red.700" variant="flushed" type="number" name="target" value={target} onChange={handleChange}/>
                 </label><br/>
 
-
+              
                <label>
                    Upload image:
-                <Input type="file" variant="flushed" onChange={e => setImg(e.target.files[0])}/>
+                <Input type="file" errorBorderColor="red.700" isInvalid variant="flushed" onChange={e => setImg(e.target.files[0])}/>
                </label>
 
 
-
+   <br/>
 
 
 
