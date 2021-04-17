@@ -22,6 +22,7 @@ import {
   Button,
   Stack,
 } from "@chakra-ui/react";
+import Loader from "../../Styled-components/Loader";
 
 const DonateMainDiv = styled.div`
   width: 40vw;
@@ -621,10 +622,15 @@ export const FundraiserDonate = () => {
   }, [dispatch, id]);
 
   return (
+    <>
+    <Navbar />
     <div>
+      {
+        !fundraiserData && <Loader/>
+      }
       {fundraiserData && (
         <div>
-          <Navbar />
+          
           <DonateMainDiv>
             <BeneficiaryDiv>
               <div>
@@ -937,5 +943,6 @@ export const FundraiserDonate = () => {
         </div>
       )}
     </div>
+    </>
   );
 };

@@ -83,7 +83,7 @@ export const DonationCardDetails = ({
 
   const { currencyToggle } = useContext( CurrencyContext )
   let str = "";
-  for( let i=0; i<15; i++ ) {
+  for( let i=0; i<7; i++ ) {
     if( creater[i] === undefined ) {
       break
     } else {
@@ -93,7 +93,7 @@ export const DonationCardDetails = ({
 
 
   const history = useHistory();
-  console.log(imageUrl);
+  // console.log(imageUrl);
   return (
     <CardDetailsMainDiv onClick={() => history.push(`/fundraisers/${id}`)}>
       <div>
