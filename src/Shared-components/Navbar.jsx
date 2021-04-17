@@ -2,12 +2,12 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
 import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
-import { useHistory } from "react-router-dom";
+import { useHistory, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../Redux/auth/actions";
 
 export function Navbar() {
-  const Link = styled.a`
+  const Link = styled(NavLink)`
     color: black;
     padding-top: 20px;
     margin-left: 10px;
@@ -46,6 +46,7 @@ export function Navbar() {
         style={{
           paddingTop: "15px",
         }}
+        to="/"
       >
         <img
           width="100px"
@@ -54,24 +55,46 @@ export function Navbar() {
           alt=""
         />
       </Link>
-      <Link href="/">Home</Link>
-      <Link href="/donate">Donate</Link>
-      <Link href="">Lend</Link>
-      <Link href="/pricing">Pricing</Link>
-      <Link href="">Contact us</Link>
-      <Link>
+      <Link
+        to="/"
+        exact
+        activeStyle={{ backgroundColor: "#912c4a", color: "#fff" }}
+      >
+        Home
+      </Link>
+      <Link
+        activeStyle={{ backgroundColor: "#912c4a", color: "#fff" }}
+        to="/donate"
+      >
+        Donate
+      </Link>
+      <Link to="/">Lend</Link>
+      <Link to="/">Pricing</Link>
+      <Link to="/">Contact us</Link>
+
+      <Link
+        as="div"
+        style={{
+          display: "grid",
+
+          gridTemplateColumns: "70px 50px",
+        }}
+      >
         <Switch
           size="lg"
           isChecked={currencyToggle}
           onChange={handleCurrencyToggel}
         />
+
+        {currencyToggle ? "Rupee" : "Dollar"}
       </Link>
 
       <Link
         onClick={() => setShow(!show)}
         style={{
-          paddingTop: "15px",
+          cursor: "pointer",
         }}
+        as="div"
       >
         {isAuth ? (
           <p>{activeUser.fullname}</p>
