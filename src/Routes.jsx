@@ -7,6 +7,7 @@ import { FundraiserDonate } from "./Pages/DonatePage/FundraiserDonate";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import PaymentPage from "./Pages/PaymentPage";
+import { Pricing } from "./Pages/Pricing/Pricing";
 import SignupPage from "./Pages/SignupPage";
 
 const Routes = () => {
@@ -38,7 +39,8 @@ const Routes = () => {
           <DashBoard />
         </Route>
         <Route>
-          <h1>Page not found!!</h1>
+          {/* <h1>Page not found!!</h1> */}
+          <Pricing />
         </Route>
       </Switch>
     </div>
