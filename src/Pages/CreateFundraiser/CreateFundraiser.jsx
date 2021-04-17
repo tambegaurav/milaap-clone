@@ -6,7 +6,7 @@ import { addCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
-import { Redirect } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 
 const DonateMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
@@ -322,7 +322,9 @@ export function CreateFundraiser() {
               <br />
             </label>
           </div>
-          <StyledButton onClick={handleSubmit} text="Start a campaign" />
+          <Link to="/">  
+            <StyledButton onClick={handleSubmit} text="Start a campaign" />
+          </Link>
         </div>
       </DonateMainDiv>
     </>

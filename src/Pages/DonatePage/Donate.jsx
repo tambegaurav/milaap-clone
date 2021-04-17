@@ -22,6 +22,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import Loader from "../../Styled-components/Loader";
+import { useHistory } from "react-router-dom";
 
 export function Donate() {
   const [filters, setFilters] = useState("");
@@ -29,6 +30,7 @@ export function Donate() {
   const [sort, setSort] = useState("asc");
   const [order, setOrder] = useState("asc");
 
+  const history = useHistory();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -146,6 +148,7 @@ export function Donate() {
           ) : (
             cards.map((item) => (
               <DonationCardDetails
+                onClick={() => history.push(`/fundraisers/${item.id}`)}
                 id={item.id}
                 label={item.title}
                 imageUrl={item.image}

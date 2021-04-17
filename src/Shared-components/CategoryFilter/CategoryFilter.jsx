@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { getCards } from "../../Redux/categoryApi/actions";
 import { CategoryCard } from "../../Styled-components/CategoryCard";
 import Loader from "../../Styled-components/Loader";
@@ -22,6 +23,7 @@ export function CategoryFilter() {
   }, [filters]);
 
   // console.log(cards)
+  const history = useHistory();
 
   const handleButton = (str) => {
     setFilters(str);
@@ -83,6 +85,7 @@ export function CategoryFilter() {
           cards.map((item,i) => (
             i<6 &&
             <DonationCardDetails
+              onClick={() => history.push(`/fundraisers/${item.id}`)}
               id={item.id}
               label={item.title}
               imageUrl={item.image}
