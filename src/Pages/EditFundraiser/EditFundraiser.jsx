@@ -2,22 +2,21 @@ import { Input } from "@chakra-ui/input";
 import { Select } from "@chakra-ui/select";
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {
-  addCampaign,
-  updateCampaign,
-  upload,
-} from "../../Redux/campaignApi/actions";
+import { updateCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
 import { Link, Redirect, useParams } from "react-router-dom";
 import { fetchFundraiserData } from "../../Redux/specificFundraiser/actions";
 import { Textarea } from "@chakra-ui/textarea";
+import { postUpdate } from "../../Redux/postUpdates/actions";
+import { Heading } from "@chakra-ui/layout";
 
 const DonateMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
   height: auto;
   display: flex;
+  padding-top: 20px;
 
   > div {
     width: 40%;
@@ -162,6 +161,18 @@ const DonateMainDiv = styled.div`
 `;
 
 export function EditFundraiser() {
+  const { isAuth, activeUser } = useSelector((state) => state.auth);
+
+  const { isLoading, isError, isSuccess } = useSelector(
+    (state) => state.campaign,
+    shallowEqual
+  );
+  const dispatch = useDispatch();
+  const { fundraiserData } = useSelector(
+    (state) => state.fundraiser,
+    shallowEqual
+  );
+
   const initial = {
     createdBy: "",
     createdFor: "",
@@ -174,7 +185,6 @@ export function EditFundraiser() {
     updates: [],
   };
 
-  const { isAuth, activeUser } = useSelector((state) => state.auth);
   const [data, setData] = useState(initial);
   const {
     createdBy,
@@ -196,15 +206,12 @@ export function EditFundraiser() {
       [name]: value,
     });
   };
-  const { isLoading, isError, isSuccess } = useSelector(
-    (state) => state.campaign,
-    shallowEqual
-  );
-  const dispatch = useDispatch();
-  const { fundraiserData } = useSelector(
-    (state) => state.fundraiser,
-    shallowEqual
-  );
+
+  const [newUpdate, setNewUpdate] = useState("");
+
+  const postNewUpdate = () => {
+    dispatch(postUpdate({ newUpdate, updates, id: data.id }));
+  };
 
   useEffect(() => {
     dispatch(fetchFundraiserData(id));
@@ -238,8 +245,10 @@ export function EditFundraiser() {
     <>
       {!isAuth && <Redirect to="/users/sign-in" />}
       <Navbar />
+
       <DonateMainDiv>
         <div>
+          <Heading>Edit your Campaign here</Heading>
           <div>
             <label> Campaign Creator name: </label>
             <Input
@@ -268,7 +277,7 @@ export function EditFundraiser() {
               />
             </label>
           </div>
-          <h2>Campaign Details</h2>
+
           <div>
             <label>
               Title:
@@ -362,7 +371,7 @@ export function EditFundraiser() {
           />
         </div>
         <div>
-          Updates
+          <Heading>Post updates here</Heading>
           <hr />
           <div>
             <label>
@@ -372,49 +381,40 @@ export function EditFundraiser() {
                 variant="flushed"
                 type="text"
                 placeholder="Write new update here"
-                style={{ backgroundColor: "red", paddingLeft: "10px" }}
+                style={{
+                  paddingLeft: "10px",
+                  border: "2px solid #912c4a",
+                  borderRadius: "5px",
+                }}
+                value={newUpdate}
+                onChange={(e) => setNewUpdate(e.target.value)}
               />
               <StyledButton
                 style={{ width: "100%", margin: "auto" }}
                 text="Post"
-                onClick=""
+                onClick={postNewUpdate}
               />
             </label>
           </div>
           <div>
             {updates?.map((el) => {
               return (
-                <div
-                  style={{
-                    overflowY: "scroll",
-                    height: "150px",
-                  }}
-                >
-                  Heyyyy Lorem ipsum dolor sit amet, consectetur adipisicing
-                  elit. Est libero alias illo animi ab. Corrupti esse
-                  reprehenderit rerum quaerat rem nemo tenetur ad id
-                  voluptatibus sunt fuga, at maxime laudantium! Heyyyy Lorem
-                  ipsum dolor sit amet, consectetur adipisicing elit. Est libero
-                  alias illo animi ab. Corrupti esse reprehenderit rerum quaerat
-                  rem nemo tenetur ad id voluptatibus sunt fuga, at maxime
-                  laudantium! Heyyyy Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Est libero alias illo animi ab. Corrupti
-                  esse reprehenderit rerum quaerat rem nemo tenetur ad id
-                  voluptatibus sunt fuga, at maxime laudantium! Heyyyy Lorem
-                  ipsum dolor sit amet, consectetur adipisicing elit. Est libero
-                  alias illo animi ab. Corrupti esse reprehenderit rerum quaerat
-                  rem nemo tenetur ad id voluptatibus sunt fuga, at maxime
-                  laudantium! Heyyyy Lorem ipsum dolor sit amet, consectetur
-                  adipisicing elit. Est libero alias illo animi ab. Corrupti
-                  esse reprehenderit rerum quaerat rem nemo tenetur ad id
-                  voluptatibus sunt fuga, at maxime laudantium! Heyyyy Lorem
-                  ipsum dolor sit amet, consectetur adipisicing elit. Est libero
-                  alias illo animi ab. Corrupti esse reprehenderit rerum quaerat
-                  rem nemo tenetur ad id voluptatibus sunt fuga, at maxime
-                  laudantium!
-                </div>
+                <>
+                  <div>{el.title}</div>
+                  <div
+                    style={{
+                      overflowY: "scroll",
+                      height: "150px",
+                    }}
+                  >
+                    {el.description}
+                  </div>
+                </>
               );
             })}
+            {updates.length === 0 && (
+              <div>You have not posted any updates yet.</div>
+            )}
           </div>
         </div>
       </DonateMainDiv>

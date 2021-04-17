@@ -619,237 +619,34 @@ export const FundraiserDonate = () => {
 
   return (
     <>
-    <Navbar />
-    <div>
-      {
-        !fundraiserData && <Loader/>
-      }
-      {fundraiserData && (
-        <div>
-          
-          <DonateMainDiv>
-            <BeneficiaryDiv>
-              <div>
-                <h3>
-                  Milaap will not charge any fee on your donation to this
-                  campaign.
-                </h3>
-              </div>
-              <BeneficiaryTitle>
-                <h1>{fundraiserData.title}</h1> {/** This takes title */}
-              </BeneficiaryTitle>
-              <BeneficiaryImage
-                style={{ backgroundImage: `url(${fundraiserData.image})` }}
-              ></BeneficiaryImage>{" "}
-              {/** This takes image */}
-              <FundraisedStats>
-                <CircularProgress
-                  value={((raisedAmount / fundraiserData.target) * 100).toFixed(
-                    1
-                  )}
-                  color="#37d123"
-                  size="74px"
-                >
-                  <CircularProgressLabel fontSize="15px" fontWeight="500">
-                    {((raisedAmount / fundraiserData.target) * 100).toFixed(1)}%
-                  </CircularProgressLabel>
-                </CircularProgress>
+      <Navbar />
+      <div>
+        {!fundraiserData && <Loader />}
+        {fundraiserData && (
+          <div>
+            <DonateMainDiv>
+              <BeneficiaryDiv>
                 <div>
-                  <h3>Raised</h3>
-                  <h1>
-                    <span>
-                      {currencyToggle ? "Rs" : "USD"}.
-                      {currencyToggle
-                        ? raisedAmount
-                        : Math.round(raisedAmount / 74)}
-                    </span>
-                    {/** This takes amount raised till now */}
-                    <span>
-                      {" "}
-                      of {currencyToggle ? "Rs" : "USD"}.
-                      {currencyToggle
-                        ? fundraiserData.target
-                        : Math.round(fundraiserData.target / 74)}
-                    </span>
-                    {/** This takes target amount */}
-                  </h1>
+                  <h3>
+                    Milaap will not charge any fee on your donation to this
+                    campaign.
+                  </h3>
                 </div>
-                <div>
-                  <Link onClick={onOpen} ref={btnRef} as={"div"}>
-                    {fundraiserData.supporters.length} supporters{" "}
-                    {/** This takes length of supporters aaray */}
-                  </Link>
-                  <Modal
-                    onClose={onClose}
-                    finalFocusRef={btnRef}
-                    isOpen={isOpen}
-                    scrollBehavior="inside"
-                  >
-                    <ModalOverlay />
-                    <ModalContent>
-                      <ModalHeader
-                        style={{
-                          borderBottom: "1px solid #c4c4c4",
-                          margin: "10px 0",
-                        }}
-                      >
-                        <div>{fundraiserData.supporters.length} supporters</div>
-                      </ModalHeader>
-                      <ModalCloseButton />
-                      <ModalBody>
-                        {fundraiserData.supporters.map((item) => {
-                          return (
-                            <div key={item.id}>
-                              <SupporterModal>
-                                <div>
-                                  <div>{item.name[0]}</div>
-                                </div>
-                                <div>
-                                  <h4>{item.name}</h4>
-                                  <h1>
-                                    {currencyToggle ? (
-                                      <span>&#8377;</span>
-                                    ) : (
-                                      "$"
-                                    )}
-                                    {currencyToggle
-                                      ? item.amount
-                                      : Math.round(item.amount / 74)}
-                                  </h1>
-                                </div>
-                              </SupporterModal>
-                            </div>
-                          );
-                        })}
-                      </ModalBody>
-                      <ModalFooter style={{ borderTop: "1px solid #c4c4c4" }}>
-                        <ModalDonateButton>
-                          <Link to="/payment" onClick={onClose}>
-                            <StyledButton
-                              onClick={() => history.push("/payment")}
-                              text="Donate now"
-                            />
-                          </Link>
-                        </ModalDonateButton>
-                      </ModalFooter>
-                    </ModalContent>
-                  </Modal>
-                </div>
-              </FundraisedStats>
-              <ShareInfo>
-                <div>
-                  <div
-                    style={{
-                      backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/whatsapp-de7eea5e99374fa76f0ef336de81e6009c552c0e0fd4310da10d76ff52ea8693.svg"})`,
-                    }}
-                  ></div>
-                  <div>Share</div>
-                </div>
-                <div>
-                  <div
-                    style={{
-                      backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/facebook-e95d42ee18fd2198d8052f9b73e846cf2811d7c566c64bc6957422917e271f7b.svg"})`,
-                    }}
-                  ></div>
-                  <div>Share</div>
-                </div>
-              </ShareInfo>
-              <BeneficiaryName>
-                <div>
-                  <div>{fundraiserData.createdBy[0].toUpperCase()}</div>
-                  {/** This will take first char of name */}
-                  <div>
-                    <h4>Created by</h4>
-                    <h1>{fundraiserData.createdBy}</h1>{" "}
-                    {/** This takes createdBy */}
-                  </div>
-                </div>
-                <div>
-                  <div>{fundraiserData.createdFor[0].toUpperCase()}</div>
-                  {/** This will take first char of name */}
-                  <div>
-                    <h4>This fundraiser will benefit</h4>
-                    <h1>{fundraiserData.createdFor}</h1>{" "}
-                    {/** This takes createdFor */}
-                  </div>
-                </div>
-              </BeneficiaryName>
-              <BeneficiaryStory>
-                <div>
-                  <div>
-                    <StyledButton
-                      text="Story"
-                      onClick={handleSwitchStoryUpdate}
-                      style={
-                        storyUpdate
-                          ? {}
-                          : { background: "#912c4a", color: "#fff" }
-                      }
-                    />
-                  </div>
-                  <div>
-                    <StyledButton
-                      text={`Updates(${fundraiserData.updates.length})`}
-                      onClick={handleSwitchStoryUpdate}
-                      style={
-                        storyUpdate
-                          ? { background: "#912c4a", color: "#fff" }
-                          : {}
-                      }
-                    />
-                  </div>
-                </div>
-                {!storyUpdate ? (
-                  <p>{fundraiserData.description}</p>
-                ) : (
-                  <p>
-                    {fundraiserData.updates.length > 0 &&
-                      fundraiserData.updates[0].description}
-                  </p>
-                )}
-                {/** This will take discription */}
-              </BeneficiaryStory>
-              <SupportFundraiser>
-                <div>
-                  <h2>
-                    Create a support fundraiser page and raise donations from
-                    your friends to
-                  </h2>
-                  <h2>
-                    help {fundraiserData.createdFor}
-                    {/** This takes createdFor */}
-                  </h2>
-                </div>
-                <div>
-                  <StyledButton text="Create a support fundraiser" />
-                </div>
-              </SupportFundraiser>
-            </BeneficiaryDiv>
-            <PaymentDiv>
-              <div>
-                <div>
-                  <div>
-                    <div
-                      style={{
-                        backgroundImage: `url(${"https://assets.milaap.org/assets/donate-icon-7cabb309d2c7a586a914c0a23abe52032aa0ce01115fb54e07c6148ab2cf8c6a.svg"})`,
-                      }}
-                    ></div>
-                    <div>Donate</div>
-                  </div>
-                  <div>
-                    <Link onClick={onOpen} ref={btnRef} as={"div"}>
-                      {fundraiserData.supporters.length} supporters
-                    </Link>
-                  </div>
-                </div>
-                <div>
+                <BeneficiaryTitle>
+                  <h1>{fundraiserData.title}</h1> {/** This takes title */}
+                </BeneficiaryTitle>
+                <BeneficiaryImage
+                  style={{ backgroundImage: `url(${fundraiserData.image})` }}
+                ></BeneficiaryImage>{" "}
+                {/** This takes image */}
+                <FundraisedStats>
                   <CircularProgress
                     value={(
                       (raisedAmount / fundraiserData.target) *
                       100
                     ).toFixed(1)}
                     color="#37d123"
-                    size="73px"
+                    size="74px"
                   >
                     <CircularProgressLabel fontSize="15px" fontWeight="500">
                       {((raisedAmount / fundraiserData.target) * 100).toFixed(
@@ -867,6 +664,7 @@ export const FundraiserDonate = () => {
                           ? raisedAmount
                           : Math.round(raisedAmount / 74)}
                       </span>
+                      {/** This takes amount raised till now */}
                       <span>
                         {" "}
                         of {currencyToggle ? "Rs" : "USD"}.
@@ -874,74 +672,292 @@ export const FundraiserDonate = () => {
                           ? fundraiserData.target
                           : Math.round(fundraiserData.target / 74)}
                       </span>
+                      {/** This takes target amount */}
                     </h1>
                   </div>
-                </div>
-                <div>
-                  <StyledButton
-                    onClick={() => history.push("/payment")}
-                    text="Donate now"
-                  />
-                </div>
-                <div>
-                  <h2>Card, Netbanking, Cheque pickups</h2>
-                </div>
-                <div>
-                  <div></div>
                   <div>
-                    <span>Or</span>
-                    <span>Donate using</span>
+                    <Link onClick={onOpen} ref={btnRef} as={"div"}>
+                      {fundraiserData.supporters.length} supporters{" "}
+                      {/** This takes length of supporters aaray */}
+                    </Link>
+                    <Modal
+                      onClose={onClose}
+                      finalFocusRef={btnRef}
+                      isOpen={isOpen}
+                      scrollBehavior="inside"
+                    >
+                      <ModalOverlay />
+                      <ModalContent>
+                        <ModalHeader
+                          style={{
+                            borderBottom: "1px solid #c4c4c4",
+                            margin: "10px 0",
+                          }}
+                        >
+                          <div>
+                            {fundraiserData.supporters.length} supporters
+                          </div>
+                        </ModalHeader>
+                        <ModalCloseButton />
+                        <ModalBody>
+                          {fundraiserData.supporters.map((item) => {
+                            return (
+                              <div key={item.id}>
+                                <SupporterModal>
+                                  <div>
+                                    <div>{item.name[0]}</div>
+                                  </div>
+                                  <div>
+                                    <h4>{item.name}</h4>
+                                    <h1>
+                                      {currencyToggle ? (
+                                        <span>&#8377;</span>
+                                      ) : (
+                                        "$"
+                                      )}
+                                      {currencyToggle
+                                        ? item.amount
+                                        : Math.round(item.amount / 74)}
+                                    </h1>
+                                  </div>
+                                </SupporterModal>
+                              </div>
+                            );
+                          })}
+                        </ModalBody>
+                        <ModalFooter style={{ borderTop: "1px solid #c4c4c4" }}>
+                          <ModalDonateButton>
+                            <Link to="/payment" onClick={onClose}>
+                              <StyledButton
+                                onClick={() => history.push("/payment")}
+                                text="Donate now"
+                              />
+                            </Link>
+                          </ModalDonateButton>
+                        </ModalFooter>
+                      </ModalContent>
+                    </Modal>
                   </div>
-                  <div></div>
-                </div>
+                </FundraisedStats>
+                <ShareInfo>
+                  <div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/whatsapp-de7eea5e99374fa76f0ef336de81e6009c552c0e0fd4310da10d76ff52ea8693.svg"})`,
+                      }}
+                    ></div>
+                    <div>Share</div>
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${"https://assets.milaap.org/assets/campaign/facebook-e95d42ee18fd2198d8052f9b73e846cf2811d7c566c64bc6957422917e271f7b.svg"})`,
+                      }}
+                    ></div>
+                    <div>Share</div>
+                  </div>
+                </ShareInfo>
+                <BeneficiaryName>
+                  <div>
+                    <div>{fundraiserData.createdBy[0].toUpperCase()}</div>
+                    {/** This will take first char of name */}
+                    <div>
+                      <h4>Created by</h4>
+                      <h1>{fundraiserData.createdBy}</h1>{" "}
+                      {/** This takes createdBy */}
+                    </div>
+                  </div>
+                  <div>
+                    <div>{fundraiserData.createdFor[0].toUpperCase()}</div>
+                    {/** This will take first char of name */}
+                    <div>
+                      <h4>This fundraiser will benefit</h4>
+                      <h1>{fundraiserData.createdFor}</h1>{" "}
+                      {/** This takes createdFor */}
+                    </div>
+                  </div>
+                </BeneficiaryName>
+                <BeneficiaryStory>
+                  <div>
+                    <div>
+                      <StyledButton
+                        text="Story"
+                        onClick={handleSwitchStoryUpdate}
+                        style={
+                          storyUpdate
+                            ? {}
+                            : { background: "#912c4a", color: "#fff" }
+                        }
+                      />
+                    </div>
+                    <div>
+                      <StyledButton
+                        text={`Updates(${fundraiserData.updates.length})`}
+                        onClick={handleSwitchStoryUpdate}
+                        style={
+                          storyUpdate
+                            ? { background: "#912c4a", color: "#fff" }
+                            : {}
+                        }
+                      />
+                    </div>
+                  </div>
+                  {!storyUpdate ? (
+                    <p>{fundraiserData.description}</p>
+                  ) : (
+                    <p>
+                      {fundraiserData.updates.length > 0 &&
+                        fundraiserData.updates.map((el) => (
+                          <div>
+                            <p
+                              style={{
+                                fontWeight: "500",
+                                textTransform: "uppercase",
+                              }}
+                            >
+                              {el.title}
+                            </p>
+                            <p>{el.description}</p>
+                            <hr />
+                          </div>
+                        ))}
+                    </p>
+                  )}
+                  {/** This will take discription */}
+                </BeneficiaryStory>
+                <SupportFundraiser>
+                  <div>
+                    <h2>
+                      Create a support fundraiser page and raise donations from
+                      your friends to
+                    </h2>
+                    <h2>
+                      help {fundraiserData.createdFor}
+                      {/** This takes createdFor */}
+                    </h2>
+                  </div>
+                  <div>
+                    <StyledButton text="Create a support fundraiser" />
+                  </div>
+                </SupportFundraiser>
+              </BeneficiaryDiv>
+              <PaymentDiv>
                 <div>
                   <div>
                     <div>
                       <div
                         style={{
-                          backgroundImage: `url(${"https://assets.milaap.org/assets/qr_code-4663c94becb62937467a2d00e761e207e3a7af3490f0b73577fa0a1392fbda0f.jpg"})`,
+                          backgroundImage: `url(${"https://assets.milaap.org/assets/donate-icon-7cabb309d2c7a586a914c0a23abe52032aa0ce01115fb54e07c6148ab2cf8c6a.svg"})`,
                         }}
                       ></div>
+                      <div>Donate</div>
+                    </div>
+                    <div>
+                      <Link onClick={onOpen} ref={btnRef} as={"div"}>
+                        {fundraiserData.supporters.length} supporters
+                      </Link>
                     </div>
                   </div>
                   <div>
-                    <StyledButton text="Generate QR" />
+                    <CircularProgress
+                      value={(
+                        (raisedAmount / fundraiserData.target) *
+                        100
+                      ).toFixed(1)}
+                      color="#37d123"
+                      size="73px"
+                    >
+                      <CircularProgressLabel fontSize="15px" fontWeight="500">
+                        {((raisedAmount / fundraiserData.target) * 100).toFixed(
+                          1
+                        )}
+                        %
+                      </CircularProgressLabel>
+                    </CircularProgress>
+                    <div>
+                      <h3>Raised</h3>
+                      <h1>
+                        <span>
+                          {currencyToggle ? "Rs" : "USD"}.
+                          {currencyToggle
+                            ? raisedAmount
+                            : Math.round(raisedAmount / 74)}
+                        </span>
+                        <span>
+                          {" "}
+                          of {currencyToggle ? "Rs" : "USD"}.
+                          {currencyToggle
+                            ? fundraiserData.target
+                            : Math.round(fundraiserData.target / 74)}
+                        </span>
+                      </h1>
+                    </div>
+                  </div>
+                  <div>
+                    <StyledButton
+                      onClick={() => history.push("/payment")}
+                      text="Donate now"
+                    />
+                  </div>
+                  <div>
+                    <h2>Card, Netbanking, Cheque pickups</h2>
+                  </div>
+                  <div>
+                    <div></div>
+                    <div>
+                      <span>Or</span>
+                      <span>Donate using</span>
+                    </div>
+                    <div></div>
+                  </div>
+                  <div>
+                    <div>
+                      <div>
+                        <div
+                          style={{
+                            backgroundImage: `url(${"https://assets.milaap.org/assets/qr_code-4663c94becb62937467a2d00e761e207e3a7af3490f0b73577fa0a1392fbda0f.jpg"})`,
+                          }}
+                        ></div>
+                      </div>
+                    </div>
+                    <div>
+                      <StyledButton text="Generate QR" />
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div>
                 <div>
-                  <h3>Scan & donate with any app</h3>
+                  <div>
+                    <h3>Scan & donate with any app</h3>
+                  </div>
+                  <div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/bhim-3-69845.png"})`,
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-256/google-pay-2038779-1721670.png"})`,
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/paytm-226448.png"})`,
+                      }}
+                    ></div>
+                    <div
+                      style={{
+                        backgroundImage: `url(${"https://www.searchpng.com/wp-content/uploads/2018/11/phone-pe.png"})`,
+                      }}
+                    ></div>
+                  </div>
                 </div>
-                <div>
-                  <div
-                    style={{
-                      backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/bhim-3-69845.png"})`,
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-256/google-pay-2038779-1721670.png"})`,
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      backgroundImage: `url(${"https://cdn.iconscout.com/icon/free/png-512/paytm-226448.png"})`,
-                    }}
-                  ></div>
-                  <div
-                    style={{
-                      backgroundImage: `url(${"https://www.searchpng.com/wp-content/uploads/2018/11/phone-pe.png"})`,
-                    }}
-                  ></div>
-                </div>
-              </div>
-            </PaymentDiv>
-          </DonateMainDiv>
-          <Footer />
-        </div>
-      )}
-    </div>
+              </PaymentDiv>
+            </DonateMainDiv>
+            <Footer />
+          </div>
+        )}
+      </div>
     </>
   );
 };
