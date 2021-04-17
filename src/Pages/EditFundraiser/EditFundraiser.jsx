@@ -13,7 +13,6 @@ import styled from "styled-components";
 import { Link, Redirect, useParams } from "react-router-dom";
 import { fetchFundraiserData } from "../../Redux/specificFundraiser/actions";
 import { Textarea } from "@chakra-ui/textarea";
-import { getCards } from "../../Redux/categoryApi/actions";
 
 const DonateMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
@@ -189,7 +188,7 @@ export function EditFundraiser() {
     updates,
   } = data;
   const [img, setImg] = useState(null);
-  const {id} = useParams();
+  const id = useParams();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setData({
@@ -206,7 +205,6 @@ export function EditFundraiser() {
     (state) => state.fundraiser,
     shallowEqual
   );
-  const {cards}=useSelector(state=>state.cards,shallowEqual)
 
   useEffect(() => {
     dispatch(fetchFundraiserData(id));
@@ -242,7 +240,7 @@ export function EditFundraiser() {
       <Navbar />
       <DonateMainDiv>
         <div>
-          
+          <div>
             <label> Campaign Creator name: </label>
             <Input
               isInvalid
@@ -254,7 +252,7 @@ export function EditFundraiser() {
               value={createdBy}
               onChange={handleChange}
             />
-          
+          </div>
           <div>
             <label>
               Campaign creating for:
@@ -316,7 +314,7 @@ export function EditFundraiser() {
               />
             </label>
           </div>
-          {/* <div>
+          <div>
             <label>
               Uploaded imageUrl:{" "}
               <span
@@ -335,8 +333,7 @@ export function EditFundraiser() {
                 onChange={(e) => setImg(e.target.files[0])}
               />
             </label>
-          </div> */}
-
+          </div>
           <div>
             <label>
               Category:
