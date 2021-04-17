@@ -176,7 +176,6 @@ export function EditFundraiser() {
   };
 
   const { isAuth, activeUser } = useSelector((state) => state.auth);
-
   const [data, setData] = useState(initial);
   const {
     createdBy,
@@ -210,26 +209,28 @@ export function EditFundraiser() {
   const {cards}=useSelector(state=>state.cards,shallowEqual)
 
   useEffect(() => {
-    dispatch(getCards("all",""));
-   cards.map(item=>item.id===Number(id) && 
-   setData({
-     ...data,
-     createdBy:item.createdBy
-   })
-   )
-  }, []);
-  console.log(id)
+    dispatch(fetchFundraiserData(id));
+    setData({
+      ...data,
+      ...fundraiserData,
+    });
+  }, [dispatch, id]);
 
   const handleSubmit = () => {
     upload(img).then((res) => {
       console.log(res.data.link);
       dispatch(
         updateCampaign({
-          ...data,
           target: Number(target),
           image: res.data.link,
-          activeUser,
-          campaignId: id,
+          id: data.id,
+          createdBy,
+          createdFor,
+          title,
+          description,
+          category,
+          supporters,
+          updates,
         })
       );
     });
