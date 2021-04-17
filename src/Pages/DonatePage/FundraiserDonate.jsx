@@ -750,7 +750,7 @@ export const FundraiserDonate = () => {
               </ShareInfo>
               <BeneficiaryName>
                 <div>
-                  <div>{fundraiserData.createdBy[0]}</div>
+                  <div>{fundraiserData.createdBy[0].toUpperCase()}</div>
                   {/** This will take first char of name */}
                   <div>
                     <h4>Created by</h4>
@@ -759,7 +759,7 @@ export const FundraiserDonate = () => {
                   </div>
                 </div>
                 <div>
-                  <div>{fundraiserData.createdFor[0]}</div>
+                  <div>{fundraiserData.createdFor[0].toUpperCase()}</div>
                   {/** This will take first char of name */}
                   <div>
                     <h4>This fundraiser will benefit</h4>
