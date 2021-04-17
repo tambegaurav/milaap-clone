@@ -6,6 +6,7 @@ import { addCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
+import { Redirect } from "react-router-dom";
 
 const DonateMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
@@ -167,7 +168,7 @@ export function CreateFundraiser() {
     updates: [],
   };
 
-  const { activeUser } = useSelector((state) => state.auth);
+  const { isAuth, activeUser } = useSelector((state) => state.auth);
 
   const [data, setData] = useState(initial);
   const {
@@ -212,6 +213,7 @@ export function CreateFundraiser() {
 
   return (
     <>
+      {!isAuth && <Redirect to="/users/sign-in" />}
       <Navbar />
       <DonateMainDiv>
         <div>
