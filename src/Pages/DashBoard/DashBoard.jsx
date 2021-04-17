@@ -87,7 +87,7 @@ export const DashBoard = () => {
             <Navbar />
             <ScrollToTopButton showBelow={1000} />
             {
-                activeUser.campaigns.length === 0 && 
+                activeUser.campaigns.length > 0 && 
                 <RaiseCampaign>
                     <Link to="/createfundraiser">
                         <StyledButton text="Raise Campagin" />

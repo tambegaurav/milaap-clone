@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import StyledButton from "../../Styled-components/Button";
 
 const FooterMainDiv = styled.div`
   background: #ffffff;
@@ -139,9 +140,18 @@ const FundraiseDiv = styled.div`
   flex: 1;
   padding: 20px;
 
+  > div:nth-child(1) {
+    button {
+      background: #9c3353;
+      border-radius: 50px;
+      font-size: 19px;
+      padding: 25px 30px;
+    }
+  }
+
   > div:nth-child(2) {
     font-size: 14px;
-    margin: 10% 0;
+    margin: 8% 0;
     color: #9c3353;
 
     * {
@@ -334,7 +344,9 @@ const Footer = () => {
         </DonateDiv>
         <FundraiseDiv>
           <div>
-            <button>START</button>
+            <Link to="/createfundraiser">
+              <StyledButton text="Start a fundraiser" />
+            </Link>
           </div>
           <div>
             <Link>Princing</Link>
