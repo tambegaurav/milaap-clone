@@ -6,6 +6,13 @@ import { useHistory, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../Redux/auth/actions";
 
+const CustomSwitch = styled(Switch)`
+  .css-1b2twv6[aria-checked="true"],
+  .css-1b2twv6[data-checked] {
+    background-color: #912c4a;
+  }
+`;
+
 export function Navbar() {
   const Link = styled(NavLink)`
     color: black;
@@ -85,7 +92,7 @@ export function Navbar() {
           gridTemplateColumns: "70px 50px",
         }}
       >
-        <Switch
+        <CustomSwitch
           size="lg"
           isChecked={currencyToggle}
           onChange={handleCurrencyToggel}
@@ -98,6 +105,7 @@ export function Navbar() {
         onClick={() => setShow(!show)}
         style={{
           cursor: "pointer",
+          marginTop: "-5px",
         }}
         as="div"
       >

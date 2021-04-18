@@ -168,9 +168,8 @@ export function EditFundraiser() {
     shallowEqual
   );
   const dispatch = useDispatch();
-  const { fundraiserData } = useSelector(
-    (state) => state.fundraiser,
-    shallowEqual
+  const fundraiserData = useSelector(
+    (state) => state.fundraiser.fundraiserData
   );
 
   const initial = {
@@ -210,16 +209,35 @@ export function EditFundraiser() {
   const [newUpdate, setNewUpdate] = useState("");
 
   const postNewUpdate = () => {
-    dispatch(postUpdate({ newUpdate, updates, id: data.id }));
+    dispatch(postUpdate({ newUpdate, updates, id: data.id }))
+      .then(() => {
+        dispatch(fetchFundraiserData(id));
+      })
+      .then(() => {
+        setData({
+          ...data,
+          ...fundraiserData,
+        });
+      });
   };
 
   useEffect(() => {
     dispatch(fetchFundraiserData(id));
+    // .then(() => {
+    //   // setData({
+    //   //   ...data,
+    //   //   ...fundraiserData,
+    //   // });
+    // });
+    console.log(data);
+  }, [dispatch, id]);
+
+  useEffect(() => {
     setData({
       ...data,
       ...fundraiserData,
     });
-  }, [dispatch, id]);
+  }, [fundraiserData]);
 
   const handleSubmit = () => {
     upload(img).then((res) => {
