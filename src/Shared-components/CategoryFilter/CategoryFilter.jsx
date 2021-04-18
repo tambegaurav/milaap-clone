@@ -116,6 +116,7 @@ export function CategoryFilter() {
               i < 6 && (
                 <DonationCardDetails
                   onClick={() => history.push(`/fundraisers/${item.id}`)}
+                  key={item.id}
                   id={item.id}
                   label={item.title}
                   imageUrl={item.image}

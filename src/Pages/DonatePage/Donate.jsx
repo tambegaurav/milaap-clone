@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useState } from "react";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
 import { getCards } from "../../Redux/categoryApi/actions";
@@ -41,6 +42,7 @@ export function Donate() {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getCards(filters,""));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filters]);
   if (order === "desc") {
     cards.sort((a, b) => {

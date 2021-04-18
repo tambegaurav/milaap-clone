@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { Input } from "@chakra-ui/input";
 import { Select } from "@chakra-ui/select";
 import React, { useState } from "react";

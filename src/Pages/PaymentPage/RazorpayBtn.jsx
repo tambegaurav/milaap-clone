@@ -33,6 +33,7 @@ const PayByRazorPay = ({ amount, disableData }) => {
   );
 
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const history = useHistory();
 
   const openPayModal = async () => {

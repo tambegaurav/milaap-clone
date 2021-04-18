@@ -76,6 +76,7 @@ const Campaigns = styled.div`
 
 export const DashBoard = () => {
   const { activeUser, isAuth } = useSelector((state) => state.auth);
+  // eslint-disable-next-line no-unused-vars
   const { userCampagin, isLoading, isError } = useSelector(
     (state) => state.userCampaginData
   );
@@ -88,6 +89,7 @@ export const DashBoard = () => {
 
   useEffect(() => {
     dispatch(filterFundraisers(activeUser));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeUser]);
 
   if (!isAuth) {

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import axios from "axios";
 import { useHistory } from "react-router";
 import {
@@ -14,7 +15,7 @@ export const paymentRequest = () => {
 
 export const paymentSuccess = (payload) => {
   return {
-    type: PAYMENT_REQUEST,
+    type: PAYMENT_SUCCESS,
     payload: payload,
   };
 };

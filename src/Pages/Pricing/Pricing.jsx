@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {
   Accordion,
   AccordionButton,
-  AccordionIcon,
+ 
   AccordionItem,
   AccordionPanel,
   Box,

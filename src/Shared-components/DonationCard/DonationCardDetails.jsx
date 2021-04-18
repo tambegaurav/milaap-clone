@@ -86,6 +86,7 @@ export const DonationCardDetails = ({
   id,
   onClick,
   percentage,
+  style
 }) => {
   const { currencyToggle } = useContext(CurrencyContext);
   let str = "";
@@ -97,10 +98,11 @@ export const DonationCardDetails = ({
     }
   }
 
+  // eslint-disable-next-line no-unused-vars
   const history = useHistory();
   // console.log(imageUrl);
   return (
-    <CardDetailsMainDiv onClick={onClick}>
+    <CardDetailsMainDiv onClick={onClick} style={style}>
       <div>
         <div style={{ backgroundImage: `url(${imageUrl})` }}></div>
       </div>

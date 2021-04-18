@@ -11,6 +11,7 @@ const initial = {
   isLoading: false,
   isError: false,
   isSuccess: false,
+  message: ''
 };
 
 export const campaignReducer = (state = initial, action) => {
@@ -20,6 +21,7 @@ export const campaignReducer = (state = initial, action) => {
         ...state,
         isError: false,
         isLoading: true,
+        message: ''
       };
     }
     case ADD_CAMPAIGN_SUCCESS: {
@@ -28,6 +30,8 @@ export const campaignReducer = (state = initial, action) => {
         isError: false,
         isLoading: false,
         isSuccess: true,
+        message: 'Campaign Added Successfully'
+
       };
     }
     case ADD_CAMPAIGN_FAILURE: {
@@ -35,6 +39,7 @@ export const campaignReducer = (state = initial, action) => {
         ...state,
         isError: true,
         isLoading: false,
+        message: ''
       };
     }
 
@@ -43,6 +48,7 @@ export const campaignReducer = (state = initial, action) => {
         ...state,
         isError: false,
         isLoading: true,
+        message: ''
       };
     }
 
@@ -52,6 +58,7 @@ export const campaignReducer = (state = initial, action) => {
         isError: false,
         isLoading: false,
         isSuccess: true,
+        message: 'Campaign Updated Successfully'
       };
     }
 
@@ -61,6 +68,7 @@ export const campaignReducer = (state = initial, action) => {
         isError: true,
         isLoading: false,
         isSuccess: false,
+        message: ''
       };
     }
 

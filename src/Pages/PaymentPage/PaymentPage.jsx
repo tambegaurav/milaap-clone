@@ -4,7 +4,6 @@ import React, { useState } from "react";
 import PayByRazorPay from "./RazorpayBtn";
 import styled from "styled-components";
 import { Checkbox } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
 
 const PaymentMainDiv = styled.div`
   background: linear-gradient(90deg, #a33555, #5f2747);
@@ -115,6 +114,7 @@ const initState = {
 
 const PaymentPage = () => {
   const [formDetails, setFormDetails] = useState(initState);
+
 
   const handleChange = (e) => {
     const { name, value, checked, type } = e.target;

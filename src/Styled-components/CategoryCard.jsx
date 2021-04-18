@@ -20,9 +20,9 @@ const MainDiv = styled.div`
   }
 `;
 
-export function CategoryCard({ img, text, onClick }) {
+export function CategoryCard({ img, text, onClick, style={} }) {
   return (
-    <MainDiv onClick={onClick}>
+    <MainDiv onClick={onClick} style={style}>
       <div>
         <img width="70px" src={img} alt="" />
       </div>

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Input } from "@chakra-ui/input";
 import { Select } from "@chakra-ui/select";
 import React, { useEffect, useState } from "react";
@@ -6,7 +7,7 @@ import { updateCampaign, upload } from "../../Redux/campaignApi/actions";
 import { Navbar } from "../../Shared-components/Navbar";
 import StyledButton from "../../Styled-components/Button";
 import styled from "styled-components";
-import { Link, Redirect, useParams } from "react-router-dom";
+import {  Redirect, useParams } from "react-router-dom";
 import { fetchFundraiserData } from "../../Redux/specificFundraiser/actions";
 import { Textarea } from "@chakra-ui/textarea";
 import { postUpdate } from "../../Redux/postUpdates/actions";
@@ -161,9 +162,9 @@ const DonateMainDiv = styled.div`
 `;
 
 export function EditFundraiser() {
-  const { isAuth, activeUser } = useSelector((state) => state.auth);
+  const { isAuth } = useSelector((state) => state.auth);
 
-  const { isLoading, isError, isSuccess } = useSelector(
+  const { isLoading } = useSelector(
     (state) => state.campaign,
     shallowEqual
   );
@@ -387,6 +388,7 @@ export function EditFundraiser() {
             isLoading={isLoading}
             text="Update campaign"
           />
+       
         </div>
         <div>
           <Heading>Post updates here</Heading>
