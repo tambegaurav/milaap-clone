@@ -595,6 +595,12 @@ const ModalDonateButton = styled.button`
   }
 `;
 
+const CloseButtonWrapper = styled.div`
+  button:focus {
+    box-shadow: none;
+  }
+`;
+
 export const FundraiserDonate = () => {
   const [storyUpdate, setStoryUpdate] = useState(false);
   const { currencyToggle } = useContext(CurrencyContext);
@@ -698,7 +704,10 @@ export const FundraiserDonate = () => {
                             {fundraiserData.supporters.length} supporters
                           </div>
                         </ModalHeader>
-                        <ModalCloseButton />
+                        <CloseButtonWrapper>
+                          <ModalCloseButton />
+                        </CloseButtonWrapper>
+
                         <ModalBody>
                           {fundraiserData.supporters.map((item) => {
                             return (
