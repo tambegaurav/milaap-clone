@@ -194,7 +194,7 @@ const PaymentPage = () => {
               amount={formDetails.amount}
               disableData={
                 formDetails.anonymus
-                  ? { ...formDetails, name: "Anonymus" }
+                  ? { ...formDetails, name: "Anonymous" }
                   : formDetails
               }
             />

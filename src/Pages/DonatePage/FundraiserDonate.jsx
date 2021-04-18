@@ -402,7 +402,6 @@ const BeneficiaryName = styled.div`
 
   > div {
     flex: 1;
-    height: 10vh;
     border: 1px solid #b9b7b770;
     border-radius: 3px;
     padding: 15px;

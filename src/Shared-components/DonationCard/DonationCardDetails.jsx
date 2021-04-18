@@ -89,9 +89,9 @@ export const DonationCardDetails = ({
 }) => {
   const { currencyToggle } = useContext(CurrencyContext);
   let str = "";
-  for( let i=0; i<7; i++ ) {
-    if( creater[i] === undefined ) {
-      break
+  for (let i = 0; i < 7; i++) {
+    if (creater[i] === undefined) {
+      break;
     } else {
       str += creater[i];
     }

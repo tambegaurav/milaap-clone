@@ -119,7 +119,9 @@ export function CategoryFilter() {
                   id={item.id}
                   label={item.title}
                   imageUrl={item.image}
-                  amount={item.target}
+                  amount={item.supporters.reduce((ac, v) => {
+                    return ac + v.amount;
+                  }, 0)}
                   creater={item.createdBy}
                   percentage={
                     (item.supporters.reduce((ac, v) => {
