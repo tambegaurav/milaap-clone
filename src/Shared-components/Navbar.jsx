@@ -1,9 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
+import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
+import { useHistory, NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { signout } from "../Redux/auth/actions";
+
+const CustomSwitch = styled(Switch)`
+  .css-1b2twv6[aria-checked="true"],
+  .css-1b2twv6[data-checked] {
+    background-color: #912c4a;
+  }
+`;
 
 export function Navbar() {
-  const Link = styled.a`
+  const Link = styled(NavLink)`
     color: black;
     padding-top: 20px;
     margin-left: 10px;
@@ -15,9 +26,15 @@ export function Navbar() {
     &:hover {
       background-color: #f0efef;
     }
+    &:active {
+      background: #e2e1e1;
+    }
   `;
   const [show, setShow] = useState(false);
-
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const { currencyToggle, handleCurrencyToggel } = useContext(CurrencyContext);
+  const { isAuth, activeUser } = useSelector((state) => state.auth);
   return (
     <div
       style={{
@@ -36,6 +53,7 @@ export function Navbar() {
         style={{
           paddingTop: "15px",
         }}
+        to="/"
       >
         <img
           width="100px"
@@ -44,25 +62,61 @@ export function Navbar() {
           alt=""
         />
       </Link>
-      <Link href="#">Home</Link>
-      <Link href="">Donate</Link>
-      <Link href="">Lend</Link>
-      <Link href="">Pricing</Link>
-      <Link href="">Contact us</Link>
-      <Link>
-        <Switch size="lg" />
+      <Link
+        to="/"
+        exact
+        activeStyle={{ backgroundColor: "#912c4a", color: "#fff" }}
+      >
+        Home
+      </Link>
+      <Link
+        activeStyle={{ backgroundColor: "#912c4a", color: "#fff" }}
+        to="/donate"
+      >
+        Donate
+      </Link>
+      <Link to="/">Lend</Link>
+      <Link
+        activeStyle={{ backgroundColor: "#912c4a", color: "#fff" }}
+        to="/pricing"
+      >
+        Pricing
+      </Link>
+      <Link to="/">Contact us</Link>
+
+      <Link
+        as="div"
+        style={{
+          display: "grid",
+
+          gridTemplateColumns: "70px 50px",
+        }}
+      >
+        <CustomSwitch
+          size="lg"
+          isChecked={currencyToggle}
+          onChange={handleCurrencyToggel}
+        />
+
+        {currencyToggle ? "Rupee" : "Dollar"}
       </Link>
 
       <Link
         onClick={() => setShow(!show)}
         style={{
-          paddingTop: "15px",
+          cursor: "pointer",
+          marginTop: "-5px",
         }}
+        as="div"
       >
-        <img
-          src="https://assets.milaap.org/assets/header/user-icon-dfb080c6054d6a209639e60bd2bc033a2b79a8528da7131a2f118b92dd5589ae.png"
-          alt=""
-        />
+        {isAuth ? (
+          <p>{activeUser.fullname}</p>
+        ) : (
+          <img
+            src="https://assets.milaap.org/assets/header/user-icon-dfb080c6054d6a209639e60bd2bc033a2b79a8528da7131a2f118b92dd5589ae.png"
+            alt=""
+          />
+        )}
       </Link>
 
       {show && (
@@ -80,10 +134,49 @@ export function Navbar() {
             transition: "1px",
           }}
         >
-          <button style={{ borderRight: "1px solid gray", padding: "10px" }}>
-            Login
-          </button>
-          <button style={{ padding: "10px" }}>Register</button>
+          {!isAuth && (
+            <>
+              <button
+                onClick={() => history.push("/users/sign-in")}
+                style={{
+                  borderRight: "1px solid gray",
+                  padding: "10px",
+                  outline: "none",
+                }}
+              >
+                Login
+              </button>
+              <button
+                onClick={() => history.push("/users/sign-up")}
+                style={{ padding: "10px", outline: "none" }}
+              >
+                Register
+              </button>
+            </>
+          )}
+          {isAuth && (
+            <>
+              <button
+                onClick={() => history.push("/dashboard")}
+                style={{
+                  borderRight: "1px solid gray",
+                  padding: "10px",
+                  outline: "none",
+                }}
+              >
+                Dashboard
+              </button>
+              <button
+                onClick={() => {
+                  dispatch(signout());
+                  history.replace("/");
+                }}
+                style={{ padding: "10px", outline: "none" }}
+              >
+                Signout
+              </button>
+            </>
+          )}
         </div>
       )}
     </div>

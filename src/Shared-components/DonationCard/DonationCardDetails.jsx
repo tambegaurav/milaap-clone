@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CircularProgress, CircularProgressLabel } from "@chakra-ui/react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+import { CurrencyContext } from "../../Context/CurrencyContextProvider/CurrencyContextProvider";
 
 const CardDetailsMainDiv = styled.div`
   width: 30%;
@@ -8,6 +10,26 @@ const CardDetailsMainDiv = styled.div`
   border-radius: 10px;
   box-shadow: 0px 0px 5px #9c3353;
   padding-bottom: 5px;
+  cursor: pointer;
+  transition: 0.2s all ease-in-out;
+
+  @media (max-width: 1000px) {
+    width: 45%;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 10px auto;
+  }
+
+  :hover {
+    box-shadow: 2px 2px 10px #9c3353;
+    transform: scale(1.01);
+  }
 
   > div:nth-child(1) > div {
     width: 100%;
@@ -69,37 +91,31 @@ const TitleDiv = styled.div`
   padding: 10px;
 `;
 
-// const DescriptionDiv = styled.div`
-//   padding: 15px 0 15px 14px;
-//   display: flex;
-
-//   > div:nth-child(1) {
-//     border: 1.5px solid #691a47;
-//     border-top-left-radius: 10px;
-//     border-bottom-left-radius: 10px;
-//     background: #691a47;
-//   }
-//   > div:nth-child(2) {
-//     background: #f7f7f7;
-//     text-align: left;
-//     margin: 0 5% 0 0;
-//     font-size: 14px;
-//     line-height: 18px;
-//     padding: 5px 8px;
-//   }
-// `;
-
 export const DonationCardDetails = ({
   label,
   imageUrl,
   amount,
   creater,
-
+  id,
+  onClick,
   percentage,
+  style,
 }) => {
-  console.log(imageUrl);
+  const { currencyToggle } = useContext(CurrencyContext);
+  let str = "";
+  for (let i = 0; i < 7; i++) {
+    if (creater[i] === undefined) {
+      break;
+    } else {
+      str += creater[i];
+    }
+  }
+
+  // eslint-disable-next-line no-unused-vars
+  const history = useHistory();
+  // console.log(imageUrl);
   return (
-    <CardDetailsMainDiv>
+    <CardDetailsMainDiv onClick={onClick} style={style}>
       <div>
         <div style={{ backgroundImage: `url(${imageUrl})` }}></div>
       </div>
@@ -107,17 +123,23 @@ export const DonationCardDetails = ({
         <h1>{label}</h1>
       </TitleDiv>
       <div>
-        <CircularProgress value={percentage} color="green.400">
-          <CircularProgressLabel>{percentage}%</CircularProgressLabel>
+        <CircularProgress value={Math.round(percentage)} color="green.400">
+          <CircularProgressLabel>
+            {Math.round(percentage)}%
+          </CircularProgressLabel>
         </CircularProgress>
         <div>
           <div>Raised</div>
-          <div>&#8377;{amount}</div>
+          <div>
+            {" "}
+            {currencyToggle ? <span>&#8377;</span> : <span>$</span>}{" "}
+            {currencyToggle ? amount : Math.round(amount / 74)}
+          </div>
         </div>
         <div></div>
         <div>
           <div>Created by</div>
-          <div>{creater}</div>
+          <div>{str} ...</div>
         </div>
       </div>
     </CardDetailsMainDiv>

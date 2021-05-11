@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import StyledButton from "../../Styled-components/Button";
 
 const FooterMainDiv = styled.div`
   background: #ffffff;
@@ -9,7 +10,6 @@ const FooterMainDiv = styled.div`
   width: 100%;
 
   > div:nth-child(1) {
-    height: 85%;
     display: flex;
     padding-top: 2%;
   }
@@ -27,16 +27,15 @@ const FooterMainDiv = styled.div`
     }
   }
 
-  @media all and (max-width: 500px) {
+  @media all and (max-width: 480px), all and ( max-width: 768px ), all and ( max-width: 1024px ) {
     > div:nth-child(1) {
-      height: 85%;
+      height: auto;
       display: block;
       padding-top: 2%;
     }
 
     > div:nth-child(2) {
       height: 15%;
-      margin-top: 46em;
       padding-top: 15px;
       color: #fff;
       font-size: 10px;
@@ -56,9 +55,10 @@ const DonateDiv = styled.div`
   background: white;
 
   > div:nth-child(1) {
-    div {
-      border-bottom: 1px solid black;
-      width: 9px;
+    p {
+      ::first-letter {
+        text-decoration: underline;
+      }
     }
   }
 
@@ -75,7 +75,7 @@ const DonateDiv = styled.div`
         > div:nth-child(1) {
           width: 1.5em;
           height: 1.5em;
-          margin: 1%;
+          margin: 8% 2%;
           padding: 10px;
           background-position: center;
           background-size: cover;
@@ -91,25 +91,17 @@ const DonateDiv = styled.div`
     }
   }
 
-  @media all and (max-width: 500px) {
+  @media all and (max-width: 480px), all and ( max-width: 768px ), all and ( max-width: 1024px ) {
     padding: 20px;
     margin: 0 4%;
     background: white;
-
-    > div:nth-child(1) {
-      div {
-        border-bottom: 1px solid black;
-        width: 9px;
-        margin: 0 36.5%;
-      }
-    }
 
     > div:nth-child(2) {
       width: 100%;
       text-align: center;
       * {
-        margin: 0% 0 0% 35.5%;
-
+        margin: 0.5%;
+        justify-content: center;
         > div {
           display: flex;
           flex-direction: row;
@@ -139,9 +131,18 @@ const FundraiseDiv = styled.div`
   flex: 1;
   padding: 20px;
 
+  > div:nth-child(1) {
+    button {
+      background: #9c3353;
+      border-radius: 50px;
+      font-size: 19px;
+      padding: 25px 30px;
+    }
+  }
+
   > div:nth-child(2) {
     font-size: 14px;
-    margin: 10% 0;
+    margin: 8% 0;
     color: #9c3353;
 
     * {
@@ -181,6 +182,37 @@ const FundraiseDiv = styled.div`
         background-repeat: no-repeat;
         background-size: cover;
       }
+    }
+  }
+
+  @media all and ( max-width: 1024px ){
+    padding: 0;
+
+    > div:nth-child(2) {
+      margin: 2% 0;
+    }
+
+    > div:nth-child(3) {
+      align-items: center;
+    }
+  }
+
+  @media all and ( min-width: 1025px ) {
+    > div:nth-child(2) {
+      font-size: 10px;
+    }
+    > div:nth-child(3) {
+      align-items: center;
+      margin: 2% 0;
+    }
+  }
+
+  @media all and ( min-width: 1200px ) {
+    > div:nth-child(2) {
+      font-size: 14px;
+    }
+    > div:nth-child(3) {
+      margin: 1% 19%;
     }
   }
 `;
@@ -296,15 +328,14 @@ const Footer = () => {
       <div>
         <DonateDiv>
           <div>
-            <span>Donte towards</span>
-            <div></div>
+            <p>Donte towards</p>
           </div>
           <div>
             <Link>
               <div>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/809/809957.svg?token=exp=1618298933~hmac=4f4f9e54182f9809b9f75bfaa2adac59"})`,
+                    backgroundImage: `url(${"../../../CategoryIcons/medical_icon.png"})`,
                   }}
                 ></div>
                 <div>Medical</div>
@@ -314,7 +345,7 @@ const Footer = () => {
               <div>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/566/566985.svg?token=exp=1618299597~hmac=095a0e1c9ab91b605b11596200f8fdb8"})`,
+                    backgroundImage: `url(${"../../../CategoryIcons/education_icon.png"})`,
                   }}
                 ></div>
                 <div>Education</div>
@@ -324,7 +355,7 @@ const Footer = () => {
               <div>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/628/628533.svg?token=exp=1618299664~hmac=43d110816ffe61bae714c0f412222ac6"})`,
+                    backgroundImage: `url(${"../../../CategoryIcons/memorial_icon.png"})`,
                   }}
                 ></div>
                 <div>Memorial</div>
@@ -334,7 +365,9 @@ const Footer = () => {
         </DonateDiv>
         <FundraiseDiv>
           <div>
-            <button>START</button>
+            <Link to="/createfundraiser">
+              <StyledButton text="Start a fundraiser" />
+            </Link>
           </div>
           <div>
             <Link>Princing</Link>
@@ -347,35 +380,35 @@ const Footer = () => {
               <Link>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/49/49354.svg?token=exp=1618301484~hmac=ec68c05776356b344d23e7647a11d13f"})`,
+                    backgroundImage: `url(${"../../../SocialMedia/fb_icon.png"})`,
                   }}
                 ></div>
               </Link>
               <Link>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/1384/1384017.svg?token=exp=1618301570~hmac=915e3fded0f9488cdf7a1f678aca753e"})`,
+                    backgroundImage: `url(${"../../../SocialMedia/twitter_icon.png"})`,
                   }}
                 ></div>
               </Link>
               <Link>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/1384/1384014.svg?token=exp=1618301595~hmac=1929596a803c5837b084caeb1b4bc072"})`,
+                    backgroundImage: `url(${"../../../SocialMedia/linkedin_icon.png"})`,
                   }}
                 ></div>
               </Link>
               <Link>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/1384/1384015.svg?token=exp=1618301655~hmac=a70626646ddd71adbbb7d6fc3c4fe2af"})`,
+                    backgroundImage: `url(${"../../../SocialMedia/insta_icon.png"})`,
                   }}
                 ></div>
               </Link>
               <Link>
                 <div
                   style={{
-                    backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/49/49399.svg?token=exp=1618301706~hmac=2d756a3f1207e238e24520c081020f3e"})`,
+                    backgroundImage: `url(${"../../../SocialMedia/youtube_icon.png"})`,
                   }}
                 ></div>
               </Link>

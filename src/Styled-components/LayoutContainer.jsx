@@ -3,8 +3,8 @@ import styled from "styled-components";
 
 const Container = styled.div``;
 
-const LayoutContainer = ({ children }) => {
-  return <Container>{children}</Container>;
+const LayoutContainer = ({ children, style }) => {
+  return <Container style={style}>{children}</Container>;
 };
 
 export default LayoutContainer;

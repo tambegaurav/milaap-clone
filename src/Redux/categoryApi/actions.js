@@ -24,14 +24,23 @@ export const categoryFailure = () => {
   };
 };
 
-export const getCards = (params) => (dispatch) => {
+export const getCards = (params,search) => (dispatch) => {
+if(params){
   var last = params === "" ? "" : `?category=${params}`;
   if (params === "all") {
     last = "";
   }
   dispatch(categoryRequest());
   axios
-    .get("https://boron-milaap-clone.herokuapp.com/fundraisers" + last)
+    .get(`https://boron-milaap-clone.herokuapp.com/fundraisers` + last)
     .then((res) => dispatch(categorySuccess(res.data)))
     .catch((err) => dispatch(categoryFailure()));
+}
+else if(search){
+  dispatch(categoryRequest());
+  axios
+    .get(`https://boron-milaap-clone.herokuapp.com/fundraisers?q=` + search)
+    .then((res) => dispatch(categorySuccess(res.data)))
+    .catch((err) => dispatch(categoryFailure()));
+}
 };

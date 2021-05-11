@@ -3,7 +3,7 @@ import { Button } from "@chakra-ui/react";
 import styled from "styled-components";
 
 const StyledBtn = styled(Button)`
-  width: 400px;
+  /* width: 400px !important; */
   margin-top: 10px;
   background-color: #9c3353;
   color: white;
@@ -17,10 +17,10 @@ const StyledBtn = styled(Button)`
   }
 `;
 
-const StyledButton = ({ text, onClick, isLoading }) => {
+const StyledButton = ({ text, onClick, isLoading, style, disabled }) => {
   return (
     <div>
-      <StyledBtn isLoading={isLoading} onClick={onClick}>
+      <StyledBtn disabled={disabled} isLoading={isLoading} onClick={onClick} style={style}>
         {text}
       </StyledBtn>
     </div>
