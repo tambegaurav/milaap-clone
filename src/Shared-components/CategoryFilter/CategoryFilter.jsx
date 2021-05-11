@@ -72,31 +72,31 @@ export function CategoryFilter() {
         <CategoryCard
           text="All"
           onClick={() => handleButton("all")}
-          img="https://www.shareicon.net/data/512x512/2015/08/22/89164_all_512x512.png"
+          img="../../../CategoryIcons/all_icon.png"
         />
 
         <CategoryCard
           text="Medical"
           onClick={() => handleButton("medical")}
-          img="https://image.flaticon.com/icons/png/512/3/3862.png"
+          img="../../../CategoryIcons/medical_icon.png"
         />
 
         <CategoryCard
           text="Animal"
           onClick={() => handleButton("animals")}
-          img="https://www.freeiconspng.com/uploads/animal-paw-vector-icon-animals-icons-icons-download-0.png"
+          img="../../../CategoryIcons/animal_icon.png"
         />
 
         <CategoryCard
           text="Memorial"
           onClick={() => handleButton("memorial")}
-          img="https://static.thenounproject.com/png/1382987-200.png"
+          img="../../../CategoryIcons/memorial_icon.png"
         />
 
         <CategoryCard
           text="Education"
           onClick={() => handleButton("education")}
-          img="https://upload.wikimedia.org/wikipedia/commons/e/e8/Education%2C_Studying%2C_University%2C_Alumni_-_icon.png"
+          img="../../../CategoryIcons/education_icon.png"
         />
 
         {/* <select onChange={(e) => setFilters(e.target.value)}>
