@@ -24,8 +24,8 @@ const FAQMainDiv = styled.div`
         display: flex;
     }
 
-    @media all and ( max-width: 500px ) {
-        margin-bottom: -14em;
+    @media all and ( max-width: 480px ), all and ( max-width: 768px ) {
+        margin-bottom: -10em;
 
         > div:nth-child(1) {
             margin: 1em 0;
@@ -49,6 +49,7 @@ const FAQMainDiv = styled.div`
 `
 
 const FAQVideoLink  = styled.div`
+
     flex: 0.8;
     margin: 10px;
     padding: 80px 0%;
@@ -101,8 +102,8 @@ const FAQVideoLink  = styled.div`
             }
         }
     }
-
-    @media all and ( max-width: 500px ) {
+    
+    @media all and ( max-width: 480px ), all and ( max-width: 768px ) {
         margin: 0;
         
         > div {
@@ -139,6 +140,101 @@ const FAQVideoLink  = styled.div`
             }
         }
     }
+
+    @media all and ( min-width: 769px ) {
+        margin: 0;
+        
+        > div {
+            display: flex;
+            flex-direction: row;
+            padding: 12px 10px;
+            margin: 0px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            
+            > div:nth-child(1) {
+                width: 50px;
+                height: 50px;
+                margin: 2% 3%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            > div:nth-child(2) {
+                flex: 1;
+                padding: 0 5px 0 15px;
+                text-align: left;
+
+                h1 {
+                    font-size: 20px;
+                    font-weight: 400;
+                    color: #9c3353;
+                }
+
+                p {
+                    color: #5d5d5d;
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    
+    @media all and ( min-width: 1200px ) {        
+        flex: 0.8;
+        margin: 10px;
+        padding: 80px 0%;
+
+        > div:nth-child(1) {
+            ${props => props.children[0].props.activeEl === 1 ? `box-shadow: 0px 0px 8px #d6afbb` : null};
+        }
+
+        > div:nth-child(2) {
+            ${props => props.children[1].props.activeEl === 1 ? `box-shadow: 0px 0px 8px #c2b1b6` : null};
+            margin-top: 50px;
+        }
+
+        > div:nth-child(3) {
+            ${props => props.children[2].props.activeEl === 1 ? `box-shadow: 0px 0px 8px #d6afbb` : null};
+            margin-top: 50px;
+        }
+
+        > div {
+            display: flex;
+            flex-direction: row;
+            padding: 12px 10px;
+            margin: 20px 0;
+            border-radius: 10px;
+            cursor: pointer;
+            
+            > div:nth-child(1) {
+                width: 50px;
+                height: 50px;
+                margin: 2% 3%;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+
+            > div:nth-child(2) {
+                flex: 1;
+                padding: 0 5px 0 15px;
+                text-align: left;
+
+                h1 {
+                    font-size: 20px;
+                    font-weight: 400;
+                    color: #9c3353;
+                }
+
+                p {
+                    color: #5d5d5d;
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+
 `
 
 const FAQVideo = styled.div`
@@ -183,8 +279,48 @@ const FAQVideo = styled.div`
         }
     }
 
-    @media all and ( max-width: 500px ) {
-        margin: -10% 0;
+    @media all and ( max-width: 480px ), all and ( max-width: 768px ) {
+        height: auto;
+        margin: 0 0 0 10%;
+        transition: all 0.3s ease-in;
+
+        > div {
+            border-radius: 48px;
+            box-shadow: 0px 0px 25px #f5d1dc;
+        }
+        > div > div:nth-child(1) {
+            height: 6vh;
+            transition: all 0.3s ease-out;
+        }
+
+        > div >  div:nth-child(2) {
+            height: auto;
+        }
+
+        > div > div:nth-child(2) video {
+            width: 100%;
+            height: 100%;
+            padding: 15px;
+            background: transparent;
+            transition: all 0.3s ease-out;
+        }
+
+        > div > div:nth-child(3) {
+            height: 10vh;
+            border-top: none;
+            position: relative;
+            transition: all 0.3s ease-out;
+
+            > div {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                border: 1px solid black;
+                position: absolute;
+                left: 43%;
+                top: 22%;
+            }
+        }
     }
 `
 
