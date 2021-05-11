@@ -13,6 +13,19 @@ const CardDetailsMainDiv = styled.div`
   cursor: pointer;
   transition: 0.2s all ease-in-out;
 
+  @media (max-width: 1000px) {
+    width: 45%;
+  }
+
+  @media (max-width: 768px) {
+    width: 95%;
+  }
+
+  @media (max-width: 480px) {
+    width: 100%;
+    margin: 10px auto;
+  }
+
   :hover {
     box-shadow: 2px 2px 10px #9c3353;
     transform: scale(1.01);
@@ -86,7 +99,7 @@ export const DonationCardDetails = ({
   id,
   onClick,
   percentage,
-  style
+  style,
 }) => {
   const { currencyToggle } = useContext(CurrencyContext);
   let str = "";
