@@ -10,7 +10,7 @@ const BannerSection = styled.section`
     height: auto;
     background-repeat: no-repeat;
 
-    @media all and ( max-width: 500px ) {
+    @media all and ( max-width: 480px ) {
         margin-top: -1em;
     }
 `
@@ -52,9 +52,22 @@ const UrgentNeed = styled.div`
         }
     }
     
-    @media all and (max-width: 500px) {
+    @media all and ( max-width: 480px ) {
         display: none;
     }
+
+    @media all and ( max-width:  768px ), all and ( max-width: 1024px ), all and ( max-width: 1200px ) {
+        padding: 10px 0;
+
+        > * > div {
+            font-size: 15px;
+            margin: 0 5%;
+        }
+    }
+
+    /* @media all and ( min-width:  ) {
+
+    } */
 `
 
 const Title = styled.div`
@@ -192,7 +205,7 @@ const Title = styled.div`
         }
     }
 
-    @media all and ( max-width: 500px ) {
+    @media all and ( max-width: 480px ), all and ( max-width: 768px ), all and ( max-width: 1024px ) {
         > div:nth-child(1) {
             h2 {
                 font-size: 15px;
@@ -204,9 +217,9 @@ const Title = styled.div`
             width: 300px;
             line-height: 110%;
             font-size: 14px;
-            font-weight: 400;
+            font-weight: 600;
             color: #212121;
-            color: #fff;
+            color: #9c3353;
             margin-top: 32px;
         }
         
@@ -253,7 +266,7 @@ const Title = styled.div`
         }
         
         > div:nth-child(5) {
-            height: 8vh;
+            height: 10vh;
 
             > div:nth-child(2) {
                 display: flex;
@@ -261,9 +274,9 @@ const Title = styled.div`
                 margin-left: 2%;
 
                 > div:nth-child(1) {
-                    width: 45px;
-                    height: 30px;
-                    margin-top: 2%;
+                    width: 30px;
+                    height: 25px;
+                    margin-top: 1.5%;
                     background-position: center;
                     background-repeat: no-repeat;
                     background-size: cover;
@@ -294,8 +307,40 @@ const Title = styled.div`
         }
     }
 
-    
+    @media all and ( min-width: 1025px ) {
+        > div:nth-child(5) {
+            > div:nth-child(2) {
+                > div:nth-child(1) {
+                    width: 30px;
+                    height: 25px;
+                    margin-top: 1%;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
+                > span:nth-child(2) {
+                    font-size: 14px;
+                }
+            }
+        }
+    }
+    @media all and ( min-width: 1400px ) {
+        > div:nth-child(5) {
+            > div:nth-child(2) {
+                > div:nth-child(1) {
+                    width: 45px;
+                    height: 40px;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                }
 
+                > span:nth-child(2) {
+                    font-size: 20px;
+                }
+            }
+        }
+    }
 `
 
 export const HomeBanner = () => {
@@ -339,7 +384,7 @@ export const HomeBanner = () => {
                 <div>
                     <div></div>
                     <div>
-                        <div style={{backgroundImage: `url(${"https://www.flaticon.com/svg/vstatic/svg/1077/1077221.svg?token=exp=1618382755~hmac=af028797f90b486f82a25a1b9d5fddcf"})`}}></div>
+                        <div style={{backgroundImage: `url(${"../../../GeneralIcons/megaphone_icon.png"})`}}></div>
                         <span>Our crowdfunding platform charges NO fees</span>
                         <img src="https://assets.milaap.org/assets/home/diamond-9ce851717cc50c7de40ec2977af60e21c799ad40001782db3fa136582b0e4ff5.png" alt=""/>
                         <span>0%</span>
