@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import "../App.css";
 import styled from "styled-components";
 import { Switch } from "@chakra-ui/react";
 import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
@@ -16,10 +17,10 @@ const CustomSwitch = styled(Switch)`
 export function Navbar() {
   const Link = styled(NavLink)`
     color: black;
-    padding-top: 20px;
-    margin-left: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
+    padding-top: 2%;
+    /* margin-left: 2%; */
+    padding-right: 2%;
+    padding-left: 2%;
     font-weight: 500;
     font-size: 17px;
 
@@ -37,17 +38,7 @@ export function Navbar() {
   const { isAuth, activeUser } = useSelector((state) => state.auth);
   return (
     <div
-      style={{
-        width: "100%",
-        height: "9vh",
-        boxShadow: "1px 1px 5px #fcb2c8",
-        display: "flex",
-        position: "sticky",
-        top: 0,
-        zIndex: "100",
-        backgroundColor: "#fff",
-        justifyContent: "space-around",
-      }}
+      className="nav"
     >
       <Link
         style={{
@@ -88,7 +79,6 @@ export function Navbar() {
         as="div"
         style={{
           display: "grid",
-
           gridTemplateColumns: "70px 50px",
         }}
       >
@@ -98,7 +88,7 @@ export function Navbar() {
           onChange={handleCurrencyToggel}
         />
 
-        {currencyToggle ? "Rupee" : "Dollar"}
+        {currencyToggle ? "INR" : "USD"}
       </Link>
 
       <Link
@@ -121,18 +111,7 @@ export function Navbar() {
 
       {show && (
         <div
-          style={{
-            position: "absolute",
-            top: "60px",
-            right: "20px",
-            border: "1px solid #a2a2ff",
-            background: "white",
-            display: "flex",
-            padding: "5px",
-            borderRadius: "5px",
-            boxShadow: "2px 2px #d0d1f0",
-            transition: "1px",
-          }}
+        className="login-box"
         >
           {!isAuth && (
             <>
