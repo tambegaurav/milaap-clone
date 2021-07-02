@@ -6,6 +6,7 @@ import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyCont
 import { useHistory, NavLink } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../Redux/auth/actions";
+import { setData } from "../localStorage";
 
 const CustomSwitch = styled(Switch)`
   .css-1b2twv6[aria-checked="true"],
@@ -37,9 +38,7 @@ export function Navbar() {
   const { currencyToggle, handleCurrencyToggel } = useContext(CurrencyContext);
   const { isAuth, activeUser } = useSelector((state) => state.auth);
   return (
-    <div
-      className="nav"
-    >
+    <div className="nav">
       <Link
         style={{
           paddingTop: "15px",
@@ -99,7 +98,7 @@ export function Navbar() {
         }}
         as="div"
       >
-        {isAuth ? (
+        {isAuth && activeUser ? (
           <p>{activeUser.fullname}</p>
         ) : (
           <img
@@ -110,9 +109,7 @@ export function Navbar() {
       </Link>
 
       {show && (
-        <div
-        className="login-box"
-        >
+        <div className="login-box">
           {!isAuth && (
             <>
               <button
@@ -133,7 +130,7 @@ export function Navbar() {
               </button>
             </>
           )}
-          {isAuth && (
+          {isAuth && activeUser && (
             <>
               <button
                 onClick={() => history.push("/dashboard")}
@@ -147,6 +144,8 @@ export function Navbar() {
               </button>
               <button
                 onClick={() => {
+                  setData("user", null);
+                  setData("isAuth", false);
                   dispatch(signout());
                   history.replace("/");
                 }}
