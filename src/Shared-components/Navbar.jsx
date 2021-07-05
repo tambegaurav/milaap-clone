@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { CurrencyContext } from "../Context/CurrencyContextProvider/CurrencyContextProvider";
+import { setData } from "../localStorage";
 import { ReactComponent as MenuIcon } from "../menu.svg";
 import { signout } from "../Redux/auth/actions";
 import "../Styles/NavBar.css";
@@ -127,7 +128,7 @@ export function Navbar() {
               </button>
             </>
           )}
-          {isAuth && (
+          {isAuth && activeUser && (
             <>
               <button
                 onClick={() => history.push("/dashboard")}
@@ -141,6 +142,8 @@ export function Navbar() {
               </button>
               <button
                 onClick={() => {
+                  setData("user", null);
+                  setData("isAuth", false);
                   dispatch(signout());
                   history.replace("/");
                 }}
