@@ -57,7 +57,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #6d1d35;
 }
-.nav{
+/* .nav{
   width: 100%;
   height: auto;
   box-shadow: 1px 1px 5px #fcb2c8;
@@ -68,7 +68,7 @@
   background: #fff;
   justify-content: space-around;
   align-content:center
-}
+} */
 .login-box{
   position: absolute;
   top: 60px;

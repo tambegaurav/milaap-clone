@@ -1,0 +1,92 @@
+.navbar-main-container {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #fff;
+    box-shadow: 1px 1px 5px #fcb2c8;
+    flex-grow: 1;
+    height: 9vh;
+}
+
+.navbar-logo-link {
+    max-width: 150px;
+    width: 100%;
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.navbar-menu-items-container-before {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 8px;
+    height: 100%;
+}
+
+.navbar-menu-items-container-before a {
+    height: 100%;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease-in-out;
+}
+
+.navbar-menu-items-container-after, .navbar-menu-icon {
+    display: none;
+}
+
+.custom-toggle-switch {
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    justify-content: flex-end;
+    flex-grow: 1;
+    gap: 10px;
+}
+
+.custom-toggle-switch span {
+    letter-spacing: 1.5px;
+}
+
+.navbar-user-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    max-width: 180px;
+    width: 100%;
+}
+
+/* style={{ display: "grid", gridTemplateColumns: "70px 50px" }} */
+
+@media only screen and (max-width: 925px) {
+    .navbar-menu-items-container-before {
+        display: none;
+    }
+
+    .navbar-menu-items-container-after {
+        width: 300px;
+        display: flex;
+    }
+
+    .navbar-menu-icon {
+        display: contents;
+    }
+
+    .navbar-menu-icon .menuIcon {
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+    }
+}
+
+@media only screen and (max-width: 650px) {
+    .navbar-menu-icon .menuIcon {
+        width: 100px;
+        height: 100px;
+    }
+}
